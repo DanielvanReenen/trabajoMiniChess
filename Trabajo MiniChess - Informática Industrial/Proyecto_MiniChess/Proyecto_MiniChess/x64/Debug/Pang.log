@@ -1,0 +1,6 @@
+﻿  MiniChess.cpp
+C:\Users\danie\Desktop\Trabajo MiniChess - Informática Industrial\Proyecto_MiniChess\Proyecto_MiniChess\MiniChess.cpp(59,46): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\Trabajo MiniChess - Informática Industrial\Proyecto_MiniChess\Proyecto_MiniChess\MiniChess.cpp(60,44): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\Trabajo MiniChess - Informática Industrial\Proyecto_MiniChess\Proyecto_MiniChess\MiniChess.cpp(61,45): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\Trabajo MiniChess - Informática Industrial\Proyecto_MiniChess\Proyecto_MiniChess\MiniChess.cpp(62,46): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Pang.vcxproj -> C:\Users\danie\Desktop\Trabajo MiniChess - Informática Industrial\Proyecto_MiniChess\Proyecto_MiniChess\x64\Debug\MiniChess.exe
