@@ -1,5 +1,5 @@
 #pragma once
-struct Coordeada {
+struct Coordenada {
 	int x;
 	int y;
 };
