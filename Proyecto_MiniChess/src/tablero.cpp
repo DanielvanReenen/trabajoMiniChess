@@ -1,6 +1,8 @@
 #include "tablero.h"
 #include "iostream"
 #include <vector>
+#include "freeglut.h"
+#include "ETSIDI.h"
 
 
 using namespace std;
@@ -19,18 +21,33 @@ Tablero::Tablero()
 
 void Tablero::dibuja()
 {
+
 	for (int i = 0; i < casillas.size(); i++) {
 		for (int j = 0; j < casillas.size(); j++) {
-			 Pieza piezatablero = casillas[i][j];
-			 cout << piezatablero.dibujaPieza();
+			Pieza piezatablero = casillas[i][j];
+			cout << piezatablero.dibujaPieza();
 		}
 		cout << "\n";
 	}
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero.png").id);
+	glDisable(GL_LIGHTING);
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 1);
+	glTexCoord2d(0, 1); glVertex2f(-1, -1);
+	glTexCoord2d(1, 1); glVertex2f(1, -1);
+	glTexCoord2d(1, 0); glVertex2f(1, 1);
+	glTexCoord2d(0, 0); glVertex2f(-1, 1);
+	glEnd();
+	glEnable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+
 }
 
 void Tablero::creaTablero()
 {
-	
+
 	Torre torre = Torre(1);
 	Caballo caballo = Caballo(2);
 	Alfil alfil = Alfil(3);
@@ -38,22 +55,22 @@ void Tablero::creaTablero()
 	Reina reina = Reina(5);
 	Peon peon = Peon(6);
 	Vacio vacio = Vacio(0);
-	
+
 	int j = 1;
 	for (int i = 0; i < casillas.size(); i++) {
-			casillas[i][j] = peon;
+		casillas[i][j] = peon;
 	}
 
 	j = 6;
 	for (int i = 0; i < casillas.size(); i++) {
 		casillas[i][j] = peon;
 	}
-	
+
 	casillas[0][0] = torre;
 	casillas[7][0] = torre;
 	casillas[0][7] = torre;
 	casillas[7][7] = torre;
-	
+
 	casillas[1][0] = caballo;
 	casillas[6][0] = caballo;
 	casillas[1][7] = caballo;
@@ -69,5 +86,5 @@ void Tablero::creaTablero()
 
 	casillas[4][0] = reina;
 	casillas[4][7] = reina;
-	
+
 }
