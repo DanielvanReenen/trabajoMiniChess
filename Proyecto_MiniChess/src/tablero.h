@@ -14,4 +14,5 @@ public:
 public:
 	void dibuja();
 	void creaTablero();
+	void segundafuncionprueba();
 };
