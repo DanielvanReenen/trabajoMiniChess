@@ -15,4 +15,5 @@ public:
 	void dibuja();
 	void creaTablero();
 	void segundafuncionprueba();
+	void funcionpruebaJavier();
 };
