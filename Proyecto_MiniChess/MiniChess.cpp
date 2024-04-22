@@ -9,7 +9,7 @@ void OnDraw(void);
 
 int main(int argc, char* argv[]) {
 
-	tablero.creaTablero();
+	tablero.inicializaTablero();
 
 	/*
 

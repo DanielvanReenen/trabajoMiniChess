@@ -37,6 +37,7 @@ class Torre :public Pieza
 {
 public:
 	Torre(int valor) : Pieza(valor) {};
+	void inicializa();//													xx
 	void MoverTorre();
 };
 

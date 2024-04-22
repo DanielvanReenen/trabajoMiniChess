@@ -45,16 +45,18 @@ void Tablero::dibuja()
 
 }
 
-void Tablero::creaTablero()
+void Tablero::inicializaTablero()
 {
+	//Asignamos un número al tipo de pieza
+	enum tipospieza{vacio_, torre_, caballo_, alfil_, rey_, reina_, peon_};
 
-	Torre torre = Torre(1);
-	Caballo caballo = Caballo(2);
-	Alfil alfil = Alfil(3);
+	Torre torre = Torre(torre_);
+	Caballo caballo = Caballo(caballo_);
+	Alfil alfil = Alfil(alfil_);
 	Rey rey = Rey(4);
 	Reina reina = Reina(5);
 	Peon peon = Peon(6);
-	Vacio vacio = Vacio(0);
+	//Vacio vacio = Vacio(0);
 
 	int j = 1;
 	for (int i = 0; i < casillas.size(); i++) {
