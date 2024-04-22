@@ -15,3 +15,5 @@ public:
 	void dibuja();
 	void creaTablero();
 };
+
+//Comentario prueba
