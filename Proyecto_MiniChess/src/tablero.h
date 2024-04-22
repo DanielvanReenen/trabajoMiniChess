@@ -14,6 +14,10 @@ public:
 public:
 	void dibuja();
 	void creaTablero();
+	void segundafuncionprueba();
+	void funcionpruebaJavier();
+	void tercerafuncionpruebaguille();
+	//HOLA COMO ESTAMOS
 };
 
 //Comentario prueba

@@ -23,7 +23,7 @@ private:
 	SpriteSequence sprite12{ "imagenes/TorreSith.png",1 };
 
 public:
-	Pieza() = default;
+	Pieza() ;
 	Pieza(int valor) : valorNumerico(valor) {};
 	~Pieza();
 	int dibujaPieza();
