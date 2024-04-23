@@ -21,7 +21,7 @@ Tablero::Tablero()
 
 void Tablero::dibuja()
 {
-
+	/*
 	for (int i = 0; i < casillas.size(); i++) {
 		for (int j = 0; j < casillas.size(); j++) {
 			Pieza piezatablero = casillas[i][j];
@@ -29,7 +29,7 @@ void Tablero::dibuja()
 		}
 		cout << "\n";
 	}
-
+	*/
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero.png").id);
 	glDisable(GL_LIGHTING);

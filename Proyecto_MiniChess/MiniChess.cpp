@@ -1,19 +1,22 @@
-#include<iostream>
+#include <iostream>
 #include "tablero.h"
-#include<vector>
+#include <vector>
+#include "freeglut.h"
+#include "ETSIDI.h"
+
 
 Tablero tablero;
 Pieza piezas;
 
 void OnDraw(void);
+void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
+
 
 int main(int argc, char* argv[]) {
 
 	tablero.inicializaTablero();
 
 	/*
-
-
 	do  {
 		int posfila;
 		int poscolumna;
@@ -27,8 +30,8 @@ int main(int argc, char* argv[]) {
 
 	} while (tablero.finalJuego = false);
 	*/
-	//Inicializar el gestor de ventanas GLUT
-		//y crear la ventana
+
+	//Inicializar el gestor de ventanas GLUT y crear la ventana
 
 	glutInit(&argc, argv);
 	glutInitWindowSize(800, 600);
@@ -41,6 +44,7 @@ int main(int argc, char* argv[]) {
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
+	glutMouseFunc(OnMouseClick);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -62,3 +66,12 @@ void OnDraw(void) {
 	glutSwapBuffers();
 }
 
+void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
+	std::cout << "Boton: " << button << ", Stado: " << state << std::endl;
+	std::cout << "Coordenadas: (" << pantalla_x << ", " << pantalla_y << ")" << std::endl;
+	
+//Despues de la comprobacion de que el boton funciona, hacemos que siempre que se fulse el boton pase algo
+		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+		 //Aqui es donde pondríamos el codigo de cambio de color de las casillas seleccionadas y demás
+		}
+}
