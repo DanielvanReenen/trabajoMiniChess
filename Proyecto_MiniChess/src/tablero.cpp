@@ -3,6 +3,13 @@
 #include <vector>
 #include "freeglut.h"
 #include "ETSIDI.h"
+#include "peon.h"
+#include "alfil.h"
+#include "torre.h"
+#include "reina.h"
+#include "rey.h"
+#include "caballo.h"
+
 
 
 using namespace std;

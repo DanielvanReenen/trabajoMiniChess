@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
+
 	glutMouseFunc(OnMouseClick);
 
 	//pasarle el control a GLUT,que llamara a los callbacks
