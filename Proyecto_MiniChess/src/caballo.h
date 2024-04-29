@@ -5,5 +5,7 @@ class Caballo :public Pieza
 {
 public:
 	Caballo(int valor) : Pieza(valor) {};
-	void MoverCaballo();
+	Caballo(Coordenada pos, int col);
+	void dibujaPieza();
+	//void MoverCaballo();
 };

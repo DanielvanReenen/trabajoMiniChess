@@ -2,18 +2,23 @@
 #include<iostream>
 #include<vector>
 #include "pieza.h"
+#include "Coordenada.h"
+#include "listaPiezas.h"
 
 using namespace std;
 
 class Tablero {
-public:
-	Tablero();
-	vector<vector<Pieza>>casillas;
+private:
+	vector<vector<Pieza*>>casillas;
 	bool finalJuego = false;
 
 public:
+	Tablero();
+	ListaPiezas piezas;
+	Coordenada coordenadaenTablero[64];
 	void dibuja();
 	void inicializaTablero();
+	void CoordenadasaCasillas();
 
 };
 

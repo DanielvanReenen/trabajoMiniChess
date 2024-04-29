@@ -13,7 +13,7 @@ void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
 
 
 int main(int argc, char* argv[]) {
-
+	tablero.CoordenadasaCasillas();
 	tablero.inicializaTablero();
 
 	/*
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(650, 650);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Chess Wars");
 
@@ -62,7 +62,8 @@ void OnDraw(void) {
 	glLoadIdentity();
 
 	tablero.dibuja();
-	piezas.dibujaPieza();
+
+	tablero.piezas.dibujaPieza();
 
 	glutSwapBuffers();
 }

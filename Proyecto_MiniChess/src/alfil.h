@@ -5,5 +5,7 @@ class Alfil :public Pieza
 {
 public:
 	Alfil(int valor) : Pieza(valor) {};
-	void MoverAlfil();
+	Alfil(Coordenada pos, int col);
+	void dibujaPieza();
+	//void MoverAlfil();
 };
