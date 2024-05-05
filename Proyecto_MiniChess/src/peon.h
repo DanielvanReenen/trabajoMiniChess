@@ -5,8 +5,7 @@ class Peon :public Pieza
 {
 public:
 	Peon(int valor) : Pieza(valor) {};
-	Peon(Coordenada pos, int col);
-	void dibujaPieza();
+	Peon(int col, int cas);
 	//void moverPeon();
 	//void comerPeon();
 };

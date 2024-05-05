@@ -10,11 +10,6 @@ Pieza::~Pieza()
 
 }
 
-void Pieza::dibujaPieza()
-{
-
-}
-
 /*Pieza Pieza::getPieza()
 {
 	Pieza nuevapieza;

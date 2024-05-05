@@ -5,8 +5,7 @@ class Rey :public Pieza
 {
 public:
 	Rey(int valor) : Pieza(valor) {};
-	Rey(Coordenada pos, int col);
-	void dibujaPieza();
+	Rey(int col, int cas);
 	//void MoverRey();
 };
 

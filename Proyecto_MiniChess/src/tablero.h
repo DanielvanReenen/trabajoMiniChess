@@ -4,21 +4,22 @@
 #include "pieza.h"
 #include "Coordenada.h"
 #include "listaPiezas.h"
+#include "dibuja.h"
 
 using namespace std;
 
 class Tablero {
 private:
 	vector<vector<Pieza*>>casillas;
+	//vector<Pieza*> lp;
 	bool finalJuego = false;
+	
 
 public:
-	Tablero();
 	ListaPiezas piezas;
-	Coordenada coordenadaenTablero[64];
+	Tablero();
 	void dibuja();
 	void inicializaTablero();
-	void CoordenadasaCasillas();
 
 };
 

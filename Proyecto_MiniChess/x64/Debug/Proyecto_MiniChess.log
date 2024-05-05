@@ -1,14 +1,4 @@
-﻿  MiniChess.cpp
-  alfil.cpp
-  caballo.cpp
-  listaPiezas.cpp
-  peon.cpp
-  pieza.cpp
-  reina.cpp
-  rey.cpp
-  tablero.cpp
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(112,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(113,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  torre.cpp
-  Generating Code...
+﻿  dibuja.cpp
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\dibuja.cpp(25,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\dibuja.cpp(26,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Proyecto_MiniChess.vcxproj -> C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
