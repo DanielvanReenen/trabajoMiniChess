@@ -45,6 +45,9 @@
     <ClInclude Include="src\interaccion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\selector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\tablero.cpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\interaccion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

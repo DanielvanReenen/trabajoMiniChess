@@ -10,14 +10,15 @@ Interaccion interaccion;
 
 void OnDraw(void);
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
+void resize(int width, int height);
 
+float Width = 785;
+float Height = 785; //max height = 785
 
 int main(int argc, char* argv[]) {
 	tablero.CasillasaCoordenadas();
 	tablero.inicializaTablero();
 	
-	
-
 	/*
 	do  {
 		int posfila;
@@ -36,16 +37,21 @@ int main(int argc, char* argv[]) {
 	//Inicializar el gestor de ventanas GLUT y crear la ventana
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(650, 650);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowPosition(371, 0);
+	glutInitWindowSize(Width, Height);
 	glutCreateWindow("Chess Wars");
+
+	glutDisplayFunc(OnDraw);
+	glutReshapeFunc(resize);
+	
 
 	glClearColor(0, 0, 0, 1);
 	glColor3f(1.f, 0, 0);
-	glOrtho(700, 0, 700, 0, -1, 1);
+	glOrtho(785, 0, 785, 0, -1, 1);
 
 	//Registrar los callbacks
-	glutDisplayFunc(OnDraw);
+	
 
 	glutMouseFunc(OnMouseClick);
 
@@ -75,6 +81,13 @@ void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
 	
 //Despues de la comprobacion de que el boton funciona, hacemos que siempre que se fulse el boton pase algo
 		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		 //Aqui es donde pondríamos el codigo de cambio de color de las casillas seleccionadas y demás
+			tablero.selectorRaton(pantalla_x, pantalla_y);
+			std::cout << "Usted ha pinchado en la casilla: (" << tablero.selector.getFila() << ", " << tablero.selector.getColumna() << ")" << std::endl;
 		}
+}
+
+
+
+void resize(int width, int height) {
+	glutReshapeWindow(Width, Height);
 }

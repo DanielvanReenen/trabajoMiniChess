@@ -9,6 +9,7 @@
 #include "rey.h"
 #include "reina.h"
 #include "peon.h"
+#include "selector.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	//vector<Pieza*> lp;
 	bool finalJuego = false;
 	Coordenada coordenadaSobreTablero[64];
+	Selector selector;
 	
 public:
 	Tablero();
@@ -26,6 +28,7 @@ public:
 	void CasillasaCoordenadas();
 	void inicializaTablero();
 	void dibujaPieza();
+	void selectorRaton(int x, int y);
 };
 
 //Comentario prueba

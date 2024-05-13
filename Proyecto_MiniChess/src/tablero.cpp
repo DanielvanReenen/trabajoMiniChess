@@ -5,6 +5,7 @@
 #include "ETSIDI.h"
 
 
+
 Tablero::Tablero()
 {
 	int fila = 100;
@@ -25,172 +26,173 @@ void Tablero::inicializaTablero()
 	Coordenada pos = { 100, 100 };
 	Vacio* vacio = new Vacio(pos, 100, 100, 100);
 
+	enum {blanco, negro};
 
 	int columna = 0;
 	int fila = 0;
 	Coordenada posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Torre* torreblanca = new Torre(posinicial, 0, columna, fila);
+	Torre* torreblanca = new Torre(posinicial, blanco, columna, fila);
 	
 	columna = 0; 
 	fila = 7;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Torre* torreblanca1 = new Torre(posinicial, 0, columna, fila);
+	Torre* torreblanca1 = new Torre(posinicial, blanco, columna, fila);
 
 	columna = 7;
 	fila = 0;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Torre* torrenegra = new Torre(posinicial, 1, columna, fila);
+	Torre* torrenegra = new Torre(posinicial, negro, columna, fila);
 
 	columna = 7;
 	fila = 7;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Torre* torrenegra1 = new Torre(posinicial, 1, columna, fila);
+	Torre* torrenegra1 = new Torre(posinicial, negro, columna, fila);
 
 	
 	columna = 0;
 	fila = 1;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Caballo* caballoblanco = new Caballo(posinicial, 0, columna, fila);
+	Caballo* caballoblanco = new Caballo(posinicial, blanco, columna, fila);
 	
 	columna = 0;
 	fila = 6;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Caballo* caballoblanco1 = new Caballo(posinicial, 0, columna, fila);
+	Caballo* caballoblanco1 = new Caballo(posinicial, blanco, columna, fila);
 	
 	columna = 7;
 	fila = 1;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Caballo* caballonegro = new Caballo(posinicial, 1, columna, fila);
+	Caballo* caballonegro = new Caballo(posinicial, negro, columna, fila);
 	
 	columna = 7;
 	fila = 6;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Caballo* caballonegro1 = new Caballo(posinicial, 1, columna, fila);
+	Caballo* caballonegro1 = new Caballo(posinicial, negro, columna, fila);
 
 	
 	columna = 0;
 	fila = 2;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Alfil* alfilblanco = new Alfil(posinicial, 0, columna, fila);
+	Alfil* alfilblanco = new Alfil(posinicial, blanco, columna, fila);
 	
 	columna = 0;
 	fila = 5;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Alfil* alfilblanco1 = new Alfil(posinicial, 0, columna, fila);
+	Alfil* alfilblanco1 = new Alfil(posinicial, blanco, columna, fila);
 	
 	columna = 7;
 	fila = 2;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Alfil* alfilnegro = new Alfil(posinicial, 1, columna, fila);
+	Alfil* alfilnegro = new Alfil(posinicial, negro, columna, fila);
 	
 	columna = 7;
 	fila = 5;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Alfil* alfilnegro1 = new Alfil(posinicial, 1, columna, fila);
+	Alfil* alfilnegro1 = new Alfil(posinicial, negro, columna, fila);
 
 	
 	columna = 0;
 	fila = 3;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Rey* reyblanco = new Rey(posinicial, 0, columna, fila);
+	Rey* reyblanco = new Rey(posinicial, blanco, columna, fila);
 	
 	columna = 7;
 	fila = 3;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Rey* reynegro = new Rey(posinicial, 1, columna, fila);
+	Rey* reynegro = new Rey(posinicial, negro, columna, fila);
 
 	
 	columna = 0;
 	fila = 4;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Reina* reinablanca = new Reina(posinicial, 0, columna, fila);
+	Reina* reinablanca = new Reina(posinicial, blanco, columna, fila);
 	
 	columna = 7;
 	fila = 4;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Reina* reinanegra = new Reina(posinicial, 1, columna, fila);
+	Reina* reinanegra = new Reina(posinicial, negro, columna, fila);
 
 	
 	columna = 1;
 	fila = 0;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 1;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco1 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco1 = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 2;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco2 = new Peon(posinicial, 0, columna, fila);;
+	Peon* peonblanco2 = new Peon(posinicial, blanco, columna, fila);;
 	
 	columna = 1;
 	fila = 3;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco3 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco3 = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 4;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco4 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco4 = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 5;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco5 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco5 = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 6;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco6 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco6 = new Peon(posinicial, blanco, columna, fila);
 	
 	columna = 1;
 	fila = 7;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonblanco7 = new Peon(posinicial, 0, columna, fila);
+	Peon* peonblanco7 = new Peon(posinicial, blanco, columna, fila);
 
 	
 	columna = 6;
 	fila = 0;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro = new Peon(posinicial, negro, columna, fila);
 	
 	columna = 6;
 	fila = 1;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro1 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro1 = new Peon(posinicial, negro, columna, fila);
 	
 	columna = 6;
 	fila = 2;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro2 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro2 = new Peon(posinicial, negro, columna, fila);
 	
 	columna = 6;
 	fila = 3;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro3 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro3 = new Peon(posinicial, negro, columna, fila);
 
 	columna = 6;
 	fila = 4;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro4 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro4 = new Peon(posinicial, negro, columna, fila);
 	
 	columna = 6;
 	fila = 5;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro5 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro5 = new Peon(posinicial, negro, columna, fila);
 	
 	columna = 6;
 	fila = 6;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro6 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro6 = new Peon(posinicial, negro, columna, fila);
 
 	columna = 6;
 	fila = 7;
 	posinicial = coordenadaSobreTablero[columna * 8 + fila];
-	Peon* peonnegro7 = new Peon(posinicial, 1, columna, fila);
+	Peon* peonnegro7 = new Peon(posinicial, negro, columna, fila);
 
 	casillas[0][0] = torreblanca;
 	casillas[0][1] = caballoblanco;
@@ -246,6 +248,12 @@ void Tablero::dibujaPieza()
 			aux->dibujaPieza();
 		}
 	}
+}
+
+void Tablero::selectorRaton(int x, int y)
+{
+	//selector.origen();
+	selector.raton(x, y);
 }
 
 void Tablero::dibuja()

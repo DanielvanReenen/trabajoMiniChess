@@ -27,6 +27,7 @@
     <ClInclude Include="src\pieza.h" />
     <ClInclude Include="src\reina.h" />
     <ClInclude Include="src\rey.h" />
+    <ClInclude Include="src\selector.h" />
     <ClInclude Include="src\tablero.h" />
     <ClInclude Include="src\torre.h" />
   </ItemGroup>
@@ -39,6 +40,7 @@
     <ClCompile Include="src\pieza.cpp" />
     <ClCompile Include="src\reina.cpp" />
     <ClCompile Include="src\rey.cpp" />
+    <ClCompile Include="src\selector.cpp" />
     <ClCompile Include="src\tablero.cpp" />
     <ClCompile Include="src\torre.cpp" />
   </ItemGroup>
