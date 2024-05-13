@@ -42,10 +42,7 @@
     <ClInclude Include="src\torre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\listaPiezas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dibuja.h">
+    <ClInclude Include="src\interaccion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,10 +74,7 @@
     <ClCompile Include="src\torre.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\listaPiezas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dibuja.cpp">
+    <ClCompile Include="src\interaccion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

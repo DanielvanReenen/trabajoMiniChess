@@ -5,7 +5,8 @@ class Reina :public Pieza
 {
 public:
 	Reina(int valor) : Pieza(valor) {};
-	Reina(int col, int cas);
+	Reina(Coordenada pos, int col, int fila_, int columna_);
 	//void MoverReina();
+	void dibujaPieza();
 };
 

@@ -3,18 +3,20 @@
 #include <vector>
 #include "freeglut.h"
 #include "ETSIDI.h"
-#include "dibuja.h"
-
+#include "interaccion.h"
 
 Tablero tablero;
+Interaccion interaccion;
 
 void OnDraw(void);
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
 
 
 int main(int argc, char* argv[]) {
+	tablero.CasillasaCoordenadas();
 	tablero.inicializaTablero();
-	//tablero.dibuja();
+	
+	
 
 	/*
 	do  {
@@ -54,8 +56,6 @@ int main(int argc, char* argv[]) {
 }
 
 void OnDraw(void) {
-	Dibuja mundo;
-
 	//Borrado de la pantalla	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -63,9 +63,8 @@ void OnDraw(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	mundo.dibujaTablero();
-	mundo.CasillasaCoordenadas();
-	mundo.dibujaPiezas(tablero.piezas);
+	tablero.dibuja();
+	tablero.dibujaPieza();
 
 	glutSwapBuffers();
 }

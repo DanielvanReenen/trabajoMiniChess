@@ -3,24 +3,29 @@
 #include<vector>
 #include "pieza.h"
 #include "Coordenada.h"
-#include "listaPiezas.h"
-#include "dibuja.h"
+#include "torre.h"
+#include "caballo.h"
+#include "alfil.h"
+#include "rey.h"
+#include "reina.h"
+#include "peon.h"
 
 using namespace std;
 
 class Tablero {
-private:
+	friend Pieza;
+public:
 	vector<vector<Pieza*>>casillas;
 	//vector<Pieza*> lp;
 	bool finalJuego = false;
+	Coordenada coordenadaSobreTablero[64];
 	
-
 public:
-	ListaPiezas piezas;
 	Tablero();
 	void dibuja();
+	void CasillasaCoordenadas();
 	void inicializaTablero();
-
+	void dibujaPieza();
 };
 
 //Comentario prueba

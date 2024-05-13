@@ -10,6 +10,10 @@ Pieza::~Pieza()
 
 }
 
+void Pieza::dibujaPieza()
+{
+}
+
 /*Pieza Pieza::getPieza()
 {
 	Pieza nuevapieza;
@@ -19,6 +23,7 @@ Pieza::~Pieza()
 	return Pieza(nuevapieza);
 }*/
 
+
 void Pieza::MoverPieza()
 {
 
@@ -26,4 +31,24 @@ void Pieza::MoverPieza()
 
 void Pieza::ComerPieza()
 {
+}
+
+int Pieza::getFila()
+{
+	return fila;
+}
+
+int Pieza::getColumna()
+{
+	return columna;
+}
+
+void Pieza::setFila(int fila_) 
+{
+	fila = fila_;
+}
+
+void Pieza::setColumna(int columna_)
+{
+	columna = columna_;
 }

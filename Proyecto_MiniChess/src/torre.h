@@ -5,6 +5,7 @@ class Torre :public Pieza
 {
 public:
 	Torre(int valor) : Pieza(valor) {};	
-	Torre(int col, int cas);
+	Torre(Coordenada pos, int col, int fila_, int columna_);
+	void dibujaPieza();
 	//void MoverTorre();
 };
