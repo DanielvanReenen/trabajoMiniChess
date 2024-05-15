@@ -11,24 +11,34 @@
 #include "peon.h"
 #include "selector.h"
 
+
 using namespace std;
+
+class Selector;
 
 class Tablero {
 	friend Pieza;
+	friend class Selector;
+
 public:
+
 	vector<vector<Pieza*>>casillas;
 	//vector<Pieza*> lp;
 	bool finalJuego = false;
 	Coordenada coordenadaSobreTablero[64];
-	Selector selector;
+	Selector selector{};
 	
 public:
 	Tablero();
+	~Tablero();
 	void dibuja();
 	void CasillasaCoordenadas();
 	void inicializaTablero();
 	void dibujaPieza();
 	void selectorRaton(int x, int y);
+
+	Pieza* getPieza(int fila, int columna);
+	
 };
 
 //Comentario prueba

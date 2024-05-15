@@ -8,6 +8,8 @@
 using ETSIDI::SpriteSequence;
 using std::vector;
 
+enum class TipoPieza { Torre, Caballo, Alfil, Rey, Reina, Peon, Ninguno };
+
 class Pieza
 {
 protected:
@@ -35,6 +37,10 @@ public:
 	Pieza(int valor) : valorNumerico(valor) {};
 	~Pieza();
 	virtual void dibujaPieza();
+	virtual TipoPieza getTipo() const = 0; // Método virtual puro para obtener el tipo de pieza
+
+
+
 	//Pieza getPieza();
 	void MoverPieza();
 	void ComerPieza();
@@ -43,7 +49,7 @@ public:
 	void setFila(int fila_);
 	void setColumna(int columna_);
 };
-
+/*
 class Vacio :public Pieza
 {
 public:
@@ -52,3 +58,4 @@ public:
 	void dibujaPieza() {};
 
 };
+*/

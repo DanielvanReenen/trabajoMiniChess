@@ -7,5 +7,6 @@ public:
 	Alfil(int valor) : Pieza(valor) {};
 	Alfil(Coordenada pos, int col, int fila_, int columna_);
 	//void MoverAlfil();
-	void dibujaPieza();
+	void dibujaPieza() override;
+	TipoPieza getTipo() const override { return TipoPieza::Alfil; }
 };

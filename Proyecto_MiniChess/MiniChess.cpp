@@ -4,6 +4,7 @@
 #include "freeglut.h"
 #include "ETSIDI.h"
 #include "interaccion.h"
+#include "selector.h"
 
 Tablero tablero;
 Interaccion interaccion;
@@ -81,8 +82,9 @@ void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
 	
 //Despues de la comprobacion de que el boton funciona, hacemos que siempre que se fulse el boton pase algo
 		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-			tablero.selectorRaton(pantalla_x, pantalla_y);
-			std::cout << "Usted ha pinchado en la casilla: (" << tablero.selector.getFila() << ", " << tablero.selector.getColumna() << ")" << std::endl;
+			//tablero.selectorRaton(pantalla_x, pantalla_y);
+			tablero.selector.raton(pantalla_x, pantalla_y, tablero);
+			//std::cout << "Usted ha pinchado en la casilla: (" << tablero.selector.getFila() << ", " << tablero.selector.getColumna() << ")" << std::endl;
 		}
 }
 

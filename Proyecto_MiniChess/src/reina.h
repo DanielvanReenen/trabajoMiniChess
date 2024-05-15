@@ -7,6 +7,7 @@ public:
 	Reina(int valor) : Pieza(valor) {};
 	Reina(Coordenada pos, int col, int fila_, int columna_);
 	//void MoverReina();
-	void dibujaPieza();
+	void dibujaPieza() override;
+	TipoPieza getTipo() const override { return TipoPieza::Reina; }
 };
 

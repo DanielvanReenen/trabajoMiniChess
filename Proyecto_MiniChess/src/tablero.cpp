@@ -1,4 +1,5 @@
 #include "tablero.h"
+#include "selector.h"
 #include "iostream"
 #include <vector>
 #include "freeglut.h"
@@ -8,23 +9,28 @@
 
 Tablero::Tablero()
 {
-	int fila = 100;
-	int columna = 100;
-	Coordenada pos = { fila, columna };
-	Vacio* vacio = new Vacio(pos, 100, fila, columna);
-	vector<Pieza*> columnas;
+	
+
+	vector<Pieza*> columnas(8, nullptr); // Inicializa cada fila con 8 punteros nulos
 	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			columnas.push_back(vacio);
-		}
 		casillas.push_back(columnas);
+	}
+}
+
+
+
+Tablero::~Tablero() {
+	for (auto& fila : casillas) {
+		for (auto& pieza : fila) {
+			delete pieza;
+		}
 	}
 }
 
 void Tablero::inicializaTablero()
 {
-	Coordenada pos = { 100, 100 };
-	Vacio* vacio = new Vacio(pos, 100, 100, 100);
+	//oordenada pos = { 100, 100 };
+	//Vacio* vacio = new Vacio(pos, 100, 100, 100);
 
 	enum {blanco, negro};
 
@@ -239,21 +245,27 @@ void Tablero::inicializaTablero()
 	*/
 }
 
-void Tablero::dibujaPieza()
-{
+void Tablero::dibujaPieza() {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
-			Pieza* aux = new Pieza;
-			aux = casillas[i][j];
-			aux->dibujaPieza();
+			if (casillas[i][j] != nullptr) {
+				casillas[i][j]->dibujaPieza();
+			}
 		}
 	}
+}
+
+Pieza* Tablero::getPieza(int fila, int columna) {
+	if (fila < 0 || fila >= 8 || columna < 0 || columna >= 8) {
+		return nullptr; // Verifica si la coordenada está dentro de los límites del tablero
+	}
+	return casillas[fila][columna];
 }
 
 void Tablero::selectorRaton(int x, int y)
 {
 	//selector.origen();
-	selector.raton(x, y);
+	selector.raton(x, y, *this);
 }
 
 void Tablero::dibuja()

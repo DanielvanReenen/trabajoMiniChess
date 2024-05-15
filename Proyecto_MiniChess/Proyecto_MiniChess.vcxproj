@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\alfil.h" />
     <ClInclude Include="src\caballo.h" />
+    <ClInclude Include="src\casilla.h" />
     <ClInclude Include="src\Coordenada.h" />
     <ClInclude Include="src\interaccion.h" />
     <ClInclude Include="src\peon.h" />
