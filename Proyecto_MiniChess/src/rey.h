@@ -9,5 +9,7 @@ public:
 	//void MoverRey();
 	void dibujaPieza() override;
 	TipoPieza getTipo() const override { return TipoPieza::Rey; }
+	vector<Casilla> getMovimientosPermitidos() const override; //Vector con las casillas permitidas por las restricciones de movimiento
+
 };
 

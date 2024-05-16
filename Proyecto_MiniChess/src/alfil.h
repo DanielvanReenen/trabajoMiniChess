@@ -9,4 +9,5 @@ public:
 	//void MoverAlfil();
 	void dibujaPieza() override;
 	TipoPieza getTipo() const override { return TipoPieza::Alfil; }
+	vector<Casilla> getMovimientosPermitidos() const override; //Vector con las casillas permitidas por las restricciones de movimiento
 };

@@ -43,6 +43,10 @@ int Pieza::getColumna()
 	return columna;
 }
 
+int Pieza::getColor() {
+	return color;
+}
+
 void Pieza::setFila(int fila_) 
 {
 	fila = fila_;

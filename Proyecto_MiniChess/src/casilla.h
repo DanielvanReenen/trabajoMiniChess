@@ -1,5 +1,5 @@
 #pragma once
 struct Casilla {
-	float columna;
-	float fila;
+	int columna;
+	int fila;
 };

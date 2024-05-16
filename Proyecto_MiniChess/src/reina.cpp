@@ -32,3 +32,20 @@ void Reina::dibujaPieza()
 	}
 }
 
+vector<Casilla> Reina::getMovimientosPermitidos() const {
+	vector<Casilla> movimientos;
+	// Movimientos posibles del rey (una casilla en cualquier dirección)
+	int direcciones[8][2] = {
+		{1, 0}, {1, 1}, {0, 1}, {-1, 1},
+		{-1, 0}, {-1, -1}, {0, -1}, {1, -1}
+	};
+
+	for (auto& dir : direcciones) {
+		int nuevaFila = fila + dir[0];
+		int nuevaColumna = columna + dir[1];
+		movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+
+	}
+
+	return movimientos;
+}

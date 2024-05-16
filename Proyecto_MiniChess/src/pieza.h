@@ -4,6 +4,8 @@
 #include"Coordenada.h"
 #include"pieza.h"
 #include <vector>
+#include "casilla.h"
+
 
 using ETSIDI::SpriteSequence;
 using std::vector;
@@ -37,13 +39,14 @@ public:
 	Pieza(int valor) : valorNumerico(valor) {};
 	~Pieza();
 	virtual void dibujaPieza();
-	virtual TipoPieza getTipo() const = 0; // Método virtual puro para obtener el tipo de pieza
-
+	virtual TipoPieza getTipo() const = 0; // Método virtual para obtener el tipo de pieza
+	virtual vector<Casilla> getMovimientosPermitidos() const = 0; // Método virtual para obtener movimientos permitidos
 
 
 	//Pieza getPieza();
 	void MoverPieza();
 	void ComerPieza();
+	int getColor();
 	int getFila();
 	int getColumna();
 	void setFila(int fila_);

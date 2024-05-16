@@ -10,9 +10,16 @@ class Selector
 {
 	friend class Tablero;
 private:
+	Casilla casSeleccion;
 	Casilla casOrigen;
 	Casilla casDestino;
 	Pieza* piezaSeleccionada = nullptr;
+	Pieza* piezaOrigen = nullptr;
+	Pieza* piezaDestino = nullptr;
+	bool seleccionActiva = false;
+	bool movimientoActivado = false;
+	int colorjugador = 0;
+
 public:
 	Selector();
 	int getFila();
