@@ -29,19 +29,24 @@ void Caballo::dibujaPieza()
 		glPopMatrix();
 	}
 }
+
 vector<Casilla> Caballo::getMovimientosPermitidos() const { //TODO ESTO HAY QUE CAMBIARLO
 	vector<Casilla> movimientos;
-	// Movimientos posibles del rey (una casilla en cualquier dirección)
-	int direcciones[8][2] = {
-		{1, 0}, {1, 1}, {0, 1}, {-1, 1},
-		{-1, 0}, {-1, -1}, {0, -1}, {1, -1}
+
+	// Definir todos los posibles movimientos del caballo en forma de L
+	const int movimientosPosibles[8][2] = {
+		{2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+		{1, 2}, {1, -2}, {-1, 2}, {-1, -2}
 	};
 
-	for (auto& dir : direcciones) {
-		int nuevaFila = fila + dir[0];
-		int nuevaColumna = columna + dir[1];
-		movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+	for (const auto& movimiento : movimientosPosibles) {
+		int nuevaFila = fila + movimiento[0];
+		int nuevaColumna = columna + movimiento[1];
 
+		// Verificar que la nueva posición esté dentro de los límites del tablero
+		if (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
+			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+		}
 	}
 
 	return movimientos;

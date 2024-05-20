@@ -8,7 +8,7 @@
 using namespace std::this_thread;
 using namespace std::chrono;
 
-//class Tablero;
+
 
 class Selector
 {
@@ -31,9 +31,5 @@ public:
 	void raton(int x, int y, Tablero& tablero);
 	void origen();
 	Pieza* getPiezaSeleccionada() const;
-
-
-	//primer pixel de casilla = 30
-	//ultimo pixel de casilla = 120,625
 };
 

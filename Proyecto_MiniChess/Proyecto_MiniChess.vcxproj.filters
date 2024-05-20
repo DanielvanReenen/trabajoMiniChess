@@ -80,9 +80,6 @@
     <ClCompile Include="src\torre.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\interaccion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

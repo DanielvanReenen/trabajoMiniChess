@@ -7,6 +7,6 @@ class Interaccion
 {
 
 public:
-	//void aplicarGravedad(Pieza* pieza, Tablero& tablero);
+	void aplicarGravedad(Pieza* pieza, Tablero& tablero);
 };
 

@@ -25,7 +25,6 @@ void Selector::raton(int x, int y, Tablero& tablero)
     piezaSeleccionada = tablero.getPieza(casSeleccion.columna, casSeleccion.fila);
     std::cout << "Usted ha pinchado en la casilla: (" << casSeleccion.columna << ", " << casSeleccion.fila << ")" << std::endl;
 
-
     if (!seleccionActiva ) { //si no tenia nada seleccionado antes
         if (piezaSeleccionada != nullptr) {//si no estoy seleccionando un vacio
 
@@ -61,46 +60,43 @@ void Selector::raton(int x, int y, Tablero& tablero)
         }
         else {//PARA EL MOVIMIENTO
             std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos();
+            bool movimientoPermitido = false;
 
-               /*bool movimientoPermitido = false;
-                for (const auto& movimiento : movimientosPermitidos) {
-                    if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
-                        movimientoPermitido = true;
-                        break;
-                    }
-                }*/
+            for (const auto& movimiento : movimientosPermitidos) {
+                if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
+                    movimientoPermitido = true;
+                    break;
+                }
+            }
 
-                //if (movimientoPermitido) {
-                    casDestino = casSeleccion;
-                    movimientoActivado = true;
-                    piezaDestino = piezaOrigen;
-                    piezaDestino->setColumna(casDestino.columna);
-                    piezaDestino->setFila(casDestino.fila);
-                    tablero.casillas[piezaDestino->getColumna()][piezaDestino->getFila()] = piezaDestino;
-                    piezaDestino->setPosicion(tablero.coordenadaSobreTablero[piezaDestino->getColumna() * 8 + piezaDestino->getFila()]);
-                    std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
-                    tablero.casillas[casOrigen.columna][casOrigen.fila] = nullptr;
-                    
+            if (movimientoPermitido) {
+                casDestino = casSeleccion;
+                movimientoActivado = true;
+                piezaDestino = piezaOrigen;
+                piezaDestino->setColumna(casDestino.columna);
+                piezaDestino->setFila(casDestino.fila);
+                tablero.casillas[piezaDestino->getColumna()][piezaDestino->getFila()] = piezaDestino;
+                piezaDestino->setPosicion(tablero.coordenadaSobreTablero[piezaDestino->getColumna() * 8 + piezaDestino->getFila()]);
+                std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
+                tablero.casillas[casOrigen.columna][casOrigen.fila] = nullptr;
 
-                    tablero.dibujaPieza();
-                    movimientoActivado = false;
-                    seleccionActiva = false;
-                    piezaOrigen = nullptr;
-                    piezaSeleccionada = nullptr;
-                    piezaDestino = nullptr;
+                tablero.dibujaPieza();
+                movimientoActivado = false;
+                seleccionActiva = false;
+                piezaOrigen = nullptr;
+                piezaSeleccionada = nullptr;
+                piezaDestino = nullptr;
+            }
                     
                     //AQUI DEBERIAMOS LLAMAR A UNA FUNCION MIEMBRO DE ITERACCION PARA EJECUTAR LOS MOVIMIENTOS Y COMER FICHAS
 
                 // }
-           /* else {
+            else {
                 std::cout << "No se permite ese movimiento." << std::endl;
-            }*/
+            }
         }
     }
-
-
-
-    };
+};
     
   
 

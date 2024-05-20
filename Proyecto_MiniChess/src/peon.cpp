@@ -32,20 +32,42 @@ void Peon::dibujaPieza()
 	}
 }
 
+
 vector<Casilla> Peon::getMovimientosPermitidos() const {
-	vector<Casilla> movimientos;
-	// Movimientos posibles del rey (una casilla en cualquier dirección)
-	int direcciones[8][2] = {
-		{1, 0}, {1, 1}, {0, 1}, {-1, 1},
-		{-1, 0}, {-1, -1}, {0, -1}, {1, -1}
-	};
+    vector<Casilla> movimientos;
+    int direccion;
+    if (color == 0) {
+        direccion = 1; // Blancos avanzan hacia derecha (positiva)
+    }
+    else {
+        direccion = -1; // Negros avanzan hacia izquierda (negativa)
+    }
+    // Movimiento hacia adelante 
+    int nuevaColumna = columna + direccion;
+    if (nuevaColumna >= 0 && nuevaColumna < 8) {
+        movimientos.push_back(Casilla{ nuevaColumna, fila });
+    }
 
-	for (auto& dir : direcciones) {
-		int nuevaFila = fila + dir[0];
-		int nuevaColumna = columna + dir[1];
-		movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+    // Movimiento inicial de dos casillas 
+    if ((color == 0 && columna == 1) || (color == 1 && columna == 6)) {
+        int dobleColumna = columna + 2 * direccion;
+        if (dobleColumna >= 0 && dobleColumna < 8) {
+            movimientos.push_back(Casilla{ dobleColumna, fila });
+        }
+    }
+    
+    // Captura del peon
+    /*
+    int diagonalArribaFila = fila - 1;
+    int diagonalAbajoFila = fila + 1;
 
-	}
+    if (diagonalArribaFila >= 0 && nuevaColumna >= 0 && nuevaColumna < 8) {
+        movimientos.push_back(Casilla{ nuevaColumna, diagonalArribaFila });
+    }
 
-	return movimientos;
+    if (diagonalAbajoFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
+        movimientos.push_back(Casilla{ nuevaColumna, diagonalAbajoFila });
+    }
+    */
+    return movimientos;
 }

@@ -243,18 +243,18 @@ void Tablero::inicializaTablero()
 }
 
 void Tablero::dibujaPieza() {
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			if (casillas[i][j] != nullptr) {
-				casillas[i][j]->dibujaPieza();
+	for (auto& fila : casillas) {
+		for (auto& pieza : fila) {
+			if (pieza != nullptr) {
+				pieza->dibujaPieza();
 			}
 		}
 	}
 }
 
 Pieza* Tablero::getPieza(int columna, int fila) {
-	if (fila < 0 || fila >= 8 || columna < 0 || columna >= 8) {
-		return nullptr; // Verifica si la coordenada está dentro de los límites del tablero
+	if (columna < 0 || columna >= 8 || fila < 0 || fila >= 8) {
+		return nullptr;
 	}
 	return casillas[columna][fila];
 }

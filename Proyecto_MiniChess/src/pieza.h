@@ -55,13 +55,3 @@ public:
 	void setColumna(int columna_);
 	void setPosicion(Coordenada posicion_);
 };
-/*
-class Vacio :public Pieza
-{
-public:
-	Vacio(int valor) : Pieza(valor) {};
-	Vacio(Coordenada pos, int col, int fila_, int columna_) { posicion = pos, color = col; fila = fila_; columna = columna_; }
-	void dibujaPieza() {};
-
-};
-*/
