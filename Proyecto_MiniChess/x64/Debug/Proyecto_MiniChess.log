@@ -1,6 +1,6 @@
 ﻿  MiniChess.cpp
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(42,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(42,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(44,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(44,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(92,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(92,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Proyecto_MiniChess.vcxproj -> C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

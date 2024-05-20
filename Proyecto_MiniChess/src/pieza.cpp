@@ -56,3 +56,8 @@ void Pieza::setColumna(int columna_)
 {
 	columna = columna_;
 }
+
+void Pieza::setPosicion(Coordenada posicion_)
+{
+	posicion = posicion_;
+}

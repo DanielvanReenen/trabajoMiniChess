@@ -18,9 +18,11 @@ protected:
 	int valorNumerico = 0;
 	int color;
 	int fila;
+	int nuevaFilaGravitatoria;
 	int columna;
 	Coordenada posicion;
-
+	Coordenada velocidad = { 0, 0.5 };
+	Coordenada aceleracion = { 0,0 };
 	SpriteSequence sprite1{ "imagenes/TorreJedi.png",1 };
 	SpriteSequence sprite2{ "imagenes/CaballoJedi.png",1 };
 	SpriteSequence sprite3{ "imagenes/AlfilJedi.png",1 };
@@ -51,6 +53,7 @@ public:
 	int getColumna();
 	void setFila(int fila_);
 	void setColumna(int columna_);
+	void setPosicion(Coordenada posicion_);
 };
 /*
 class Vacio :public Pieza

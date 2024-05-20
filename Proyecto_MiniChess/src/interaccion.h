@@ -7,6 +7,6 @@ class Interaccion
 {
 
 public:
-	void moverPieza(Pieza* pieza, Pieza* vacio, int nuevaFila, int nuevaColumna, vector<vector<Pieza*>>& cas);
+	//void aplicarGravedad(Pieza* pieza, Tablero& tablero);
 };
 

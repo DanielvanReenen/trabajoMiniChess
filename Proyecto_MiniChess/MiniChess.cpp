@@ -12,6 +12,7 @@ Interaccion interaccion;
 void OnDraw(void);
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
 void resize(int width, int height);
+void OnTimer(int value);
 
 float Width = 785;
 float Height = 785; //max height = 785
@@ -46,6 +47,7 @@ int main(int argc, char* argv[]) {
 	glutDisplayFunc(OnDraw);
 	glutReshapeFunc(resize);
 	
+	
 
 	glClearColor(0, 0, 0, 1);
 	glColor3f(1.f, 0, 0);
@@ -53,9 +55,9 @@ int main(int argc, char* argv[]) {
 
 	//Registrar los callbacks
 	
-
+	glutTimerFunc(25, OnTimer, 0);
 	glutMouseFunc(OnMouseClick);
-
+	
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
@@ -77,19 +79,25 @@ void OnDraw(void) {
 }
 
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
-	std::cout << "Boton: " << button << ", Stado: " << state << std::endl;
-	std::cout << "Coordenadas: (" << pantalla_x << ", " << pantalla_y << ")" << std::endl;
+	//std::cout << "Boton: " << button << ", Stado: " << state << std::endl;
+	//std::cout << "Coordenadas: (" << pantalla_x << ", " << pantalla_y << ")" << std::endl;
 	
 //Despues de la comprobacion de que el boton funciona, hacemos que siempre que se fulse el boton pase algo
 		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-			//tablero.selectorRaton(pantalla_x, pantalla_y);
-			tablero.selector.raton(pantalla_x, pantalla_y, tablero);
-			//std::cout << "Usted ha pinchado en la casilla: (" << tablero.selector.getFila() << ", " << tablero.selector.getColumna() << ")" << std::endl;
+			tablero.selectorRaton(pantalla_x, pantalla_y);
 		}
 }
 
-
-
 void resize(int width, int height) {
 	glutReshapeWindow(Width, Height);
+}
+
+void OnTimer(int value)
+{
+	//poner aqui el código de animacion
+	tablero.aplicarGravedad();
+
+	//no borrar estas lineas
+	glutTimerFunc(1000, OnTimer, 0);
+	glutPostRedisplay();
 }

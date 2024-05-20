@@ -1,5 +1,4 @@
 #include "tablero.h"
-#include "selector.h"
 #include "iostream"
 #include <vector>
 #include "freeglut.h"
@@ -9,8 +8,6 @@
 
 Tablero::Tablero()
 {
-	
-
 	vector<Pieza*> columnas(8, nullptr); // Inicializa cada fila con 8 punteros nulos
 	for (int i = 0; i < 8; i++) {
 		casillas.push_back(columnas);
@@ -255,17 +252,41 @@ void Tablero::dibujaPieza() {
 	}
 }
 
-Pieza* Tablero::getPieza(int fila, int columna) {
+Pieza* Tablero::getPieza(int columna, int fila) {
 	if (fila < 0 || fila >= 8 || columna < 0 || columna >= 8) {
 		return nullptr; // Verifica si la coordenada está dentro de los límites del tablero
 	}
-	return casillas[fila][columna];
+	return casillas[columna][fila];
 }
 
 void Tablero::selectorRaton(int x, int y)
 {
 	//selector.origen();
 	selector.raton(x, y, *this);
+}
+
+void Tablero::aplicarGravedad()
+{
+	for (int i = 0; i < 8; i++) {
+		for (int j = 6; j >= 0; j--) {
+			// Buscar la posición más baja disponible
+			if (casillas[i][j] != nullptr) {
+				int nuevaFilaGravitatoria = casillas[i][j]->getFila();
+				while (nuevaFilaGravitatoria < 7 && (casillas[i][nuevaFilaGravitatoria + 1] == nullptr)) {
+					nuevaFilaGravitatoria++;
+			}
+
+			// Mover la pieza a la nueva posición
+			if (nuevaFilaGravitatoria != casillas[i][j]->getFila()) {
+				casillas[i][nuevaFilaGravitatoria] = casillas[i][j];
+				casillas[i][j] = nullptr;
+				casillas[i][nuevaFilaGravitatoria]->setFila(nuevaFilaGravitatoria);
+				casillas[i][nuevaFilaGravitatoria]->setPosicion(coordenadaSobreTablero[casillas[i][nuevaFilaGravitatoria]->getColumna() * 8 + casillas[i][nuevaFilaGravitatoria]->getFila()]);
+			}
+			}
+		}
+	}
+	
 }
 
 void Tablero::dibuja()

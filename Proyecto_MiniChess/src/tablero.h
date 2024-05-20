@@ -14,8 +14,6 @@
 
 using namespace std;
 
-class Selector;
-
 class Tablero {
 	friend Pieza;
 	friend class Selector;
@@ -36,8 +34,9 @@ public:
 	void inicializaTablero();
 	void dibujaPieza();
 	void selectorRaton(int x, int y);
+	void aplicarGravedad();
 
-	Pieza* getPieza(int fila, int columna);
+	Pieza* getPieza(int columna, int fila);
 	
 };
 
