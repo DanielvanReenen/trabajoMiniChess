@@ -232,14 +232,6 @@ void Tablero::inicializaTablero()
 	casillas[7][5] = alfilnegro1;
 	casillas[7][6] = caballonegro1;
 	casillas[7][7] = torrenegra1;
-
-	
-	/*
-	torreblanca->setCasilla(16);
-	casillas[2][0] = torreblanca;
-	casillas[0][0] = vacio;
-	Debuggeando movimientos || problemas con su representacion
-	*/
 }
 
 void Tablero::dibujaPieza() {

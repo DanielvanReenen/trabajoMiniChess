@@ -18,7 +18,7 @@ class Tablero {
 	friend Pieza;
 	friend class Selector;
 
-public:
+private:
 
 	vector<vector<Pieza*>>casillas;
 	//vector<Pieza*> lp;

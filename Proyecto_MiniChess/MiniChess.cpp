@@ -5,8 +5,10 @@
 #include "ETSIDI.h"
 #include "interaccion.h"
 #include "selector.h"
+#include "Jugador.h"
 
 Tablero tablero;
+
 Interaccion interaccion;
 
 void OnDraw(void);

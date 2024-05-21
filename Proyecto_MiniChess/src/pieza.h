@@ -35,6 +35,7 @@ protected:
 	SpriteSequence sprite10{ "imagenes/ReySith.png",1 };
 	SpriteSequence sprite11{ "imagenes/ReinaSith.png",1 };
 	SpriteSequence sprite12{ "imagenes/PeonSith.png",1 };
+	SpriteSequence spriteIndicador{ "imagenes/Indicador.png",1 };
 
 public:
 	Pieza();

@@ -13,42 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Piezas">
+      <UniqueIdentifier>{0bd9c1b2-d107-4e47-a053-aad689cba3dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tablero">
+      <UniqueIdentifier>{c477f922-7957-4134-bd2e-aa1e58dfe629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Piezas">
+      <UniqueIdentifier>{6a75e427-fcbe-442b-ab73-7e13902c4c68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Coordenada.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tablero.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\pieza.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\alfil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\caballo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\peon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\reina.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\rey.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\torre.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\interaccion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\selector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\alfil.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\caballo.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\peon.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pieza.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rey.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reina.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\torre.h">
+      <Filter>Header Files\Piezas</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Coordenada.h">
+      <Filter>Header Files\Tablero</Filter>
+    </ClInclude>
     <ClInclude Include="src\casilla.h">
+      <Filter>Header Files\Tablero</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tablero.h">
+      <Filter>Header Files\Tablero</Filter>
+    </ClInclude>
+    <ClInclude Include="jugador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,28 +71,31 @@
     <ClCompile Include="MiniChess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\pieza.cpp">
+    <ClCompile Include="src\selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\alfil.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\caballo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\peon.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pieza.cpp">
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\reina.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\rey.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\torre.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Piezas</Filter>
     </ClCompile>
-    <ClCompile Include="src\selector.cpp">
+    <ClCompile Include="jugador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
