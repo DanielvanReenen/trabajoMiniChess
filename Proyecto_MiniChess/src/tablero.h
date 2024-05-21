@@ -1,6 +1,6 @@
 #pragma once
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 #include "pieza.h"
 #include "Coordenada.h"
 #include "torre.h"
@@ -11,33 +11,28 @@
 #include "peon.h"
 #include "selector.h"
 
-
 using namespace std;
 
 class Tablero {
-	friend Pieza;
-	friend class Selector;
+    friend class Pieza;
+    friend class Selector;
 
 private:
+    vector<vector<Pieza*>> casillas;
+    bool finalJuego = false;
+    Coordenada coordenadaSobreTablero[64];
+    Selector selector;
+    Jugador jugador1;
+    Jugador jugador2;
 
-	vector<vector<Pieza*>>casillas;
-	//vector<Pieza*> lp;
-	bool finalJuego = false;
-	Coordenada coordenadaSobreTablero[64];
-	Selector selector{};
-	
 public:
-	Tablero();
-	~Tablero();
-	void dibuja();
-	void CasillasaCoordenadas();
-	void inicializaTablero();
-	void dibujaPieza();
-	void selectorRaton(int x, int y);
-	void aplicarGravedad();
-
-	Pieza* getPieza(int columna, int fila);
-	
+    Tablero(const Jugador& j1, const Jugador& j2);
+    ~Tablero();
+    void dibuja();
+    void CasillasaCoordenadas();
+    void inicializaTablero();
+    void dibujaPieza();
+    void selectorRaton(int x, int y);
+    void aplicarGravedad();
+    Pieza* getPieza(int columna, int fila);
 };
-
-

@@ -1,14 +1,2 @@
-﻿  MiniChess.cpp
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(46,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(46,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(94,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(94,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  selector.cpp
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\selector.h(7,10): error C1083: Cannot open include file: 'jugador.h': No such file or directory
-  (compiling source file 'src/selector.cpp')
-  
-  tablero.cpp
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\selector.h(7,10): error C1083: Cannot open include file: 'jugador.h': No such file or directory
-  (compiling source file 'src/tablero.cpp')
-  
-  Generating Code...
+﻿  selector.cpp
+  Proyecto_MiniChess.vcxproj -> C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

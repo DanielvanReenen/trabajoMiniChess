@@ -3,13 +3,10 @@
 #include <vector>
 #include "freeglut.h"
 #include "ETSIDI.h"
-#include "interaccion.h"
 #include "selector.h"
-#include "Jugador.h"
+#include "jugador.h"
 
-Tablero tablero;
-
-Interaccion interaccion;
+Tablero tablero(Jugador(true), Jugador(false));
 
 void OnDraw(void);
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
@@ -20,86 +17,62 @@ float Width = 785;
 float Height = 785; //max height = 785
 
 int main(int argc, char* argv[]) {
-	tablero.CasillasaCoordenadas();
-	tablero.inicializaTablero();
-	
-	/*
-	do  {
-		int posfila;
-		int poscolumna;
-		do {
-			cin >> posfila;
-			cin >> poscolumna;
-		} while (posfila > 8 && poscolumna > 8);
-		posfila = posfila--;
-		poscolumna = poscolumna--;
+    // Initialize tablero
+    tablero.CasillasaCoordenadas();
+    tablero.inicializaTablero();
 
+    // Inicializar el gestor de ventanas GLUT y crear la ventana
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowPosition(371, 0);
+    glutInitWindowSize(Width, Height);
+    glutCreateWindow("Chess Wars");
 
-	} while (tablero.finalJuego = false);
-	*/
+    glutDisplayFunc(OnDraw);
+    glutReshapeFunc(resize);
 
-	//Inicializar el gestor de ventanas GLUT y crear la ventana
+    glClearColor(0, 0, 0, 1);
+    glColor3f(1.f, 0, 0);
+    glOrtho(785, 0, 785, 0, -1, 1);
 
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowPosition(371, 0);
-	glutInitWindowSize(Width, Height);
-	glutCreateWindow("Chess Wars");
+    // Registrar los callbacks
+    glutTimerFunc(25, OnTimer, 0);
+    glutMouseFunc(OnMouseClick);
 
-	glutDisplayFunc(OnDraw);
-	glutReshapeFunc(resize);
-	
-	
+    // Pasarle el control a GLUT, que llamara a los callbacks
+    glutMainLoop();
 
-	glClearColor(0, 0, 0, 1);
-	glColor3f(1.f, 0, 0);
-	glOrtho(785, 0, 785, 0, -1, 1);
-
-	//Registrar los callbacks
-	
-	glutTimerFunc(25, OnTimer, 0);
-	glutMouseFunc(OnMouseClick);
-	
-	//pasarle el control a GLUT,que llamara a los callbacks
-	glutMainLoop();
-
-	return 0;
+    return 0;
 }
 
 void OnDraw(void) {
-	//Borrado de la pantalla	
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Borrado de la pantalla    
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//Para definir el punto de vista
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    // Para definir el punto de vista
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-	tablero.dibuja();
-	tablero.dibujaPieza();
+    tablero.dibuja();
+    tablero.dibujaPieza();
 
-	glutSwapBuffers();
+    glutSwapBuffers();
 }
 
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
-	//std::cout << "Boton: " << button << ", Stado: " << state << std::endl;
-	//std::cout << "Coordenadas: (" << pantalla_x << ", " << pantalla_y << ")" << std::endl;
-	
-//Despues de la comprobacion de que el boton funciona, hacemos que siempre que se fulse el boton pase algo
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-			tablero.selectorRaton(pantalla_x, pantalla_y);
-		}
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        tablero.selectorRaton(pantalla_x, pantalla_y);
+    }
 }
 
 void resize(int width, int height) {
-	glutReshapeWindow(Width, Height);
+    glutReshapeWindow(Width, Height);
 }
 
-void OnTimer(int value)
-{
-	//poner aqui el código de animacion
-	tablero.aplicarGravedad();
+void OnTimer(int value) {
+    tablero.aplicarGravedad();
 
-	//no borrar estas lineas
-	glutTimerFunc(1000, OnTimer, 0);
-	glutPostRedisplay();
+    // No borrar estas lineas
+    glutTimerFunc(1000, OnTimer, 0);
+    glutPostRedisplay();
 }

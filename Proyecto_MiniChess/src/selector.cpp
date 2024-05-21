@@ -16,8 +16,6 @@ Selector::Selector()
 {
 	casOrigen = { 0,0 };
 	casDestino = { 0,0 };
-	jugador1(true);
-	jugador2(false);
 }
 
 int Selector::getFila()

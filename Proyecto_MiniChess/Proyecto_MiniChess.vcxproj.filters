@@ -60,7 +60,7 @@
     <ClInclude Include="src\tablero.h">
       <Filter>Header Files\Tablero</Filter>
     </ClInclude>
-    <ClInclude Include="jugador.h">
+    <ClInclude Include="src\jugador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClCompile Include="src\torre.cpp">
       <Filter>Source Files\Piezas</Filter>
     </ClCompile>
-    <ClCompile Include="jugador.cpp">
+    <ClCompile Include="src\jugador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
