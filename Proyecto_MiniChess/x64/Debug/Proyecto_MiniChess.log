@@ -1,6 +1,12 @@
 ﻿  MiniChess.cpp
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(44,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(44,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(92,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(92,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(70,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(70,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  jugador.cpp
+  selector.cpp
+  tablero.cpp
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(83,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(84,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   Proyecto_MiniChess.vcxproj -> C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

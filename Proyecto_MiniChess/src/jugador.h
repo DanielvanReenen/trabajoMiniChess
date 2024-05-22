@@ -12,6 +12,7 @@ private:
 public: 
 	Jugador(bool);
 	void SetTurno(bool turno);
+	bool getTurno();
 
 };
 

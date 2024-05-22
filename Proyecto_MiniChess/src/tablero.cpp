@@ -55,6 +55,12 @@ void Tablero::aplicarGravedad() {
     }
 }
 
+void Tablero::actualizarJugadores(Jugador j1, Jugador j2)
+{
+    jugador1 = j1;
+    jugador2 = j2;
+}
+
 void Tablero::dibuja() {
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/tablero.png").id);

@@ -8,10 +8,10 @@ Jugador::Jugador(bool turno)
 
 void Jugador::SetTurno(bool turno)
 {
-	if (turno = true) {
-		turno = false;
-	}
-	else if (turno =false) {
-		turno = true; 
-	}
+	this->turno = turno;
+}
+
+bool Jugador::getTurno()
+{
+	return turno;
 }

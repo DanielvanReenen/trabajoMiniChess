@@ -29,21 +29,41 @@ int Selector::getColumna() {
 
 void Selector::raton(int x, int y, Tablero& tablero)
 {
+	Jugador Jugador1 = tablero.jugador1;
+	Jugador Jugador2 = tablero.jugador2;
+	bool turno1 = Jugador1.getTurno();
+	bool turno2 = Jugador2.getTurno();
+	int colorturno;
+
+	if (turno1 == turno2) {
+		cout << "error, no puede ser el turno de los 2 a la vez" << endl;
+	}
+
 	//revisar que es fila y que es columna
 	casSeleccion.columna = (x - 36) / 90;
 	casSeleccion.fila = (y - 36) / 90;
 	piezaSeleccionada = tablero.getPieza(casSeleccion.columna, casSeleccion.fila);
 	std::cout << "Usted ha pinchado en la casilla: (" << casSeleccion.columna << ", " << casSeleccion.fila << ")" << std::endl;
 
+	if (turno1 == true) {
+		colorturno = 0;
+		cout << "Se dispone a jugar el jugador 1 con las blancas" << endl;
+	}
+	else {
+		colorturno = 1;
+		cout << "Se dispone a jugar el jugador 2 con las negras" << endl;
+	}
+
 	if (!seleccionActiva) { //si no tenia nada seleccionado antes
 		if (piezaSeleccionada != nullptr) {//si no estoy seleccionando un vacio
 
-			if (piezaSeleccionada->getColor() == colorjugador) {//si es el color del jugador
+			if (piezaSeleccionada->getColor() == colorturno) {//si es el color del jugador
 				casOrigen.fila = casSeleccion.fila;
 				casOrigen.columna = casSeleccion.columna;
 				piezaOrigen = piezaSeleccionada;
 				seleccionActiva = true;
 				std::cout << "Has seleccionado un " << static_cast<int>(piezaOrigen->getTipo()) << " y está en las coordenadas (" << casOrigen.columna << ", " << casOrigen.fila << ")" << std::endl;
+				ETSIDI::play("sonidos/seleccion.wav");
 			}
 			else {
 				std::cout << "Estas no son tus piezas." << std::endl;
@@ -67,6 +87,7 @@ void Selector::raton(int x, int y, Tablero& tablero)
 			casOrigen.columna = casSeleccion.columna;
 			piezaOrigen = piezaSeleccionada;
 			std::cout << "Has cambiado la seleccion a un " << static_cast<int>(piezaOrigen->getTipo()) << " en la casilla: (" << casOrigen.columna << ", " << casOrigen.fila << ")" << std::endl;
+			ETSIDI::play("sonidos/seleccion.wav");
 		}
 		else {//PARA EL MOVIMIENTO
 			std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos();
@@ -87,10 +108,11 @@ void Selector::raton(int x, int y, Tablero& tablero)
 				piezaDestino->setFila(casDestino.fila);
 				tablero.casillas[piezaDestino->getColumna()][piezaDestino->getFila()] = piezaDestino;
 				piezaDestino->setPosicion(tablero.coordenadaSobreTablero[piezaDestino->getColumna() * 8 + piezaDestino->getFila()]);
+				ETSIDI::play("sonidos/movimiento.wav");
 				std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
 				tablero.casillas[casOrigen.columna][casOrigen.fila] = nullptr;
 
-				tablero.dibujaPieza();
+				
 				movimientoActivado = false;
 				seleccionActiva = false;
 				piezaOrigen = nullptr;

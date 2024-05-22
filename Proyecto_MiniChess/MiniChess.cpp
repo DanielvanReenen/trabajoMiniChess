@@ -6,7 +6,7 @@
 #include "selector.h"
 #include "jugador.h"
 
-Tablero tablero(Jugador(true), Jugador(false));
+Tablero tablero(Jugador(true), Jugador(false)); //Estaría guay que los 2 empiecen en false y que se asigen true a uno aleatoriamente
 
 void OnDraw(void);
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y);
@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
     // Initialize tablero
     tablero.CasillasaCoordenadas();
     tablero.inicializaTablero();
+    ETSIDI::play("sonidos/inicio.wav");
 
     // Inicializar el gestor de ventanas GLUT y crear la ventana
     glutInit(&argc, argv);

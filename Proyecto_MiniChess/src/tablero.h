@@ -34,5 +34,6 @@ public:
     void dibujaPieza();
     void selectorRaton(int x, int y);
     void aplicarGravedad();
+    void actualizarJugadores(Jugador j1, Jugador j2);
     Pieza* getPieza(int columna, int fila);
 };
