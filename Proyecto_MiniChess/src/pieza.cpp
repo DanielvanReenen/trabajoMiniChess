@@ -1,63 +1,35 @@
 #include "pieza.h"
 
-Pieza::Pieza()
-{
-	
-}
+Pieza::Pieza(int col, const char* spritePath) : color(col), fila(0), columna(0), sprite(spritePath, 1) { sprite.setSize(1, 1); }
 
-Pieza::~Pieza()
-{
-
-}
-
-void Pieza::dibujaPieza()
-{
-}
-
-/*Pieza Pieza::getPieza()
-{
-	Pieza nuevapieza;
-
-
-
-	return Pieza(nuevapieza);
-}*/
-
-
-void Pieza::MoverPieza()
-{
-
-}
-
-void Pieza::ComerPieza()
-{
-}
-
-int Pieza::getFila()
-{
-	return fila;
-}
-
-int Pieza::getColumna()
-{
-	return columna;
-}
+Pieza::~Pieza() {}
 
 int Pieza::getColor() {
-	return color;
+    return color;
 }
 
-void Pieza::setFila(int fila_) 
-{
-	fila = fila_;
+int Pieza::getFila() {
+    return fila;
 }
 
-void Pieza::setColumna(int columna_)
-{
-	columna = columna_;
+int Pieza::getColumna() {
+    return columna;
 }
 
-void Pieza::setPosicion(Coordenada posicion_)
-{
-	posicion = posicion_;
+void Pieza::setFila(int fila_) {
+    fila = fila_;
+}
+
+void Pieza::setColumna(int columna_) {
+    columna = columna_;
+}
+
+void Pieza::setPosicion(Coordenada posicion_) {
+    posicion = posicion_;
+}
+
+void Pieza::MoverPieza() {
+}
+
+void Pieza::ComerPieza() {
 }

@@ -1,32 +1,28 @@
 #include "alfil.h"
 
-Alfil::Alfil(Coordenada pos, int col, int columna_, int fila_)
-{
-	posicion = pos;
-	color = col;
-	columna = columna_;
+Alfil::Alfil(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/AlfilJedi.png" : "imagenes/AlfilSith.png") {
+	setPosicion(pos);
 	fila = fila_;
+	columna = columna_;
 }
 
 void Alfil::dibujaPieza()
 {
-
-	sprite3.setSize(0.25, 0.25);
-	sprite9.setSize(0.25, 0.25);
-
+	sprite.setSize(0.25, 0.25);
+	
 	if (color == 0) {
-		sprite3.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite3.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
 
 	if (color == 1) {
-		sprite9.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite9.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
 }

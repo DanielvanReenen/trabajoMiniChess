@@ -1,34 +1,29 @@
 #include "rey.h"
 
-Rey::Rey(Coordenada pos, int col, int columna_, int fila_)
-{
-	posicion = pos;
-	color = col;
-	columna = columna_;
+Rey::Rey(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/ReyJedi.png" : "imagenes/ReySith.png") {
+	setPosicion(pos);
 	fila = fila_;
+	columna = columna_;
 }
 
-void Rey::dibujaPieza()
-{
-	sprite4.setSize(0.25, 0.25);
-	sprite10.setSize(0.25, 0.25);
+void Rey::dibujaPieza() {
+	sprite.setSize(0.25, 0.25);
 
 	if (color == 0) {
-		sprite4.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite4.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
 
 	if (color == 1) {
-		sprite10.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite10.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
-
 }
 
 vector<Casilla> Rey::getMovimientosPermitidos() const {

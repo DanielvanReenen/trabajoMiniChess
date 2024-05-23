@@ -1,31 +1,27 @@
 #include "caballo.h"
 
-Caballo::Caballo(Coordenada pos, int col, int columna_, int fila_)
-{
-	posicion = pos;
-	color = col;
-	columna = columna_;
+Caballo::Caballo(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/CaballoJedi.png" : "imagenes/CaballoSith.png") {
+	setPosicion(pos);
 	fila = fila_;
+	columna = columna_;
 }
 
-void Caballo::dibujaPieza()
-{
-	sprite2.setSize(0.25, 0.25);
-	sprite8.setSize(0.25, 0.25);
+void Caballo::dibujaPieza() {
+	sprite.setSize(0.25, 0.25);
 
 	if (color == 0) {
-		sprite2.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite2.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
 
 	if (color == 1) {
-		sprite8.setCenter(posicion.x, posicion.y);
+		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		sprite8.draw();
+		sprite.draw();
 		glPopMatrix();
 	}
 }

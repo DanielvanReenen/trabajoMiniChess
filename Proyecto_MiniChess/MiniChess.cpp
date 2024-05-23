@@ -3,7 +3,6 @@
 #include <vector>
 #include "freeglut.h"
 #include "ETSIDI.h"
-#include "selector.h"
 #include "jugador.h"
 
 Tablero tablero(Jugador(true), Jugador(false)); //Estaría guay que los 2 empiecen en false y que se asigen true a uno aleatoriamente
@@ -62,7 +61,7 @@ void OnDraw(void) {
 
 void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-        tablero.selectorRaton(pantalla_x, pantalla_y);
+        tablero.Selector(pantalla_x, pantalla_y);
     }
 }
 

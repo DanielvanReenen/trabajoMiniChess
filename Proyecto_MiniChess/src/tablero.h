@@ -9,7 +9,7 @@
 #include "rey.h"
 #include "reina.h"
 #include "peon.h"
-#include "selector.h"
+#include "jugador.h"
 
 using namespace std;
 
@@ -21,9 +21,10 @@ private:
     vector<vector<Pieza*>> casillas;
     bool finalJuego = false;
     Coordenada coordenadaSobreTablero[64];
-    Selector selector;
     Jugador jugador1;
     Jugador jugador2;
+    
+    bool jaque;
 
 public:
     Tablero(const Jugador& j1, const Jugador& j2);
@@ -31,9 +32,10 @@ public:
     void dibuja();
     void CasillasaCoordenadas();
     void inicializaTablero();
+    void Selector(int x, int y);
+    void raton(int x, int y);
     void dibujaPieza();
-    void selectorRaton(int x, int y);
     void aplicarGravedad();
-    void actualizarJugadores(Jugador j1, Jugador j2);
+    void calcularJaque();
     Pieza* getPieza(int columna, int fila);
 };

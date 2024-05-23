@@ -1,37 +1,30 @@
 #include "peon.h"
 
-Peon::Peon(Coordenada pos, int col, int columna_, int fila_)
-{
-	posicion = pos;
-	color = col;
-	columna = columna_;
-	fila = fila_;
+Peon::Peon(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/PeonJedi.png" : "imagenes/PeonSith.png") {
+    setPosicion(pos);
+    fila = fila_;
+    columna = columna_;
 }
 
+void Peon::dibujaPieza() {
+    sprite.setSize(0.25, 0.25);
 
+    if (color == 0) {
+        sprite.setCenter(posicion.x, posicion.y);
 
-void Peon::dibujaPieza()
-{
-	sprite6.setSize(0.25, 0.25);
-	sprite12.setSize(0.25, 0.25);
+        glPushMatrix();
+        sprite.draw();
+        glPopMatrix();
+    }
 
-	if (color == 0) {
-		sprite6.setCenter(posicion.x, posicion.y);
+    if (color == 1) {
+        sprite.setCenter(posicion.x, posicion.y);
 
-		glPushMatrix();
-		sprite6.draw();
-		glPopMatrix();
-	}
-
-	if (color == 1) {
-		sprite12.setCenter(posicion.x, posicion.y);
-
-		glPushMatrix();
-		sprite12.draw();
-		glPopMatrix();
-	}
+        glPushMatrix();
+        sprite.draw();
+        glPopMatrix();
+    }
 }
-
 
 vector<Casilla> Peon::getMovimientosPermitidos() const {
     vector<Casilla> movimientos;

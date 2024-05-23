@@ -27,9 +27,6 @@
     <ClInclude Include="src\interaccion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\selector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\alfil.h">
       <Filter>Header Files\Piezas</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MiniChess.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\alfil.cpp">

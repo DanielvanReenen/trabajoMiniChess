@@ -1,11 +1,9 @@
 #pragma once
-#include"freeglut.h"
-#include"ETSIDI.h"
-#include"Coordenada.h"
-#include"pieza.h"
-#include <vector>
+#include "freeglut.h"
+#include "ETSIDI.h"
+#include "Coordenada.h"
 #include "casilla.h"
-
+#include <vector>
 
 using ETSIDI::SpriteSequence;
 using std::vector;
@@ -15,44 +13,26 @@ enum class TipoPieza { Torre, Caballo, Alfil, Rey, Reina, Peon, Ninguno };
 class Pieza
 {
 protected:
-	int valorNumerico = 0;
-	int color;
-	int fila;
-	int nuevaFilaGravitatoria;
-	int columna;
-	Coordenada posicion;
-	Coordenada velocidad = { 0, 0.5 };
-	Coordenada aceleracion = { 0,0 };
-	SpriteSequence sprite1{ "imagenes/TorreJedi.png",1 };
-	SpriteSequence sprite2{ "imagenes/CaballoJedi.png",1 };
-	SpriteSequence sprite3{ "imagenes/AlfilJedi.png",1 };
-	SpriteSequence sprite4{ "imagenes/ReyJedi.png",1 };
-	SpriteSequence sprite5{ "imagenes/ReinaJedi.png",1 };
-	SpriteSequence sprite6{ "imagenes/PeonJedi.png",1 };
-	SpriteSequence sprite7{ "imagenes/TorreSith.png",1 };
-	SpriteSequence sprite8{ "imagenes/CaballoSith.png",1 };
-	SpriteSequence sprite9{ "imagenes/AlfilSith.png",1 };
-	SpriteSequence sprite10{ "imagenes/ReySith.png",1 };
-	SpriteSequence sprite11{ "imagenes/ReinaSith.png",1 };
-	SpriteSequence sprite12{ "imagenes/PeonSith.png",1 };
-	SpriteSequence spriteIndicador{ "imagenes/Indicador.png",1 };
+    int color;
+    int fila;
+    int nuevaFilaGravitatoria;
+    int columna;
+    Coordenada posicion;
+    SpriteSequence sprite;
 
 public:
-	Pieza();
-	Pieza(int valor) : valorNumerico(valor) {};
-	~Pieza();
-	virtual void dibujaPieza();
-	virtual TipoPieza getTipo() const = 0; // Método virtual para obtener el tipo de pieza
-	virtual vector<Casilla> getMovimientosPermitidos() const = 0; // Método virtual para obtener movimientos permitidos
+    Pieza(int col, const char* spritePath);
+    virtual ~Pieza();
+    virtual void dibujaPieza() = 0;
+    virtual TipoPieza getTipo() const = 0;
+    virtual vector<Casilla> getMovimientosPermitidos() const = 0;
 
-
-	//Pieza getPieza();
-	void MoverPieza();
-	void ComerPieza();
-	int getColor();
-	int getFila();
-	int getColumna();
-	void setFila(int fila_);
-	void setColumna(int columna_);
-	void setPosicion(Coordenada posicion_);
+    void MoverPieza();
+    void ComerPieza();
+    int getColor();
+    int getFila();
+    int getColumna();
+    void setFila(int fila_);
+    void setColumna(int columna_);
+    void setPosicion(Coordenada posicion_);
 };
