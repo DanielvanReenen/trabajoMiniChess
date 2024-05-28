@@ -27,7 +27,7 @@ void Alfil::dibujaPieza()
 	}
 }
 
-vector<Casilla> Alfil::getMovimientosPermitidos() const {
+vector<Casilla> Alfil::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
 	vector<Casilla> movimientos;
 	
 	// Movimientos posibles del alfil

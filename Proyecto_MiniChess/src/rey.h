@@ -9,6 +9,6 @@ public:
 
     void dibujaPieza() override;
     TipoPieza getTipo() const override { return TipoPieza::Rey; }
-    vector<Casilla> getMovimientosPermitidos() const override;
+    vector<Casilla> getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const override;
 };
 

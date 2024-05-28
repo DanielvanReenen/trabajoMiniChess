@@ -26,7 +26,7 @@ void Caballo::dibujaPieza() {
 	}
 }
 
-vector<Casilla> Caballo::getMovimientosPermitidos() const { //TODO ESTO HAY QUE CAMBIARLO
+vector<Casilla> Caballo::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const { //TODO ESTO HAY QUE CAMBIARLO
 	vector<Casilla> movimientos;
 
 	// Definir todos los posibles movimientos del caballo en forma de L

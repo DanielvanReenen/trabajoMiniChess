@@ -26,7 +26,7 @@ void Torre::dibujaPieza() {
 	}
 }
 
-vector<Casilla> Torre::getMovimientosPermitidos() const {
+vector<Casilla> Torre::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
 	vector<Casilla> movimientos;
 	// Movimientos posibles de la torre
 	int direcciones[4][2] = {

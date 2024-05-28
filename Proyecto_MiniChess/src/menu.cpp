@@ -9,10 +9,10 @@ void Menu::inicializa() {
     // Asignar turno aleatoriamente a un jugador
     std::srand(std::time(0));
     if (std::rand() % 2 == 0) {
-        tablero.getJugador1().SetTurno(true);
+        tablero.GetJugador1().SetTurno(true);
     }
     else {
-        tablero.getJugador2().SetTurno(true);
+        tablero.GetJugador2().SetTurno(true);
     }
     estado = INICIO;
 }

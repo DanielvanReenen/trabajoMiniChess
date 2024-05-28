@@ -26,7 +26,7 @@ void Rey::dibujaPieza() {
 	}
 }
 
-vector<Casilla> Rey::getMovimientosPermitidos() const {
+vector<Casilla> Rey::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
     vector<Casilla> movimientos;
 
     // Movimientos posibles del rey (una casilla en cualquier dirección)

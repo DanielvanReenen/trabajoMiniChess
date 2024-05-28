@@ -25,7 +25,7 @@ public:
     virtual ~Pieza();
     virtual void dibujaPieza() = 0;
     virtual TipoPieza getTipo() const = 0;
-    virtual vector<Casilla> getMovimientosPermitidos() const = 0;
+    virtual vector<Casilla> getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const = 0;
 
     void MoverPieza();
     void ComerPieza();

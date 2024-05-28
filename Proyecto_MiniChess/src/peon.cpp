@@ -26,7 +26,7 @@ void Peon::dibujaPieza() {
     }
 }
 
-vector<Casilla> Peon::getMovimientosPermitidos() const {
+vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
     vector<Casilla> movimientos;
     int direccion;
     if (color == 0) {

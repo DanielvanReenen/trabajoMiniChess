@@ -26,7 +26,7 @@ void Reina::dibujaPieza() {
 	}
 }
 
-vector<Casilla> Reina::getMovimientosPermitidos() const {
+vector<Casilla> Reina::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
 	vector<Casilla> movimientos;
 	// Movimientos posibles de la reina (una casilla en cualquier dirección)
     const int direcciones[8][2] = {

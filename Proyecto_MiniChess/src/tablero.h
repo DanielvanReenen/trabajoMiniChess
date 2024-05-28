@@ -23,7 +23,16 @@ private:
     Coordenada coordenadaSobreTablero[64];
     Jugador jugador1;
     Jugador jugador2;
-    
+    Casilla casSeleccion;
+    Casilla casOrigen = { 0,0 };
+    Casilla casDestino = { 0,0 };
+    Pieza* piezaSeleccionada = nullptr;
+    Pieza* piezaOrigen = nullptr;
+    Pieza* piezaDestino = nullptr;
+    bool seleccionActiva = false;
+    bool movimientoActivado = false;
+
+
     bool jaque;
 
 public:
@@ -37,8 +46,7 @@ public:
     void dibujaPieza();
     void aplicarGravedad();
     void calcularJaque();
+    Jugador GetJugador1();
+    Jugador GetJugador2();
     Pieza* getPieza(int columna, int fila);
-    Jugador& getJugador1() { return jugador1; }
-    Jugador& getJugador2() { return jugador2; }
-    friend class Menu;
 };
