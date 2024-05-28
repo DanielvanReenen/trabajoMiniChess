@@ -60,6 +60,9 @@
     <ClInclude Include="src\jugador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\tablero.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files\Piezas</Filter>
     </ClCompile>
     <ClCompile Include="src\jugador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

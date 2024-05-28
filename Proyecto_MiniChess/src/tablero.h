@@ -38,4 +38,7 @@ public:
     void aplicarGravedad();
     void calcularJaque();
     Pieza* getPieza(int columna, int fila);
+    Jugador& getJugador1() { return jugador1; }
+    Jugador& getJugador2() { return jugador2; }
+    friend class Menu;
 };

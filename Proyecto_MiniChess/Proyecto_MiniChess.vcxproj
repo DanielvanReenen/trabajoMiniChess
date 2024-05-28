@@ -25,6 +25,7 @@
     <ClInclude Include="src\Coordenada.h" />
     <ClInclude Include="src\interaccion.h" />
     <ClInclude Include="src\jugador.h" />
+    <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\peon.h" />
     <ClInclude Include="src\pieza.h" />
     <ClInclude Include="src\reina.h" />
@@ -37,6 +38,7 @@
     <ClCompile Include="src\alfil.cpp" />
     <ClCompile Include="src\caballo.cpp" />
     <ClCompile Include="src\jugador.cpp" />
+    <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\peon.cpp" />
     <ClCompile Include="src\pieza.cpp" />
     <ClCompile Include="src\reina.cpp" />

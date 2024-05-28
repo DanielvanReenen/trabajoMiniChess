@@ -1,2 +1,3 @@
-﻿  selector.cpp
-  Proyecto_MiniChess.vcxproj -> C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
+﻿  menu.cpp
+C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\menu.cpp(10,25): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Proyecto_MiniChess.vcxproj -> C:\Users\Javier\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
