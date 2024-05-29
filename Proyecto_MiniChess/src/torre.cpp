@@ -25,29 +25,24 @@ void Torre::dibujaPieza() {
 		glPopMatrix();
 	}
 }
+vector<Casilla> Torre::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
+    vector<Casilla> movimientos;
+    int direcciones[4][2] = {
+        {0, 1},   // Movimiento hacia la derecha
+        {0, -1},  // Movimiento hacia la izquierda
+        {-1, 0},  // Movimiento hacia arriba
+        {1, 0}    // Movimiento hacia abajo
+    };
 
-vector<Casilla> Torre::getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const {
-	vector<Casilla> movimientos;
-	// Movimientos posibles de la torre
-	int direcciones[4][2] = {
-		{0, 1},   // Movimiento hacia arriba 
-		{0, -1},  // Movimiento hacia abajo 
-		{-1, 0},  // Movimiento hacia la izquierda
-		{1, 0}  // Movimiento hacia la derecha
-	};
+    for (auto& dir : direcciones) {
+        int nuevaFila = filaActual + dir[0];
+        int nuevaColumna = columnaActual + dir[1];
 
-	for (auto& dir : direcciones) {
-		int nuevaFila = fila + dir[0];
-		int nuevaColumna = columna + dir[1];
-
-		// Verificar que la nueva posición está dentro del tablero
-		while (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
-			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
-			nuevaFila += dir[0];
-			nuevaColumna += dir[1];
-		}
-
-	}
-
-	return movimientos;
+        while (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
+            movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+            nuevaFila += dir[0];
+            nuevaColumna += dir[1];
+        }
+    }
+    return movimientos;
 }

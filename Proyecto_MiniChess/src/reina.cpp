@@ -38,8 +38,8 @@ vector<Casilla> Reina::getMovimientosPermitidos(int filaActual, int columnaActua
     };
 
     for (const auto& dir : direcciones) {
-        int nuevaFila = fila;
-        int nuevaColumna = columna;
+        int nuevaFila = filaActual;
+        int nuevaColumna = columnaActualbool;
 
 		// Verificar que la nueva posición está dentro del tablero
 		while (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {

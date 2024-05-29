@@ -6,16 +6,18 @@
 Menu::Menu() : tablero(Jugador(false), Jugador(false)), estado(INICIO) {}
 
 void Menu::inicializa() {
-    // Asignar turno aleatoriamente a un jugador
     std::srand(std::time(0));
     Jugador jugador = new Jugador(false);
     
-    if (std::rand() % 2 == 0) {
+    // De momento empiezan siempre las blancas => TODO
+    if (true) {
+        cout << "EMPIEZAN LAS BLANCAS" << std::endl;
         jugador = tablero.GetJugador1();
         jugador.SetTurno(true);
         tablero.SetJugador1(jugador);
     }
     else {
+        cout << "EMPIEZAN LAS NEGRAS" << std::endl;
         jugador = tablero.GetJugador2();
         jugador.SetTurno(true);
         tablero.SetJugador2(jugador);
@@ -26,7 +28,6 @@ void Menu::inicializa() {
 
 
 void Menu::tecla(unsigned char key) {
-    std::cout << "se ha reconocido una letra: " << key << std::endl;
     switch (estado) {
     case INICIO:
         if (key == 's') exit(0);
@@ -39,7 +40,6 @@ void Menu::tecla(unsigned char key) {
         break;
     case JUEGO:
         if (key == 'p') estado = PAUSA;
-        // Agregar más lógica específica del juego de ajedrez si es necesario
         break;
     case GAMEOVER:
         if (key == 'c') estado = INICIO;
@@ -54,25 +54,8 @@ void Menu::tecla(unsigned char key) {
 }
 
 void Menu::dibuja() {
-    std::cout << "Estado actual: " << estado << std::endl;
     switch (estado) {
     case INICIO:
-        std::cout << "Dibujando la pantalla de inicio" << std::endl;
-
-        // Configuración de la vista para el inicio del juego
-     //   glMatrixMode(GL_MODELVIEW);
-        //glLoadIdentity();
-        //gluLookAt(0, 7.5, 30, // posicion del ojo
-        //    0.0, 7.5, 0.0, // hacia que punto mira (0,7.5,0)
-        //    0.0, 1.0, 0.0); // definimos hacia arriba (eje Y)
-       // ETSIDI::setTextColor(1, 1, 0);
-       // ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-      //  ETSIDI::printxy("Pang 1.2", -5, 8);
-      //  ETSIDI::setTextColor(1, 1, 1);
-      //  ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-      //  ETSIDI::printxy("PULSE LA TECLA -E- PARA EMPEZAR", -5, 7);
-      //  ETSIDI::printxy("PULSE LA TELCA -S- PARA SALIR", -5, 6);
-      //  ETSIDI::printxy("nombres", 2, 1);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/inicio.png").id);
         glDisable(GL_LIGHTING);
@@ -120,7 +103,7 @@ void Menu::dibuja() {
     }
 }
 void Menu::aplicarGravedad() {
-    tablero.aplicarGravedad();
+    //tablero.aplicarGravedad();
 }
 
 void Menu::Selector(int x, int y) {

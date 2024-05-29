@@ -39,8 +39,8 @@ vector<Casilla> Rey::getMovimientosPermitidos(int filaActual, int columnaActualb
 	};
 
 	for (const auto& dir : direcciones) {
-		int nuevaFila = fila + dir[0];
-		int nuevaColumna = columna + dir[1];
+		int nuevaFila = filaActual + dir[0];
+		int nuevaColumna = columnaActualbool + dir[1];
 		if (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
 			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
 		}

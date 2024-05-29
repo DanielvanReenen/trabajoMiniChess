@@ -36,8 +36,8 @@ vector<Casilla> Caballo::getMovimientosPermitidos(int filaActual, int columnaAct
 	};
 
 	for (const auto& movimiento : movimientosPosibles) {
-		int nuevaFila = fila + movimiento[0];
-		int nuevaColumna = columna + movimiento[1];
+		int nuevaFila = filaActual + movimiento[0];
+		int nuevaColumna = columnaActualbool + movimiento[1];
 
 		// Verificar que la nueva posición esté dentro de los límites del tablero
 		if (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
