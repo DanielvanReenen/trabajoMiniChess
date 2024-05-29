@@ -8,11 +8,17 @@ Menu::Menu() : tablero(Jugador(false), Jugador(false)), estado(INICIO) {}
 void Menu::inicializa() {
     // Asignar turno aleatoriamente a un jugador
     std::srand(std::time(0));
+    Jugador jugador = new Jugador(false);
+    
     if (std::rand() % 2 == 0) {
-        tablero.GetJugador1().SetTurno(true);
+        jugador = tablero.GetJugador1();
+        jugador.SetTurno(true);
+        tablero.SetJugador1(jugador);
     }
     else {
-        tablero.GetJugador2().SetTurno(true);
+        jugador = tablero.GetJugador2();
+        jugador.SetTurno(true);
+        tablero.SetJugador2(jugador);
     }
     estado = INICIO;
 }

@@ -63,6 +63,17 @@ void Tablero::calcularJaque()
 
 }
 
+void Tablero::SetJugador1(Jugador jugador1)
+{
+	this->jugador1 = jugador1;
+}
+
+void Tablero::SetJugador2(Jugador jugador2)
+{
+	this->jugador2 = jugador2;
+}
+
+
 Jugador Tablero::GetJugador1()
 {
 	return jugador1;

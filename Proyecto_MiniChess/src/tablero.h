@@ -46,6 +46,8 @@ public:
     void dibujaPieza();
     void aplicarGravedad();
     void calcularJaque();
+    void SetJugador1(Jugador jugador1); 
+    void SetJugador2(Jugador jugador2);
     Jugador GetJugador1();
     Jugador GetJugador2();
     Pieza* getPieza(int columna, int fila);
