@@ -51,18 +51,6 @@ void Tablero::aplicarGravedad() {
 	}
 }
 
-void Tablero::calcularJaque()
-{
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			if (casillas[i][j] != nullptr) {
-
-			}
-		}
-	}
-
-}
-
 void Tablero::SetJugador1(Jugador jugador1)
 {
 	this->jugador1 = jugador1;
@@ -73,11 +61,11 @@ void Tablero::SetJugador2(Jugador jugador2)
 	this->jugador2 = jugador2;
 }
 
-
 Jugador Tablero::GetJugador1()
 {
 	return jugador1;
 }
+
 Jugador Tablero::GetJugador2()
 {
 	return jugador2;
@@ -165,6 +153,10 @@ void Tablero::raton(int x, int y)
 	piezaSeleccionada = getPieza(casSeleccion.columna, casSeleccion.fila);
 	std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
 
+	Casilla positionRey = encontrarRey(turno1);
+	bool jaque = estaEnJaque(positionRey, turno1);
+	cout << "HAY JAQUE??? => " << jaque << endl;
+
 	if (turno1 == true) {
 		colorturno = 0;
 		cout << "Se dispone a jugar el jugador 1 con las blancas" << endl;
@@ -223,7 +215,8 @@ void Tablero::raton(int x, int y)
 				}
 			}
 
-			if (movimientoPermitido) {
+			if (movimientoPermitido) 
+			{
 				casDestino = casSeleccion;
 				movimientoActivado = true;
 				piezaDestino = piezaOrigen;
@@ -261,4 +254,79 @@ void Tablero::raton(int x, int y)
 		}
 	}
 
+}
+
+
+Casilla Tablero::encontrarRey(int colorRey) {
+	for (int fila = 0; fila < 8; ++fila) {
+		for (int columna = 0; columna < 8; ++columna) {
+			Pieza* pieza = casillas[fila][columna];
+			if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey) {
+				return Casilla{ columna, fila };
+			}
+		}
+	}
+	return Casilla{ -1, -1 }; // No debería ocurrir si el rey siempre está presente en el tablero
+}
+
+bool Tablero::casillaOcupada(int fila, int columna) {
+	return casillas[fila][columna] != nullptr;
+}
+
+bool Tablero::caminoDespejado( int filaInicial, int columnaInicial, int filaFinal, int columnaFinal) {
+	int incrementoFila = (filaFinal > filaInicial) ? 1 : (filaFinal < filaInicial) ? -1 : 0;
+	int incrementoColumna = (columnaFinal > columnaInicial) ? 1 : (columnaFinal < columnaInicial) ? -1 : 0;
+
+	int fila = filaInicial + incrementoFila;
+	int columna = columnaInicial + incrementoColumna;
+
+	while (fila != filaFinal || columna != columnaFinal) {
+		if (casillaOcupada(fila, columna)) {
+			return false;
+		}
+		fila += incrementoFila;
+		columna += incrementoColumna;
+	}
+	return true;
+}
+
+std::string Tablero::tipoPiezaToString(TipoPieza tipo) {
+	switch (tipo) {
+	case TipoPieza::Torre: return "Torre";
+	case TipoPieza::Caballo: return "Caballo";
+	case TipoPieza::Alfil: return "Alfil";
+	case TipoPieza::Rey: return "Rey";
+	case TipoPieza::Reina: return "Reina";
+	case TipoPieza::Peon: return "Peon";
+	case TipoPieza::Ninguno: return "Ninguno";
+	}
+	return "Desconocido";
+}
+
+bool Tablero::estaEnJaque(Casilla posicionRey, int colorRey) {
+	// Recorre todas las piezas del oponente
+	for (int fila = 0; fila < 8; ++fila) {
+		for (int columna = 0; columna < 8; ++columna) {
+			Pieza* pieza = casillas[fila][columna];
+			if (pieza != nullptr && pieza->getColor() != colorRey) {
+				vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, pieza->getColor() == 0);
+				for (const Casilla& movimiento : movimientos) {
+					if (movimiento.fila == posicionRey.fila && movimiento.columna == posicionRey.columna) {
+						if (pieza->getTipo() == TipoPieza::Caballo) {
+							std::cout << "El rey está en jaque por un " << tipoPiezaToString(pieza->getTipo())
+								<< " en la posición (" << fila << ", " << columna << ")\n";
+							return true; // El caballo puede saltar, no necesita camino despejado
+						}
+						else if (caminoDespejado(fila, columna, movimiento.fila, movimiento.columna)) {
+							std::cout << "El rey está en jaque por un " << tipoPiezaToString(pieza->getTipo())
+								<< " en la posición (" << fila << ", " << columna << ")\n";
+							return true; // El camino hacia el rey está despejado
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return false; // El rey no está en jaque
 }

@@ -45,10 +45,15 @@ public:
     void raton(int x, int y);
     void dibujaPieza();
     void aplicarGravedad();
-    void calcularJaque();
     void SetJugador1(Jugador jugador1); 
     void SetJugador2(Jugador jugador2);
     Jugador GetJugador1();
     Jugador GetJugador2();
     Pieza* getPieza(int columna, int fila);
+
+    Casilla encontrarRey(int colorRey);
+    bool estaEnJaque(Casilla posicionRey, int colorRey);
+    bool casillaOcupada(int fila, int columna);
+    bool caminoDespejado(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal);
+    string tipoPiezaToString(TipoPieza tipo);
 };
