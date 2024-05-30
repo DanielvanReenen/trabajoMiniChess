@@ -30,13 +30,16 @@ void Menu::inicializa() {
 void Menu::tecla(unsigned char key) {
     switch (estado) {
     case INICIO:
+    //ETSIDI::playMusica("musica/musica_principio.mp3", true); Tenemos que hacer que funcione
         if (key == 's') exit(0);
         if (key == 'e') {
+            //ETSIDI::stopMusica();
             tablero.CasillasaCoordenadas();
             tablero.inicializaTablero();
+            ETSIDI::play("sonidos/inicio.wav");
             estado = JUEGO;
         }
-        estado = JUEGO;
+
         break;
     case JUEGO:
         if (key == 'p') estado = PAUSA;

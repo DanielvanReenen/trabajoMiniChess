@@ -42,7 +42,6 @@ int main(int argc, char* argv[]) {
     glutTimerFunc(25, OnTimer, 0);
     glutMouseFunc(OnMouseClick);
     menu.inicializa();
-    ETSIDI::play("sonidos/inicio.wav");
     // Pasarle el control a GLUT, que llamara a los callbacks
     glutMainLoop();
 
@@ -74,12 +73,13 @@ void OnMouseClick(int button, int state, int pantalla_x, int pantalla_y) {
     }
 }
 
-    void OnKeyboard(unsigned char key, int x, int y) 
-    {
+void OnKeyboard(unsigned char key, int x, int y) 
+{
         std::cout << "Tecla presionada: " << key << std::endl;  // Mensaje de depuración
         menu.tecla(key);
         glutPostRedisplay(); // Asegurarse de que se vuelva a dibujar la pantalla después de una tecla
-    }
+}
+
 void resize(int width, int height) {
     glutReshapeWindow(Width, Height);
 }

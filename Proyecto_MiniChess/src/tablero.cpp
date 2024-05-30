@@ -151,7 +151,7 @@ void Tablero::raton(int x, int y)
 	casSeleccion.columna = (x - 36) / 90;
 	casSeleccion.fila = (y - 36) / 90;
 	piezaSeleccionada = getPieza(casSeleccion.columna, casSeleccion.fila);
-	std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
+	std::cout << "Usted ha pinchado en la casilla: Columna: (" << casSeleccion.columna << ")" << " , " << " Fila: (" << casSeleccion.fila << ")" << std::endl;
 
 	Casilla positionRey = encontrarRey(turno1);
 	bool jaque = estaEnJaque(positionRey, turno1);
@@ -181,7 +181,7 @@ void Tablero::raton(int x, int y)
 			}
 		}
 		else {
-			std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
+			std::cout << "Usted ha pinchado en la casilla: Columna: (" << casSeleccion.columna << ")" << " , " << " Fila: (" << casSeleccion.fila << ")" << std::endl;
 		}
 
 	}
@@ -224,13 +224,13 @@ void Tablero::raton(int x, int y)
 				piezaDestino->setFila(casDestino.fila);
 				if (casillas[piezaDestino->getColumna()][piezaDestino->getFila()] != nullptr) {
 					cout << "te has comido una pieza" << endl;	//detecta que se ha comido una pieza
+					delete casillas[piezaDestino->getColumna()][piezaDestino->getFila()];
 				}
 				casillas[piezaDestino->getColumna()][piezaDestino->getFila()] = piezaDestino;
 				piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getColumna() * 8 + piezaDestino->getFila()]);
 				ETSIDI::play("sonidos/movimiento.wav");
 				std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
 				casillas[casOrigen.columna][casOrigen.fila] = nullptr;
-
 
 				movimientoActivado = false;
 				seleccionActiva = false;
