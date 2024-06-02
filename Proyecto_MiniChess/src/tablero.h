@@ -43,6 +43,9 @@ public:
     void inicializaTablero();
     void Selector(int x, int y);
     void raton(int x, int y);
+    void ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido);
+    void MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido);
+    void MovimientoPeones(bool turnoBlancas, bool& movimientoPermitido);
     void dibujaPieza();
     void aplicarGravedad();
     void SetJugador1(Jugador jugador1); 
@@ -56,4 +59,5 @@ public:
     bool casillaOcupada(int fila, int columna);
     bool caminoDespejado(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal);
     string tipoPiezaToString(TipoPieza tipo);
+    std::vector<Casilla> getPeonMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas);
 };

@@ -4,6 +4,7 @@
 #include "Coordenada.h"
 #include "casilla.h"
 #include <vector>
+#include "tablero.h"
 
 using ETSIDI::SpriteSequence;
 using std::vector;

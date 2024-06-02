@@ -26,36 +26,8 @@ void Peon::dibujaPieza() {
     }
 }
 
-vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
+std::vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
     vector<Casilla> movimientos;
-    int direccion;
-    if (turnoBlancas) {
-        direccion = 1; // Blancos avanzan hacia derecha (positiva)
-    }
-    else {
-        direccion = -1; // Negros avanzan hacia izquierda (negativa)
-    }
-
-    int movimientoDoble = 0;
-    if (turnoBlancas) 
-    {
-        if (columnaActual == 1) 
-        {
-            movimientoDoble = 1;
-            movimientos.push_back(Casilla{ columnaActual + direccion + movimientoDoble, filaActual });
-        }
-        movimientos.push_back(Casilla{ columnaActual + direccion, filaActual });
-    }
-    else
-    {
-        if (columnaActual == 6) 
-        {
-            movimientoDoble = -1;
-            movimientos.push_back(Casilla{ columnaActual + direccion + movimientoDoble, filaActual });
-        }
-
-        movimientos.push_back(Casilla{ columnaActual + direccion, filaActual });
-
-    }
+    // EL PEON NO TIENE ESTA FUNCIÓN PORQUE NECESITA LA INFORMACIÓN DEL TABLERO
     return movimientos;
 }

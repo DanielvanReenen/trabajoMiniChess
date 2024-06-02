@@ -202,18 +202,12 @@ void Tablero::raton(int x, int y)
 			ETSIDI::play("sonidos/seleccion.wav");
 		}
 
-		else {//PARA EL MOVIMIENTO
-			std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turno1);
+		else 
+		{
 			bool movimientoPermitido = false;
-			for (const auto& movimiento : movimientosPermitidos)
-			{
-				Casilla casillaValida = movimiento;
 
-				if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
-					movimientoPermitido = true;
-					break;
-				}
-			}
+			//PARA EL MOVIMIENTO
+			ValidarMovimiento(turno1, movimientoPermitido);
 
 			if (movimientoPermitido) 
 			{
@@ -255,7 +249,6 @@ void Tablero::raton(int x, int y)
 	}
 
 }
-
 
 Casilla Tablero::encontrarRey(int colorRey) {
 	for (int fila = 0; fila < 8; ++fila) {
@@ -330,3 +323,84 @@ bool Tablero::estaEnJaque(Casilla posicionRey, int colorRey) {
 
 	return false; // El rey no está en jaque
 }
+
+void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido)
+{
+	Pieza* piezaOrigenColision = casillas[casOrigen.columna][casOrigen.fila];
+	if (piezaOrigenColision->getTipo() != TipoPieza::Peon) 
+	{
+		MovimientoGeneral(turnoBlancas, movimientoPermitido);
+	}
+	else
+	{
+		MovimientoPeones(turnoBlancas, movimientoPermitido);
+	}
+}
+
+void Tablero::MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido)
+{
+	std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
+	for (const auto& movimiento : movimientosPermitidos)
+	{
+		if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
+			movimientoPermitido = true;
+		}
+	}
+}
+
+void Tablero::MovimientoPeones(bool turnoBlancas, bool& movimientoPermitido)
+{
+	std::vector<Casilla> movimientosPermitidos = getPeonMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
+	for (const auto& movimiento : movimientosPermitidos)
+	{
+		if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
+			movimientoPermitido = true;
+		}
+	}
+}
+
+std::vector<Casilla> Tablero::getPeonMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas)
+{
+	// Falta saber en que posiciones puede moverse el peon en función del tablero
+	std::vector<Casilla> movimientos;
+
+	// Movimientos posibles del peón (una casilla en cualquier dirección en función de si hay pieza o no)
+	const int direccionesHaciaDelante[8][2] = {
+		//Explicadas en la torre y el alfil
+		//filas y columnas
+			{1, 0}, {0, 1}, {-1, 0}, {0, -1},
+			//diagonales
+				{1, 1}, {1, -1}, {-1, 1}, {-1, -1}
+	};
+
+	const int direccionesDiagonales[8][2] = {
+		//Explicadas en la torre y el alfil
+		//filas y columnas
+			{1, 0}, {0, 1}, {-1, 0}, {0, -1},
+			//diagonales
+				{1, 1}, {1, -1}, {-1, 1}, {-1, -1}
+	};
+
+	// En direcciones hacia adelante solo serán validas aquellas posiciones donde NO haya nadie
+	for (const auto& dir : direccionesHaciaDelante) {
+		int nuevaFila = filaActual + dir[0];
+		int nuevaColumna = columnaActual + dir[1];
+		if (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) 
+		{
+			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+		}
+	}
+
+	// En direcciones diagonales solo serán validas aquellas posiciones donde SI haya alguien
+	for (const auto& dir : direccionesDiagonales) {
+		int nuevaFila = filaActual + dir[0];
+		int nuevaColumna = columnaActual + dir[1];
+		if (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8)
+		{
+			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+		}
+	}
+
+	return movimientos;
+}
+
