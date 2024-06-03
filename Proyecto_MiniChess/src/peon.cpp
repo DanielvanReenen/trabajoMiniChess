@@ -27,7 +27,7 @@ void Peon::dibujaPieza() {
 }
 
 std::vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
-    vector<Casilla> movimientos;
+
     // EL PEON NO TIENE ESTA FUNCIÓN PORQUE NECESITA LA INFORMACIÓN DEL TABLERO
-    return movimientos;
+    //Estoy probando cosas con esta funcion por eso da error aqui
 }

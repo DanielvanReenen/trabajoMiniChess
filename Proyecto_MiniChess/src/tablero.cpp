@@ -324,6 +324,7 @@ bool Tablero::estaEnJaque(Casilla posicionRey, int colorRey) {
 	return false; // El rey no está en jaque
 }
 
+
 void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido)
 {
 	Pieza* piezaOrigenColision = casillas[casOrigen.columna][casOrigen.fila];
