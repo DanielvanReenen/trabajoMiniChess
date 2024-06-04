@@ -19,8 +19,8 @@ class Tablero {
 
 private:
     vector<vector<Pieza*>> casillas;
-    bool finalJuego = false;
     Coordenada coordenadaSobreTablero[64];
+    bool finalJuego = false;
     Jugador jugador1;
     Jugador jugador2;
     Casilla casSeleccion;
@@ -31,6 +31,9 @@ private:
     Pieza* piezaDestino = nullptr;
     bool seleccionActiva = false;
     bool movimientoActivado = false;
+
+    const int ColorBlancas = 0;
+    const int ColorNegras = 1;
 
     bool jaque;
 
@@ -52,9 +55,11 @@ public:
     Pieza* getPieza(int fila, int columna);
     bool hayPiezaOponente(int fila, int columna, bool turnoBlancas) const;
 
-    Casilla encontrarRey(int colorRey);
-    bool estaEnJaque(Casilla posicionRey, int colorRey);
+    Casilla encontrarRey(bool turnoBlancas);
+    bool estaEnJaque(Casilla posicionRey, bool colorRey);
     bool casillaOcupada(int fila, int columna) const;
     bool caminoDespejado(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal);
     string tipoPiezaToString(TipoPieza tipo);
+    Pieza* HayCoronacion(Casilla casillaDestino, Pieza* tipoPieza);
+    Pieza* CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas);
 };

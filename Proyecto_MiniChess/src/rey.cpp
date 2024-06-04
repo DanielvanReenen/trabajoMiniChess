@@ -45,6 +45,5 @@ vector<Casilla> Rey::getMovimientosPermitidos(int filaActual, int columnaActualb
 			movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
 		}
 	}
-
     return movimientos;
 }

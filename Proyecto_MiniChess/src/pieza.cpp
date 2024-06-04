@@ -27,3 +27,8 @@ void Pieza::setColumna(int columna_) {
 void Pieza::setPosicion(Coordenada posicion_) {
     posicion = posicion_;
 }
+
+Coordenada Pieza::getPosicion()
+{
+    return posicion;
+}

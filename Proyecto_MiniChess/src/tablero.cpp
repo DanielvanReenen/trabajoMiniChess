@@ -211,6 +211,15 @@ void Tablero::Selector(int x, int y) {
                 std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
                 casillas[casOrigen.fila][casOrigen.columna] = nullptr;
 
+                Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
+                if (piezaCoronada != nullptr)
+                {
+                    // TODO: Cambiar este sonido a uno de celebración
+                    ETSIDI::play("sonidos/movimiento.wav");
+                    casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
+                }
+
+
                 movimientoActivado = false;
                 seleccionActiva = false;
                 piezaOrigen = nullptr;
@@ -225,6 +234,8 @@ void Tablero::Selector(int x, int y) {
                     jugador1.SetTurno(true);
                     jugador2.SetTurno(false);
                 }
+
+
             }
             else {
                 std::cout << "No se permite ese movimiento." << std::endl;
@@ -233,11 +244,16 @@ void Tablero::Selector(int x, int y) {
     }
 }
 
-Casilla Tablero::encontrarRey(int colorRey) {
+Casilla Tablero::encontrarRey(bool turnoBlancas) {
+
+    int colorRey = turnoBlancas ? 1 : 0;
+    std::cout << "Estamos buscando el rey de color " << colorRey << std::endl;
+
     for (int fila = 0; fila < 8; ++fila) {
         for (int columna = 0; columna < 8; ++columna) {
             Pieza* pieza = casillas[fila][columna];
-            if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey) {
+            if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey)
+            {
                 return Casilla{ columna, fila };
             }
         }
@@ -279,11 +295,70 @@ std::string Tablero::tipoPiezaToString(TipoPieza tipo) {
     return "Desconocido";
 }
 
-bool Tablero::estaEnJaque(Casilla posicionRey, int colorRey) {
+Pieza* Tablero::HayCoronacion(Casilla casillaDestino, Pieza* tipoPieza)
+{
+    Pieza* piezaDeseada = nullptr;
+    if (tipoPieza != nullptr) 
+    {
+        if (tipoPieza->getTipo() == TipoPieza::Peon)
+        {
+            if (casillaDestino.fila == 0)
+            {
+                piezaDeseada = CoronacionDeseada(tipoPieza, casillaDestino, false);
+            }
+            else if (casillaDestino.fila == 7)
+            {
+                piezaDeseada = CoronacionDeseada(tipoPieza, casillaDestino, true);
+            }
+        }
+    }
+    return piezaDeseada;
+}
+
+Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas)
+{
+    GetConsoleWindow();
+    char piezaDeseada = 'z';
+    Pieza* nuevaPieza = nullptr;
+    int colorPieza = blancas ? 0 : 1;
+
+    do {
+        std::cout << "Escoge a que tipo de pieza quieres convertirla ( T : Torre , C : Caballo , A: Alfil, R : Reina)" << endl;
+        std::cin >> piezaDeseada;
+
+        if (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r') 
+        {
+            std::cout << "El tipo de pieza seleccionada no está disponible." << endl;
+        }
+    } while (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r');
+
+
+    switch (piezaDeseada) {
+    case 't':
+        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
+    case 'c':
+        nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
+    case 'a':
+        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
+    case 'r':
+        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
+    }
+    return nuevaPieza;
+}
+
+
+bool Tablero::estaEnJaque(Casilla posicionRey, bool turnoBlancas)
+{
+    int colorRey = turnoBlancas ? 1 : 0;
     for (int fila = 0; fila < 8; ++fila) {
         for (int columna = 0; columna < 8; ++columna) {
             Pieza* pieza = casillas[fila][columna];
-            if (pieza != nullptr && pieza->getColor() != colorRey) {
+            if (pieza != nullptr && pieza->getColor() != colorRey) 
+            {
                 vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, pieza->getColor() == 0);
                 for (const Casilla& movimiento : movimientos) {
                     if (movimiento.fila == posicionRey.fila && movimiento.columna == posicionRey.columna) {
@@ -302,7 +377,6 @@ bool Tablero::estaEnJaque(Casilla posicionRey, int colorRey) {
             }
         }
     }
-
     return false;
 }
 
@@ -313,13 +387,34 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido)
         return;
 
     MovimientoGeneral(turnoBlancas, movimientoPermitido);
+    
 }
 
 void Tablero::MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido) {
     std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
-    for (const auto& movimiento : movimientosPermitidos) {
-        if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) {
-            movimientoPermitido = true;
+    for (const auto& movimiento : movimientosPermitidos) 
+    {
+        if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) 
+        {
+            // Si el movimiento es válido, miraremos si este movimiento nos deja en jaque
+            Casilla positionRey = encontrarRey(!turnoBlancas);
+            bool jaque = estaEnJaque(positionRey, !turnoBlancas);
+            if (!jaque)
+            {
+                if (!caminoDespejado(casSeleccion.fila, casSeleccion.columna, movimiento.fila, movimiento.columna))
+                {
+                    jaque = true;
+                }
+            }
+
+            if (!jaque)
+            {
+                movimientoPermitido = true;
+            }
+            else
+            {
+                std::cout << "No puedo hacer este movimiento ya que me quedaría en jaque.";
+            }
         }
     }
 }

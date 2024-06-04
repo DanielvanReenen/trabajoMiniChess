@@ -33,4 +33,5 @@ public:
     void setFila(int fila_);
     void setColumna(int columna_);
     void setPosicion(Coordenada posicion_);
+    Coordenada getPosicion();
 };
