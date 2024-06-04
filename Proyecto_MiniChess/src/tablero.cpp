@@ -317,7 +317,8 @@ Pieza* Tablero::HayCoronacion(Casilla casillaDestino, Pieza* tipoPieza)
 
 Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas)
 {
-    GetConsoleWindow();
+    //El color de pieza tiene que ser el mismo que del turno
+    //GetConsoleWindow();
     char piezaDeseada = 'z';
     Pieza* nuevaPieza = nullptr;
     int colorPieza = blancas ? 0 : 1;
@@ -326,24 +327,40 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
         std::cout << "Escoge a que tipo de pieza quieres convertirla ( T : Torre , C : Caballo , A: Alfil, R : Reina)" << endl;
         std::cin >> piezaDeseada;
 
-        if (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r') 
+        if (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r' && piezaDeseada != 'T' && piezaDeseada != 'C' && piezaDeseada != 'A' && piezaDeseada != 'R')
         {
             std::cout << "El tipo de pieza seleccionada no está disponible." << endl;
         }
-    } while (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r');
+    } while (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r' &&  piezaDeseada != 'T' && piezaDeseada != 'C' && piezaDeseada != 'A' && piezaDeseada != 'R');
 
 
     switch (piezaDeseada) {
     case 't':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+
+        break;
+    case 'T':
+        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+
         break;
     case 'c':
         nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+
+        break;
+    case 'C':
+        nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+
         break;
     case 'a':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
         break;
+    case 'A':
+        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
     case 'r':
+        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        break;
+    case 'R':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
         break;
     }
