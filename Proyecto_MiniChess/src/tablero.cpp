@@ -152,6 +152,7 @@ void Tablero::Selector(int x, int y) {
     casSeleccion.fila = (y - 36) / 90;
     piezaSeleccionada = getPieza(casSeleccion.fila, casSeleccion.columna);
     std::cout << "Usted ha pinchado en la casilla: Columna: (" << casSeleccion.columna << ")" << " , " << " Fila: (" << casSeleccion.fila << ")" << std::endl;
+
     Casilla positionRey = encontrarRey(turno1);
     bool jaque = estaEnJaque(positionRey, turno1);
     cout << "HAY JAQUE??? => " << jaque << endl;
@@ -171,7 +172,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             seleccionActiva = true;
-            ETSIDI::play("sonidos/force.mp3");
+            ETSIDI::play("sonidos/seleccion.wav");
         }
         else {
             std::cout << "Estas no son tus piezas o la casilla está vacía." << std::endl;
@@ -188,8 +189,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
-         
-            ETSIDI::play("sonidos/force.mp3");
+            ETSIDI::play("sonidos/seleccion.wav");
         }
         else {
             bool movimientoPermitido = false;
@@ -201,21 +201,42 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino = piezaOrigen;
                 piezaDestino->setColumna(casDestino.columna);
                 piezaDestino->setFila(casDestino.fila);
+
+                //Realizamos la omprobacion de la captura al paso
+                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {
+                    int direction = (piezaOrigen->getColor() == 0) ? -1 : 1; // White moves up, black moves down
+                    delete casillas[casDestino.fila + direction][casDestino.columna];
+                    casillas[casDestino.fila + direction][casDestino.columna] = nullptr;
+                    std::cout << "En passant capture at (" << casDestino.columna << ", " << casDestino.fila + direction << ")" << std::endl;
+                }
+
+
                 if (casillas[piezaDestino->getFila()][piezaDestino->getColumna()] != nullptr) {
                     cout << "te has comido una pieza" << endl;
                     delete casillas[piezaDestino->getFila()][piezaDestino->getColumna()];
                 }
                 casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaDestino;
                 piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
-                ETSIDI::play("sonidos/sonido-mover.mp3");
+                ETSIDI::play("sonidos/movimiento.wav");
                 std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
                 casillas[casOrigen.fila][casOrigen.columna] = nullptr;
 
+                // Guardamos el valor del ultimo movimiento doble realizado por un peon
+                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 2) {
+                    ultimoPeonDobleMovFila= casDestino.fila;
+                    ultimoPeonDobleMovColumna= casDestino.columna;
+                }
+                else {
+                    ultimoPeonDobleMovFila= -1;
+                    ultimoPeonDobleMovColumna= -1;
+                  
+                }
+            
                 Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
                 if (piezaCoronada != nullptr)
                 {
-                    
-                    ETSIDI::play("sonidos/Chewbacca.mp3");
+                    // TODO: Cambiar este sonido a uno de celebración
+                    ETSIDI::play("sonidos/movimiento.wav");
                     casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                 }
 
@@ -366,7 +387,6 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     }
     return nuevaPieza;
 }
-
 
 bool Tablero::estaEnJaque(Casilla posicionRey, bool turnoBlancas)
 {

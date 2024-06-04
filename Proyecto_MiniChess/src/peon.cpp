@@ -59,5 +59,10 @@ vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual
         movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
     }
 
+    // Captura al paso 
+    if (tablero.ultimoPeonDobleMovFila == filaActual && (tablero.ultimoPeonDobleMovColumna == columnaActual - 1 || tablero.ultimoPeonDobleMovColumna == columnaActual + 1)) {
+        movimientos.push_back(Casilla{ tablero.ultimoPeonDobleMovColumna, filaActual + direccion });
+    }
+
     return movimientos;
 }

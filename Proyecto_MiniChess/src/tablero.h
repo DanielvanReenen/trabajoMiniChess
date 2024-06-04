@@ -31,6 +31,7 @@ private:
     Pieza* piezaDestino = nullptr;
     bool seleccionActiva = false;
     bool movimientoActivado = false;
+   
 
     const int ColorBlancas = 0;
     const int ColorNegras = 1;
@@ -62,4 +63,7 @@ public:
     string tipoPiezaToString(TipoPieza tipo);
     Pieza* HayCoronacion(Casilla casillaDestino, Pieza* tipoPieza);
     Pieza* CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas);
+    int ultimoPeonDobleMovFila;
+    int ultimoPeonDobleMovColumna;
+
 };
