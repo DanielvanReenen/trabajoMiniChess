@@ -1,18 +1,18 @@
 #include "pieza.h"
 
-Pieza::Pieza(int col, const char* spritePath) : color(col), fila(0), columna(0), sprite(spritePath, 1) { sprite.setSize(1, 1); }
+Pieza::Pieza(int col, const char* spritePath) : color(col), sprite(spritePath,1) {}
 
 Pieza::~Pieza() {}
 
-int Pieza::getColor() {
+int Pieza::getColor() const {
     return color;
 }
 
-int Pieza::getFila() {
+int Pieza::getFila() const {
     return fila;
 }
 
-int Pieza::getColumna() {
+int Pieza::getColumna() const {
     return columna;
 }
 
@@ -26,10 +26,4 @@ void Pieza::setColumna(int columna_) {
 
 void Pieza::setPosicion(Coordenada posicion_) {
     posicion = posicion_;
-}
-
-void Pieza::MoverPieza() {
-}
-
-void Pieza::ComerPieza() {
 }

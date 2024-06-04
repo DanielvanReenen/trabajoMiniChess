@@ -32,7 +32,6 @@ private:
     bool seleccionActiva = false;
     bool movimientoActivado = false;
 
-
     bool jaque;
 
 public:
@@ -42,22 +41,20 @@ public:
     void CasillasaCoordenadas();
     void inicializaTablero();
     void Selector(int x, int y);
-    void raton(int x, int y);
     void ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido);
     void MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido);
-    void MovimientoPeones(bool turnoBlancas, bool& movimientoPermitido);
     void dibujaPieza();
     void aplicarGravedad();
-    void SetJugador1(Jugador jugador1); 
+    void SetJugador1(Jugador jugador1);
     void SetJugador2(Jugador jugador2);
     Jugador GetJugador1();
     Jugador GetJugador2();
-    Pieza* getPieza(int columna, int fila);
+    Pieza* getPieza(int fila, int columna);
+    bool hayPiezaOponente(int fila, int columna, bool turnoBlancas) const;
 
     Casilla encontrarRey(int colorRey);
     bool estaEnJaque(Casilla posicionRey, int colorRey);
-    bool casillaOcupada(int fila, int columna);
+    bool casillaOcupada(int fila, int columna) const;
     bool caminoDespejado(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal);
     string tipoPiezaToString(TipoPieza tipo);
-    std::vector<Casilla> getPeonMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas);
 };

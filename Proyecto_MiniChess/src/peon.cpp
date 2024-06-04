@@ -1,9 +1,10 @@
 #include "peon.h"
 
-Peon::Peon(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/PeonJedi.png" : "imagenes/PeonSith.png") {
-    setPosicion(pos);
-    fila = fila_;
-    columna = columna_;
+Peon::Peon(Coordenada posicion, int color, int fila, int columna, const Tablero& tablero)
+    : Pieza(color, color == 0 ? "imagenes/PeonJedi.png" : "imagenes/PeonSith.png"), tablero(tablero) {
+    this->posicion = posicion;
+    this->fila = fila;
+    this->columna = columna;
 }
 
 void Peon::dibujaPieza() {
@@ -26,8 +27,37 @@ void Peon::dibujaPieza() {
     }
 }
 
-std::vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
+TipoPieza Peon::getTipo() const {
+    return TipoPieza::Peon;
+}
 
-    // EL PEON NO TIENE ESTA FUNCIÓN PORQUE NECESITA LA INFORMACIÓN DEL TABLERO
-    //Estoy probando cosas con esta funcion por eso da error aqui
+vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const {
+    vector<Casilla> movimientos;
+    int direccion = turnoBlancas ? 1 : -1;
+
+    // Movimiento hacia adelante
+    int nuevaFila = filaActual + direccion;
+    if (nuevaFila >= 0 && nuevaFila < 8) {
+        if (!tablero.casillaOcupada(nuevaFila, columnaActual)) {
+            movimientos.push_back(Casilla{ columnaActual, nuevaFila });
+            if ((filaActual == 1 && turnoBlancas) || (filaActual == 6 && !turnoBlancas)) {
+                nuevaFila += direccion;
+                if (!tablero.casillaOcupada(nuevaFila, columnaActual)) {
+                    movimientos.push_back(Casilla{ columnaActual, nuevaFila });
+                }
+            }
+        }
+    }
+
+    // Captura en diagonal
+    int nuevaColumna = columnaActual - 1;
+    if (nuevaColumna >= 0 && nuevaFila >= 0 && nuevaFila < 8 && tablero.casillaOcupada(nuevaFila, nuevaColumna) && tablero.hayPiezaOponente(nuevaFila, nuevaColumna, turnoBlancas)) {
+        movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+    }
+    nuevaColumna = columnaActual + 1;
+    if (nuevaColumna < 8 && nuevaFila >= 0 && nuevaFila < 8 && tablero.casillaOcupada(nuevaFila, nuevaColumna) && tablero.hayPiezaOponente(nuevaFila, nuevaColumna, turnoBlancas)) {
+        movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+    }
+
+    return movimientos;
 }

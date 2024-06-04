@@ -1,13 +1,14 @@
 #pragma once
 #include "pieza.h"
+#include "tablero.h"
 
-class Peon : public Pieza
-{
+class Peon : public Pieza {
+private:
+    const Tablero& tablero;
+
 public:
-    Peon(int col) : Pieza(col, col == 0 ? "imagenes/PeonJedi.png" : "imagenes/PeonSith.png") {}
-    Peon(Coordenada pos, int col, int fila_, int columna_);
-
-    void dibujaPieza() override;
-    TipoPieza getTipo() const override { return TipoPieza::Peon; }
-    vector<Casilla> getMovimientosPermitidos(int filaActual, int columnaActualbool, bool turnoBlancas) const override;
+    Peon(Coordenada posicion, int color, int fila, int columna, const Tablero& tablero);
+    virtual void dibujaPieza() override;
+    virtual TipoPieza getTipo() const override;
+    virtual vector<Casilla> getMovimientosPermitidos(int filaActual, int columnaActual, bool turnoBlancas) const override;
 };
