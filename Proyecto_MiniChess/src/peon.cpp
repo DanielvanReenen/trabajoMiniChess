@@ -42,27 +42,31 @@ vector<Casilla> Peon::getMovimientosPermitidos(int filaActual, int columnaActual
             movimientos.push_back(Casilla{ columnaActual, nuevaFila });
             if ((filaActual == 1 && turnoBlancas) || (filaActual == 6 && !turnoBlancas)) {
                 nuevaFila += direccion;
-                if (!tablero.casillaOcupada(nuevaFila, columnaActual)) {
+                if (nuevaFila >= 0 && nuevaFila < 8 && !tablero.casillaOcupada(nuevaFila, columnaActual)) {
                     movimientos.push_back(Casilla{ columnaActual, nuevaFila });
                 }
             }
         }
     }
 
-    // Captura en diagonal
+    // Captura en diagonal izquierda
     int nuevaColumna = columnaActual - 1;
+    nuevaFila = filaActual + direccion; // Necesitamos recalcular nuevaFila aquí
     if (nuevaColumna >= 0 && nuevaFila >= 0 && nuevaFila < 8 && tablero.casillaOcupada(nuevaFila, nuevaColumna) && tablero.hayPiezaOponente(nuevaFila, nuevaColumna, turnoBlancas)) {
         movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
     }
+
+    // Captura en diagonal derecha
     nuevaColumna = columnaActual + 1;
     if (nuevaColumna < 8 && nuevaFila >= 0 && nuevaFila < 8 && tablero.casillaOcupada(nuevaFila, nuevaColumna) && tablero.hayPiezaOponente(nuevaFila, nuevaColumna, turnoBlancas)) {
         movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
     }
 
-    // Captura al paso 
+    // Captura al paso
     if (tablero.ultimoPeonDobleMovFila == filaActual && (tablero.ultimoPeonDobleMovColumna == columnaActual - 1 || tablero.ultimoPeonDobleMovColumna == columnaActual + 1)) {
         movimientos.push_back(Casilla{ tablero.ultimoPeonDobleMovColumna, filaActual + direccion });
     }
 
     return movimientos;
 }
+
