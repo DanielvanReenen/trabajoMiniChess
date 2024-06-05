@@ -29,8 +29,10 @@ private:
     Pieza* piezaSeleccionada = nullptr;
     Pieza* piezaOrigen = nullptr;
     Pieza* piezaDestino = nullptr;
+    Pieza* piezaComida = nullptr;
     bool seleccionActiva = false;
     bool movimientoActivado = false;
+    bool comer = false;
    
 
     const int ColorBlancas = 0;

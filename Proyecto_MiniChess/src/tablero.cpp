@@ -168,7 +168,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             seleccionActiva = true;
-            ETSIDI::play("sonidos/force.mp3");
+            ETSIDI::play("sonidos/seleccion.wav");
         }
         else {
             std::cout << "Estas no son tus piezas o la casilla está vacía." << std::endl;
@@ -185,7 +185,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
-            ETSIDI::play("sonidos/force.mp3");
+            ETSIDI::play("sonidos/seleccion.wav");
         }
         else {
             bool movimientoPermitido = false;
@@ -206,31 +206,65 @@ void Tablero::Selector(int x, int y) {
                     std::cout << "Se ha capturado al paso en (" << casDestino.columna << ", " << casDestino.fila + direction << ")" << std::endl;
                 }
 
-                if (casillas[piezaDestino->getFila()][piezaDestino->getColumna()] != nullptr) {
-                    cout << "te has comido una pieza" << endl;
-                    ETSIDI::play("sonidos/sables_laser.mp3");
-                    delete casillas[piezaDestino->getFila()][piezaDestino->getColumna()];
+                if (casillas[casDestino.fila][casDestino.columna] != nullptr) {
+                    cout << "Te has comido una pieza" << endl;
+                    if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Peon) {
+                        piezaComida = new Peon(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna(), *this);
+                    }
+
+                    if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Torre) {
+                        piezaComida = new Torre(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                    }
+
+                    if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Caballo) {
+                        piezaComida = new Caballo(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                    }
+
+                    if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Alfil) {
+                        piezaComida = new Alfil(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                    }
+
+                    if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Reina) {
+                        piezaComida = new Reina(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                    }
+                    
+                    delete casillas[casDestino.fila][casDestino.columna];
+                    comer = true;
                 }
                 
-
-                casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaDestino;
-                piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
-                ETSIDI::play("sonidos/sonido-mover.mp3");
-                std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
-                casillas[casOrigen.fila][casOrigen.columna] = nullptr;
+               
+                 casillas[casDestino.fila][casDestino.columna] = piezaDestino;
+                 piezaDestino->setPosicion(coordenadaSobreTablero[casDestino.fila * 8 + casDestino.columna]);
+                 ETSIDI::play("sonidos/movimiento.wav");
+                 std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
+                 casillas[casOrigen.fila][casOrigen.columna] = nullptr;
+                
 
                 Casilla positionRey = encontrarRey(turno2);
                 jaque = estaEnJaque(positionRey, turno2);
                 cout << "HAY JAQUE??? => " << jaque << endl;
+                
 
                 if (jaque) {
-                    
-                    casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = nullptr;
-                    casillas[casOrigen.fila][casOrigen.columna] = piezaDestino;
-                    piezaDestino->setColumna(casOrigen.columna);
-                    piezaDestino->setFila(casOrigen.fila);
-                    piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
+                    if (comer = true) {
+                        casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaComida;
+                        casillas[casOrigen.fila][casOrigen.columna] = piezaDestino;
+                        piezaDestino->setColumna(casOrigen.columna);
+                        piezaDestino->setFila(casOrigen.fila);
+                        piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
+                    }
+
+                    if (comer = false) {
+                        casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = nullptr;
+                        casillas[casOrigen.fila][casOrigen.columna] = piezaDestino;
+                        piezaDestino->setColumna(casOrigen.columna);
+                        piezaDestino->setFila(casOrigen.fila);
+                        piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
+                    }
+
                 }
+
+               
 
                 // Guardamos el valor del ultimo movimiento doble realizado por un peon
                 if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 2) {
@@ -242,12 +276,14 @@ void Tablero::Selector(int x, int y) {
                     ultimoPeonDobleMovColumna= -1;
                   
                 }
+
+                
             
                 Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
                 if (piezaCoronada != nullptr)
                 {
-                 
-                    ETSIDI::play("sonidos/Chewbacca.mp3");
+                    // TODO: Cambiar este sonido a uno de celebración
+                    ETSIDI::play("sonidos/movimiento.wav");
                     casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                 }
 
@@ -257,6 +293,8 @@ void Tablero::Selector(int x, int y) {
                 piezaOrigen = nullptr;
                 piezaSeleccionada = nullptr;
                 piezaDestino = nullptr;
+                piezaComida = nullptr;
+                comer = false;
 
                 if (!jaque) {
                     if (turno1) {
@@ -441,18 +479,15 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido)
 
 void Tablero::MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido) {
     std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
-    for (const auto& movimiento : movimientosPermitidos) movimientoPermitido = true;
-    //{
-    //    if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) 
-    //    {
-    //        // Si el movimiento es válido, miraremos si este movimiento nos deja en jaque
-    //        if (!jaque) {
-    //            movimientoPermitido = true;
-    //        }
-    //    }
+    for (const auto& movimiento : movimientosPermitidos) 
+    {
+        if (movimiento.fila == casSeleccion.fila && movimiento.columna == casSeleccion.columna) 
+        {
+                movimientoPermitido = true;
+        }
 
-    //    else {
-    //        std::cout << "No puedo hacer este movimiento ya que me quedaría en jaque.";
-    //    }
-    //}
+        else {
+            std::cout << "No puedo hacer este movimiento ya que me quedaría en jaque.";
+        }
+    }
 }
