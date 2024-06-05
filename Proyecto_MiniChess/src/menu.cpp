@@ -8,7 +8,7 @@ Menu::Menu() : tablero(Jugador(false), Jugador(false)), estado(INICIO) {}
 void Menu::inicializa() {
     std::srand(std::time(0));
     Jugador jugador = new Jugador(false);
-    
+
     // De momento empiezan siempre las blancas => TODO
     if (true) {
         cout << "EMPIEZAN LAS BLANCAS" << std::endl;
@@ -23,52 +23,55 @@ void Menu::inicializa() {
         tablero.SetJugador2(jugador);
     }
     estado = INICIO;
+    ETSIDI::playMusica("musica/musica principio.mp3");
 }
-
-
 
 void Menu::tecla(unsigned char key) {
     switch (estado) {
-        case INICIO:
-        //ETSIDI::playMusica("musica/musica_principio.mp3", true); Tenemos que hacer que funcione
-            if (key == 's' || key == 'S') exit(0);
-            if (key == 'e'||key == 'E') {
-           
-                tablero.CasillasaCoordenadas();
-                tablero.inicializaTablero();
-                ETSIDI::play("sonidos/inicio.wav");
-                estado = JUEGO;
-            }
-            else if (key == 'c' || key == 'C') {
-                estado = CREDITOS;
-            }
-            break;
+    case INICIO:
+       
+        if (key == 's' || key == 'S') {
+            ETSIDI::stopMusica();
+            exit(0);
+        }
+        if (key == 'e' || key == 'E') {
+            ETSIDI::stopMusica();
+            tablero.CasillasaCoordenadas();
+            tablero.inicializaTablero();
+            ETSIDI::play("musica/fondo.mp3");
+            estado = JUEGO;
+        }
+        else if (key == 'c' || key == 'C') {
+            estado = CREDITOS;
+        }
+        break;
 
- /*       case JUEGO:
-            if (key == 'p' || key == 'P') estado = PAUSA;
-            if (key == 's' || key == 'S') {
-                exit(0);
-            }
-            break;
-        case GAMEOVER:
-            if (key == 'c' || key == 'C') estado = INICIO;
-            break;
-        case FIN:
-            if (key == 'c' || key == 'C') estado = INICIO;
-            break;
-        case PAUSA:
-            if (key == 'c' || key == 'C') estado = JUEGO;
-            break;*/
-        case CREDITOS:
-            if (key == 's' || key == 'S') exit(0);
-            if (key == 'e' || key == 'E') {
+    case JUEGO:
+        if (key == 'p' || key == 'P') estado = PAUSA;
+        if (key == 's' || key == 'S') {
+            exit(0);
+        }
+        break;
+    case WINBLANCAS:
+        if (key == 'c' || key == 'C') estado = INICIO;
+        break;
+    case WINNEGRAS:
+        if (key == 'c' || key == 'C') estado = INICIO;
+        break;
+    case PAUSA:
+        if (key == 'c' || key == 'C') estado = JUEGO;
+        break;
+    case CREDITOS:
+        if (key == 's' || key == 'S') exit(0);
+        if (key == 'e' || key == 'E') {
 
-                tablero.CasillasaCoordenadas();
-                tablero.inicializaTablero();
-                ETSIDI::play("sonidos/inicio.wav");
-                estado = JUEGO;
-            }
-            break;
+            tablero.CasillasaCoordenadas();
+            tablero.inicializaTablero();
+            ETSIDI::stopMusica();
+          //  ETSIDI::playMusica("musica/fondo.mp3");
+            estado = JUEGO;
+        }
+        break;
     }
 
 }
@@ -95,31 +98,41 @@ void Menu::dibuja() {
         tablero.dibujaPieza();
         break;
 
-    //case GAMEOVER:
-    //    tablero.dibuja();
-    //    ETSIDI::setTextColor(1, 0, 0);
-    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-    //    ETSIDI::printxy("GAME OVER: Has perdido", -5, 10);
-    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
-    //    break;
+    case WINBLANCAS:
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/winblancas.png").id);
+        glDisable(GL_LIGHTING);
+        glBegin(GL_POLYGON);
+        glColor3f(1, 1, 1);
+        glTexCoord2d(0, 1); glVertex2f(-1, -1);
+        glTexCoord2d(1, 1); glVertex2f(1, -1);
+        glTexCoord2d(1, 0); glVertex2f(1, 1);
+        glTexCoord2d(0, 0); glVertex2f(-1, 1);
+        glEnd();
+        glEnable(GL_LIGHTING);
+        glDisable(GL_TEXTURE_2D);
+        break;
 
-    //case FIN:
-    //    tablero.dibuja();
-    //    ETSIDI::setTextColor(1, 0, 0);
-    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-    //    ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", -5, 10);
-    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 9);
-    //    break;
+    case WINNEGRAS:
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/winnegras.png").id);
+        glDisable(GL_LIGHTING);
+        glBegin(GL_POLYGON);
+        glColor3f(1, 1, 1);
+        glTexCoord2d(0, 1); glVertex2f(-1, -1);
+        glTexCoord2d(1, 1); glVertex2f(1, -1);
+        glTexCoord2d(1, 0); glVertex2f(1, 1);
+        glTexCoord2d(0, 0); glVertex2f(-1, 1);
+        glEnd();
+        glEnable(GL_LIGHTING);
+        glDisable(GL_TEXTURE_2D);
+        break;
 
-    //case PAUSA:
-    //    std::cout << "Dibujando la pantalla de pausa" << std::endl;
-    //    tablero.dibuja();
-    //    tablero.dibujaPieza();
-    //    ETSIDI::setTextColor(1, 1, 0);
-    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-    //    ETSIDI::printxy("PAUSA", -5, 10);
-    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
-    //    break;
+        case PAUSA:
+        std::cout << "Dibujando la pantalla de pausa" << std::endl;
+        tablero.dibuja();
+        tablero.dibujaPieza();
+        break;
 
     case CREDITOS:
         glEnable(GL_TEXTURE_2D);
@@ -137,6 +150,7 @@ void Menu::dibuja() {
         break;
     }
 }
+
 void Menu::aplicarGravedad() {
     //tablero.aplicarGravedad();
 }
@@ -144,6 +158,7 @@ void Menu::aplicarGravedad() {
 void Menu::Selector(int x, int y) {
     tablero.Selector(x, y);
 }
+
 Menu::Estado Menu::getEstado() const {
     return estado;
 }

@@ -1,10 +1,7 @@
-﻿  MiniChess.cpp
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(85,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(85,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  menu.cpp
+C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\menu.cpp(9,25): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   tablero.cpp
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(99,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(100,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Proyecto_MiniChess.vcxproj -> C:\Users\User\source\repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
+C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(99,48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(100,50): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  Generando código...
+  Proyecto_MiniChess.vcxproj -> C:\Users\Javier\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
