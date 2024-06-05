@@ -22,7 +22,6 @@ int main(int argc, char* argv[]) {
     //tablero.CasillasaCoordenadas();
    // tablero.inicializaTablero();
    
-
     // Inicializar el gestor de ventanas GLUT y crear la ventana
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -49,6 +48,8 @@ int main(int argc, char* argv[]) {
 }
 
 void OnDraw(void) {
+  
+
     // Borrado de la pantalla    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

@@ -1,6 +1,7 @@
 #include "tablero.h"
 #include "freeglut.h"
 #include "ETSIDI.h"
+#include <stdlib.h>
 
 Tablero::Tablero(const Jugador& j1, const Jugador& j2)
     : jugador1(j1), jugador2(j2), casillas(8, vector<Pieza*>(8, nullptr)) {
@@ -139,12 +140,14 @@ void Tablero::inicializaTablero() {
 }
 
 void Tablero::Selector(int x, int y) {
+
+    system("cls");
     bool turno1 = jugador1.getTurno();
     bool turno2 = jugador2.getTurno();
     int colorturno;
 
     if (turno1 == turno2) {
-        cout << "error: no puede ser el turno de los 2 a la vez" << endl;
+        //cout << "error: no puede ser el turno de los 2 a la vez" << endl;
         return;
     }
 
