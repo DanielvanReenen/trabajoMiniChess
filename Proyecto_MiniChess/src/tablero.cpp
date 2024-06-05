@@ -438,35 +438,6 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     return nuevaPieza;
 }
 
-bool Tablero::estaEnJaque(Casilla posicionRey, bool turnoBlancas)
-{
-    int colorRey = turnoBlancas ? 1 : 0;
-    for (int fila = 0; fila < 8; ++fila) {
-        for (int columna = 0; columna < 8; ++columna) {
-            Pieza* pieza = casillas[fila][columna];
-            if (pieza != nullptr && pieza->getColor() != colorRey) 
-            {
-                vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, pieza->getColor() == 0);
-                for (const Casilla& movimiento : movimientos) {
-                    if (movimiento.fila == posicionRey.fila && movimiento.columna == posicionRey.columna) {
-                        if (pieza->getTipo() == TipoPieza::Caballo) {
-                            std::cout << "El rey está en jaque por un " << tipoPiezaToString(pieza->getTipo())
-                                << " en la posición (" << fila << ", " << columna << ")\n";
-                            return true;
-                        }
-                        else if (caminoDespejado(fila, columna, movimiento.fila, movimiento.columna)) {
-                            std::cout << "El rey está en jaque por un " << tipoPiezaToString(pieza->getTipo())
-                                << " en la posición (" << fila << ", " << columna << ")\n";
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
-
 void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido)
 {
     Pieza* piezaOrigenColision = casillas[casOrigen.fila][casOrigen.columna];
@@ -485,9 +456,80 @@ void Tablero::MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido) {
         {
                 movimientoPermitido = true;
         }
+    }
+}
 
-        else {
-            std::cout << "No puedo hacer este movimiento ya que me quedaría en jaque.";
+bool Tablero::estaEnJaque(Casilla posicionRey, bool turnoBlancas) {
+    int colorReyOponente = turnoBlancas ? 0 : 1; // Cambiado para buscar el rey del oponente
+    for (int fila = 0; fila < 7; ++fila) {
+        for (int columna = 0; columna < 7; ++columna) {
+            Pieza* pieza = casillas[fila][columna];
+            if (pieza != nullptr && pieza->getColor() == colorReyOponente) {
+                vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, !turnoBlancas);
+                for (const Casilla& movimiento : movimientos) {
+                    if (movimiento.fila == posicionRey.fila && movimiento.columna == posicionRey.columna) {
+                        if (pieza->getTipo() == TipoPieza::Caballo || caminoDespejado(fila, columna, movimiento.fila, movimiento.columna)) {
+                            std::cout << "El rey está en jaque por un " << tipoPiezaToString(pieza->getTipo())
+                                << " en la posición (" << fila << ", " << columna << ")\n";
+                            return true;
+                        }
+                    }
+                }
+            }
         }
     }
+    return false;
+}
+
+bool Tablero::estaEnJaqueMate(bool turnoBlancas) {
+    Casilla posicionReyOponente = encontrarRey(!turnoBlancas);
+    if (!estaEnJaque(posicionReyOponente, turnoBlancas)) {
+        return false;
+    }
+
+    for (int fila = 0; fila < 8; ++fila) {
+        for (int columna = 0; columna < 8; ++columna) {
+            Pieza* pieza = casillas[fila][columna];
+            if (pieza != nullptr && pieza->getColor() == (!turnoBlancas ? 0 : 1)) {
+                vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, !turnoBlancas);
+                for (const Casilla& movimiento : movimientos) {
+                    Pieza* piezaDestinoOriginal = casillas[movimiento.fila][movimiento.columna];
+                    casillas[movimiento.fila][movimiento.columna] = pieza;
+                    casillas[fila][columna] = nullptr;
+
+                    Casilla nuevaPosicionRey = pieza->getTipo() == TipoPieza::Rey ? movimiento : posicionReyOponente;
+                    bool sigueEnJaque = estaEnJaque(nuevaPosicionRey, turnoBlancas);
+
+                    casillas[fila][columna] = pieza;
+                    casillas[movimiento.fila][movimiento.columna] = piezaDestinoOriginal;
+
+                    if (!sigueEnJaque) {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    std::cout << "¡Jaque mate! El jugador " << (turnoBlancas ? "2 (negro)" : "1 (blanco)") << " ha ganado.\n";
+    return true;
+}
+
+bool Tablero::estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas)
+{
+    Pieza* piezaOrigen = casillas[filaOrigen][columnaOrigen];
+    Pieza* piezaDestino = casillas[filaDestino][columnaDestino];
+    casillas[filaDestino][columnaDestino] = piezaOrigen;
+    casillas[filaOrigen][columnaOrigen] = nullptr;
+
+    Casilla posicionRey = encontrarRey(turnoBlancas);
+    if (piezaOrigen->getTipo() == TipoPieza::Rey) {
+        posicionRey = { columnaDestino, filaDestino };
+    }
+
+    bool enJaque = estaEnJaque(posicionRey, turnoBlancas);
+    casillas[filaOrigen][columnaOrigen] = piezaOrigen;
+    casillas[filaDestino][columnaDestino] = piezaDestino;
+
+    return enJaque;
 }

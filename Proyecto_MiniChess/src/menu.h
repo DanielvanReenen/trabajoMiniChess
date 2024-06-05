@@ -5,7 +5,7 @@
 
 class Menu {
 public:
-    enum Estado { INICIO, JUEGO, GAMEOVER, FIN, PAUSA };
+    enum Estado { INICIO, JUEGO, GAMEOVER, FIN, PAUSA, CREDITOS };
 
 private:
     Estado estado;

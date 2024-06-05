@@ -29,38 +29,55 @@ void Menu::inicializa() {
 
 void Menu::tecla(unsigned char key) {
     switch (estado) {
-    case INICIO:
-    //ETSIDI::playMusica("musica/musica_principio.mp3", true); Tenemos que hacer que funcione
-        if (key == 's') exit(0);
-        if (key == 'e') {
-            //ETSIDI::stopMusica();
-            tablero.CasillasaCoordenadas();
-            tablero.inicializaTablero();
-            ETSIDI::play("sonidos/inicio.wav");
-            estado = JUEGO;
-        }
+        case INICIO:
+        //ETSIDI::playMusica("musica/musica_principio.mp3", true); Tenemos que hacer que funcione
+            if (key == 's' || key == 'S') exit(0);
+            if (key == 'e'||key == 'E') {
+           
+                tablero.CasillasaCoordenadas();
+                tablero.inicializaTablero();
+                ETSIDI::play("sonidos/inicio.wav");
+                estado = JUEGO;
+            }
+            else if (key == 'c' || key == 'C') {
+                estado = CREDITOS;
+            }
+            break;
 
-        break;
-    case JUEGO:
-        if (key == 'p') estado = PAUSA;
-        break;
-    case GAMEOVER:
-        if (key == 'c') estado = INICIO;
-        break;
-    case FIN:
-        if (key == 'c') estado = INICIO;
-        break;
-    case PAUSA:
-        if (key == 'c') estado = JUEGO;
-        break;
+ /*       case JUEGO:
+            if (key == 'p' || key == 'P') estado = PAUSA;
+            if (key == 's' || key == 'S') {
+                exit(0);
+            }
+            break;
+        case GAMEOVER:
+            if (key == 'c' || key == 'C') estado = INICIO;
+            break;
+        case FIN:
+            if (key == 'c' || key == 'C') estado = INICIO;
+            break;
+        case PAUSA:
+            if (key == 'c' || key == 'C') estado = JUEGO;
+            break;*/
+        case CREDITOS:
+            if (key == 's' || key == 'S') exit(0);
+            if (key == 'e' || key == 'E') {
+
+                tablero.CasillasaCoordenadas();
+                tablero.inicializaTablero();
+                ETSIDI::play("sonidos/inicio.wav");
+                estado = JUEGO;
+            }
+            break;
     }
+
 }
 
 void Menu::dibuja() {
     switch (estado) {
     case INICIO:
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/inicio.png").id);
+        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/Inicio.png").id);
         glDisable(GL_LIGHTING);
         glBegin(GL_POLYGON);
         glColor3f(1, 1, 1);
@@ -78,30 +95,45 @@ void Menu::dibuja() {
         tablero.dibujaPieza();
         break;
 
-    case GAMEOVER:
-        tablero.dibuja();
-        ETSIDI::setTextColor(1, 0, 0);
-        ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-        ETSIDI::printxy("GAME OVER: Has perdido", -5, 10);
-        ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
-        break;
+    //case GAMEOVER:
+    //    tablero.dibuja();
+    //    ETSIDI::setTextColor(1, 0, 0);
+    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+    //    ETSIDI::printxy("GAME OVER: Has perdido", -5, 10);
+    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
+    //    break;
 
-    case FIN:
-        tablero.dibuja();
-        ETSIDI::setTextColor(1, 0, 0);
-        ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-        ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", -5, 10);
-        ETSIDI::printxy("Pulsa -C- para continuar", -5, 9);
-        break;
+    //case FIN:
+    //    tablero.dibuja();
+    //    ETSIDI::setTextColor(1, 0, 0);
+    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+    //    ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!", -5, 10);
+    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 9);
+    //    break;
 
-    case PAUSA:
-        std::cout << "Dibujando la pantalla de pausa" << std::endl;
-        tablero.dibuja();
-        tablero.dibujaPieza();
-        ETSIDI::setTextColor(1, 1, 0);
-        ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-        ETSIDI::printxy("PAUSA", -5, 10);
-        ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
+    //case PAUSA:
+    //    std::cout << "Dibujando la pantalla de pausa" << std::endl;
+    //    tablero.dibuja();
+    //    tablero.dibujaPieza();
+    //    ETSIDI::setTextColor(1, 1, 0);
+    //    ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+    //    ETSIDI::printxy("PAUSA", -5, 10);
+    //    ETSIDI::printxy("Pulsa -C- para continuar", -5, 5);
+    //    break;
+
+    case CREDITOS:
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/Creditos.png").id);
+        glDisable(GL_LIGHTING);
+        glBegin(GL_POLYGON);
+        glColor3f(1, 1, 1);
+        glTexCoord2d(0, 1); glVertex2f(-1, -1);
+        glTexCoord2d(1, 1); glVertex2f(1, -1);
+        glTexCoord2d(1, 0); glVertex2f(1, 1);
+        glTexCoord2d(0, 0); glVertex2f(-1, 1);
+        glEnd();
+        glEnable(GL_LIGHTING);
+        glDisable(GL_TEXTURE_2D);
         break;
     }
 }

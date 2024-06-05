@@ -67,5 +67,7 @@ public:
     Pieza* CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas);
     int ultimoPeonDobleMovFila;
     int ultimoPeonDobleMovColumna;
+    bool estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas);
+    bool estaEnJaqueMate(bool turnoBlancas);
 
 };
