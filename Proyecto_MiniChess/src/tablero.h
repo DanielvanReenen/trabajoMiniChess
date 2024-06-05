@@ -36,7 +36,7 @@ private:
     const int ColorBlancas = 0;
     const int ColorNegras = 1;
 
-    bool jaque;
+    bool jaque = false;
 
 public:
     Tablero(const Jugador& j1, const Jugador& j2);
