@@ -172,7 +172,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             seleccionActiva = true;
-            ETSIDI::play("sonidos/seleccion.wav");
+            ETSIDI::play("sonidos/force.mp3");
         }
         else {
             std::cout << "Estas no son tus piezas o la casilla está vacía." << std::endl;
@@ -189,7 +189,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
-            ETSIDI::play("sonidos/seleccion.wav");
+            ETSIDI::play("sonidos/force.mp3");
         }
         else {
             bool movimientoPermitido = false;
@@ -213,11 +213,12 @@ void Tablero::Selector(int x, int y) {
 
                 if (casillas[piezaDestino->getFila()][piezaDestino->getColumna()] != nullptr) {
                     cout << "te has comido una pieza" << endl;
+                    ETSIDI::play("sonidos/sables_laser.mp3");
                     delete casillas[piezaDestino->getFila()][piezaDestino->getColumna()];
                 }
                 casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaDestino;
                 piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
-                ETSIDI::play("sonidos/movimiento.wav");
+                ETSIDI::play("sonidos/sonido-mover.mp3");
                 std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
                 casillas[casOrigen.fila][casOrigen.columna] = nullptr;
 
@@ -235,8 +236,8 @@ void Tablero::Selector(int x, int y) {
                 Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
                 if (piezaCoronada != nullptr)
                 {
-                    // TODO: Cambiar este sonido a uno de celebración
-                    ETSIDI::play("sonidos/movimiento.wav");
+                 
+                    ETSIDI::play("sonidos/Chewbacca.mp3");
                     casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                 }
 
