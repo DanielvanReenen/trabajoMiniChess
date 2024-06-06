@@ -15,6 +15,9 @@ void Peon::dibujaPieza() {
 
         glPushMatrix();
         sprite.draw();
+        if (seleccionActivada) {
+            DibujarSeleccion();
+        }
         glPopMatrix();
     }
 
@@ -23,6 +26,9 @@ void Peon::dibujaPieza() {
 
         glPushMatrix();
         sprite.draw();
+        if (seleccionActivada) {
+            DibujarSeleccion();
+        }
         glPopMatrix();
     }
 }

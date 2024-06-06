@@ -151,6 +151,7 @@ void Tablero::Selector(int x, int y) {
         return;
     }
 
+    //Registramos lo que hemos pinchado, 
     casSeleccion.columna = (x - 36) / 90;
     casSeleccion.fila = (y - 36) / 90;
     piezaSeleccionada = getPieza(casSeleccion.fila, casSeleccion.columna);
@@ -165,29 +166,34 @@ void Tablero::Selector(int x, int y) {
         cout << "Se dispone a jugar el jugador 2 con las negras" << endl;
     }
 
-    if (!seleccionActiva) {
+    if (!seleccionActiva) {  //Seleccionar casilla cuando el selector esta apagado
         if (piezaSeleccionada != nullptr && piezaSeleccionada->getColor() == colorturno) {
             casOrigen.fila = casSeleccion.fila;
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             seleccionActiva = true;
             ETSIDI::play("musica/the-force.mp3");
-
+            piezaSeleccionada->seleccionActivada = true;                                       //ESTO
         }
         else {
             std::cout << "Estas no son tus piezas o la casilla está vacía." << std::endl;
         }
     }
     else {
+        //Deseleccionamos la casilla al pulsar de nuevo sobre esta
         if (casOrigen.fila == casSeleccion.fila && casOrigen.columna == casSeleccion.columna) {
             std::cout << "Deseleccionando la pieza en la casilla: (" << casOrigen.columna << ", " << casOrigen.fila << ")" << std::endl;
             piezaOrigen = nullptr;
             seleccionActiva = false;
+            piezaSeleccionada->seleccionActivada = false;                                      //ESTO
         }
+        //Cambiamos la casilla que habiamos seleccionado por otra del mismo jugador
         else if (piezaSeleccionada != nullptr && piezaSeleccionada->getColor() == piezaOrigen->getColor()) {
+            piezaOrigen->seleccionActivada = false;                                      //ESTO
             casOrigen.fila = casSeleccion.fila;
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
+            piezaSeleccionada->seleccionActivada = true;                                      //ESTO
             std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << ")" << " , " << " Columna: (" << casSeleccion.columna << ")" << std::endl;
             ETSIDI::play("musica/the-force.mp3");
         }
@@ -201,6 +207,7 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino = piezaOrigen;
                 piezaDestino->setColumna(casDestino.columna);
                 piezaDestino->setFila(casDestino.fila);
+                piezaSeleccionada->seleccionActivada = false;                                      //ESTO
 
                 //Realizamos la omprobacion de la captura al paso
                 if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {
@@ -242,7 +249,7 @@ void Tablero::Selector(int x, int y) {
                  ETSIDI::play("musica/sonido-mover.mp3");
                  std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
                  casillas[casOrigen.fila][casOrigen.columna] = nullptr;
-                
+                 
 
                 Casilla positionRey = encontrarRey(turno2);
                 jaque = estaEnJaque(positionRey, turno2);

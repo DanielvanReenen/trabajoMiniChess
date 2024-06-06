@@ -1,7 +1,4 @@
-﻿  menu.cpp
-C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\menu.cpp(9,25): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  tablero.cpp
-C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(99,48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Javier\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(100,50): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  Proyecto_MiniChess.vcxproj -> C:\Users\Javier\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
+﻿  tablero.cpp
+C:\Users\Guillermo\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(99,48): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Guillermo\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(100,50): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  Proyecto_MiniChess.vcxproj -> C:\Users\Guillermo\source\repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

@@ -21,6 +21,8 @@ protected:
     SpriteSequence sprite;
 
 public:
+    bool seleccionActivada = false;
+
     Pieza(int col, const char* spritePath);
     virtual ~Pieza();
     virtual void dibujaPieza() = 0;
@@ -34,4 +36,5 @@ public:
     void setColumna(int columna_);
     void setPosicion(Coordenada posicion_);
     Coordenada getPosicion();
+    void DibujarSeleccion();
 };
