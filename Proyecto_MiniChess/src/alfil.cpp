@@ -14,9 +14,6 @@ void Alfil::dibujaPieza()
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-        if (seleccionActivada) {
-            DibujarSeleccion();
-        }
 		sprite.draw();
 		glPopMatrix();
 	}
@@ -25,9 +22,6 @@ void Alfil::dibujaPieza()
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-        if (seleccionActivada) {
-            DibujarSeleccion();
-        }
 		sprite.draw();
 		glPopMatrix();
 	}

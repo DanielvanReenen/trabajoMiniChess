@@ -70,5 +70,5 @@ public:
     int ultimoPeonDobleMovColumna;
     bool estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas);
     bool estaEnJaqueMate(bool turnoBlancas);
-
+    void DibujarPasosPermitidos();
 };

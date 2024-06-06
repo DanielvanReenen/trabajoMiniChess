@@ -90,6 +90,9 @@ void Tablero::dibuja() {
     glEnd();
     glEnable(GL_LIGHTING);
     glDisable(GL_TEXTURE_2D);
+    if (seleccionActiva) {
+        DibujarPasosPermitidos();
+    }
 }
 
 void Tablero::CasillasaCoordenadas() {
@@ -550,4 +553,68 @@ bool Tablero::estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int f
     casillas[filaDestino][columnaDestino] = piezaDestino;
 
     return enJaque;
+}
+
+
+void Tablero::DibujarPasosPermitidos() {
+    bool turnoBlancas = true;//la funcion getmovimientospermitidos necesita esto para funcionar
+
+    if (jugador1.getTurno() && (!jugador2.getTurno())) {
+        turnoBlancas = true;
+    }
+    else if(jugador2.getTurno() && (!jugador1.getTurno())){
+        turnoBlancas = false;
+    }
+
+
+    // Deshabilitar iluminación y texturas para asegurar que no interfieran
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+    // dibujar la pieza seleccionada en blanco
+    float xSeleccion = coordenadaSobreTablero[casOrigen.fila * 8 + casOrigen.columna].x;
+    float ySeleccion = coordenadaSobreTablero[casOrigen.fila * 8 + casOrigen.columna].y;
+
+
+    glColor4f(1.0, 1.0, 1.0, 0.5); // color blanco semitransparente
+
+    // dibujar el círculo en las coordenadas reales
+    glPushMatrix();
+    glTranslatef(-xSeleccion + 0.125, -ySeleccion + 0.12, 0.1); // centro del círculo
+    GLUquadric* qobj = gluNewQuadric();
+    gluDisk(qobj, 0, 0.1, 20, 1); // disco con radio y 10 subdivisiones
+    gluDeleteQuadric(qobj);
+    glPopMatrix();
+
+
+    //ahora dibujamos los circulitos verdes
+    std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
+    for (const Casilla& casilla : movimientosPermitidos) {
+
+
+        // coordenadas reales de la casilla
+        float sel_x = coordenadaSobreTablero[casilla.fila * 8 + casilla.columna].x;
+        float sel_y = coordenadaSobreTablero[casilla.fila * 8 + casilla.columna].y;
+
+        if (casillas[casilla.fila][casilla.columna] == nullptr) {
+            glColor4f(0.2, 1.0, 0.2, 0.5); // color verde semitransparente
+
+            //  coordenadas reales
+            glPushMatrix();
+            glTranslatef(-sel_x + 0.125, -sel_y + 0.12, 0.1); //  centro del círculo
+            GLUquadric* qobj = gluNewQuadric();
+            gluDisk(qobj, 0, 0.05, 20, 1); //disco con radio y 10 subdivisiones
+            gluDeleteQuadric(qobj);
+            glPopMatrix();
+
+        }
+    }
+
+    // Restaurar el estado anterior de OpenGL
+    glDisable(GL_BLEND);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_TEXTURE_2D);
 }

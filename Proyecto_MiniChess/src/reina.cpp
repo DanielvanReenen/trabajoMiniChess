@@ -13,9 +13,6 @@ void Reina::dibujaPieza() {
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		if (seleccionActivada) {
-			DibujarSeleccion();
-		}
 		sprite.draw();
 		glPopMatrix();
 	}
@@ -24,9 +21,6 @@ void Reina::dibujaPieza() {
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
-		if (seleccionActivada) {
-			DibujarSeleccion();
-		}
 		sprite.draw();
 		glPopMatrix();
 	}

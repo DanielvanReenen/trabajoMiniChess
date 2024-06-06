@@ -36,5 +36,4 @@ public:
     void setColumna(int columna_);
     void setPosicion(Coordenada posicion_);
     Coordenada getPosicion();
-    void DibujarSeleccion();
 };
