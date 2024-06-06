@@ -424,25 +424,27 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     switch (piezaDeseada) {
     case 't':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-
+        break;
     case 'T':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
+        break;
     case 'c':
         nuevaPieza  = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-
+        break;
     case 'C':
         nuevaPieza  = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-
+        break;
     case 'a':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-
+        break;
     case 'A':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-
+        break;
     case 'r':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
     case 'R':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
+        break;
     }
     coronacion = false;
     return nuevaPieza;

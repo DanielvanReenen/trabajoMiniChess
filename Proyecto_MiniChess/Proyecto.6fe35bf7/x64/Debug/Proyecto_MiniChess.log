@@ -1,15 +1,15 @@
 ﻿  tablero.cpp
 C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(103,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(104,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(570,59): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(570,51): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(570,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(587,33): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(587,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(591,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(591,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(591,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(604,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(604,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(604,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(572,59): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(572,51): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(572,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(589,33): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(589,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(593,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(593,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(593,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(606,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(606,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(606,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   Proyecto_MiniChess.vcxproj -> C:\Users\User\source\repos\TrabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
