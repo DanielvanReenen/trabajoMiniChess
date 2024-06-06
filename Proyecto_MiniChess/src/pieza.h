@@ -8,7 +8,7 @@
 using ETSIDI::SpriteSequence;
 using std::vector;
 
-class Tablero; // Forward declaration
+class Tablero;
 
 enum class TipoPieza { Torre, Caballo, Alfil, Rey, Reina, Peon, Ninguno };
 

@@ -34,11 +34,11 @@ Coordenada Pieza::getPosicion()
 }
 
 void Pieza::DibujarSeleccion() {
-    float Sel_x = posicion.x - 0.125;
-    float Sel_y = posicion.y - 0.14;
+    float Sel_x = -posicion.x + 0.125;
+    float Sel_y = -posicion.y + 0.13;
 
     // Deshabilitar iluminación y texturas para asegurar que no interfieran
-        glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHTING);
     glDisable(GL_TEXTURE_2D);
 
     // Habilitar mezcla alfa

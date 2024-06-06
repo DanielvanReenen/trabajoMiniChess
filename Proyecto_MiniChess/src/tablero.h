@@ -39,6 +39,7 @@ private:
     const int ColorNegras = 1;
 
     bool jaque = false;
+    bool jaqueMate = false;
 
 public:
     Tablero(const Jugador& j1, const Jugador& j2);

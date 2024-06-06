@@ -133,7 +133,7 @@ void Tablero::inicializaTablero() {
     casillas[7][4] = new Reina(coordenadaSobreTablero[7 * 8 + 4], negro, 7, 4);
 
     // Peones
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < 8; i++) {
         casillas[1][i] = new Peon(coordenadaSobreTablero[1 * 8 + i], blanco, 1, i, *this);
         casillas[6][i] = new Peon(coordenadaSobreTablero[6 * 8 + i], negro, 6, i, *this);
     }
@@ -189,7 +189,7 @@ void Tablero::Selector(int x, int y) {
         }
         //Cambiamos la casilla que habiamos seleccionado por otra del mismo jugador
         else if (piezaSeleccionada != nullptr && piezaSeleccionada->getColor() == piezaOrigen->getColor()) {
-            piezaOrigen->seleccionActivada = false;                                      //ESTO
+            piezaOrigen->seleccionActivada = false;                                           //ESTO
             casOrigen.fila = casSeleccion.fila;
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
@@ -273,9 +273,13 @@ void Tablero::Selector(int x, int y) {
                         piezaDestino->setPosicion(coordenadaSobreTablero[piezaDestino->getFila() * 8 + piezaDestino->getColumna()]);
                     }
 
+                    
+
                 }
 
-               
+                //jaqueMate = estaEnJaqueMate(turno2);
+                //if (jaqueMate = true) ;
+                
 
                 // Guardamos el valor del ultimo movimiento doble realizado por un peon
                 if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 2) {
@@ -331,8 +335,8 @@ Casilla Tablero::encontrarRey(bool turnoBlancas) {
     int colorRey = turnoBlancas ? 1 : 0;
     std::cout << "Estamos buscando el rey de color " << colorRey << std::endl;
 
-    for (int fila = 0; fila < 8; ++fila) {
-        for (int columna = 0; columna < 8; ++columna) {
+    for (int fila = 0; fila < 8; fila++) {
+        for (int columna = 0; columna < 8; columna++) {
             Pieza* pieza = casillas[fila][columna];
             if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey)
             {
@@ -472,8 +476,8 @@ void Tablero::MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido) {
 
 bool Tablero::estaEnJaque(Casilla posicionRey, bool turnoBlancas) {
     int colorReyOponente = turnoBlancas ? 0 : 1; // Cambiado para buscar el rey del oponente
-    for (int fila = 0; fila < 7; ++fila) {
-        for (int columna = 0; columna < 7; ++columna) {
+    for (int fila = 0; fila < 8; fila++) {
+        for (int columna = 0; columna < 8; columna++) {
             Pieza* pieza = casillas[fila][columna];
             if (pieza != nullptr && pieza->getColor() == colorReyOponente) {
                 vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, !turnoBlancas);
@@ -498,8 +502,8 @@ bool Tablero::estaEnJaqueMate(bool turnoBlancas) {
         return false;
     }
 
-    for (int fila = 0; fila < 8; ++fila) {
-        for (int columna = 0; columna < 8; ++columna) {
+    for (int fila = 0; fila < 8; fila++) {
+        for (int columna = 0; columna < 8; columna++) {
             Pieza* pieza = casillas[fila][columna];
             if (pieza != nullptr && pieza->getColor() == (!turnoBlancas ? 0 : 1)) {
                 vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, !turnoBlancas);
@@ -516,18 +520,21 @@ bool Tablero::estaEnJaqueMate(bool turnoBlancas) {
 
                     if (!sigueEnJaque) {
                         return false;
+                        std::cout << "Movimiento que saca del jaque: (" << fila << ", " << columna << ") -> ("
+                            << movimiento.fila << ", " << movimiento.columna << ")\n";
                     }
+
                 }
             }
         }
     }
-
-    std::cout << "¡Jaque mate! El jugador " << (turnoBlancas ? "2 (negro)" : "1 (blanco)") << " ha ganado.\n";
     return true;
+    std::cout << "¡Jaque mate! El jugador " << (turnoBlancas ? "2 (negro)" : "1 (blanco)") << " ha ganado.\n";
 }
 
 bool Tablero::estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas)
 {
+
     Pieza* piezaOrigen = casillas[filaOrigen][columnaOrigen];
     Pieza* piezaDestino = casillas[filaDestino][columnaDestino];
     casillas[filaDestino][columnaDestino] = piezaOrigen;
