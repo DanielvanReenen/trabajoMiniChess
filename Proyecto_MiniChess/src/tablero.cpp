@@ -174,7 +174,7 @@ void Tablero::Selector(int x, int y) {
             casOrigen.columna = casSeleccion.columna;
             piezaOrigen = piezaSeleccionada;
             seleccionActiva = true;
-            ETSIDI::play("musica/the-force.mp3");
+            ETSIDI::play("musica/click.mp3");
             piezaSeleccionada->seleccionActivada = true;
         }
         else {
@@ -195,7 +195,7 @@ void Tablero::Selector(int x, int y) {
             piezaOrigen = piezaSeleccionada;
             piezaSeleccionada->seleccionActivada = true;
             std::cout << "Usted ha pinchado en la casilla: Fila: (" << casSeleccion.fila << "), Columna: (" << casSeleccion.columna << ")" << std::endl;
-            ETSIDI::play("musica/the-force.mp3");
+            ETSIDI::play("musica/click.mp3");
         }
         else {
             bool movimientoPermitido = false;
@@ -270,7 +270,7 @@ void Tablero::Selector(int x, int y) {
                 if (piezaCoronada != nullptr)
                 {
                     // TODO: Cambiar este sonido a uno de celebración
-                    ETSIDI::play("musica/Chewbacca.mp3");
+                    ETSIDI::play("musica/achievement.mp3");
                     casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                 }
 
