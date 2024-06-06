@@ -209,6 +209,14 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino->setFila(casDestino.fila);
                 piezaOrigen->seleccionActivada = false;
 
+                //Realizamos la comprobacion de la captura al paso
+                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {
+                    int direction = (piezaOrigen->getColor() == 0) ? -1 : 1; 
+                    delete casillas[casDestino.fila + direction][casDestino.columna];
+                    casillas[casDestino.fila + direction][casDestino.columna] = nullptr;
+                    std::cout << "Captura al paso en (" << casDestino.columna << ", " << casDestino.fila + direction << ")" << std::endl;
+                }
+
                 // Realizar el movimiento
                 Pieza* piezaTemporal = casillas[casDestino.fila][casDestino.columna];
                 casillas[casDestino.fila][casDestino.columna] = piezaDestino;
@@ -246,16 +254,25 @@ void Tablero::Selector(int x, int y) {
                   
                 }
 
+                // Guardamos el valor del ultimo movimiento doble realizado por un peon
+                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 2) {
+                    ultimoPeonDobleMovFila = casDestino.fila;
+                    ultimoPeonDobleMovColumna = casDestino.columna;
+                }
+                else {
+                    ultimoPeonDobleMovFila = -1;
+                    ultimoPeonDobleMovColumna = -1;
+
+                }
                 
-                
-                    Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
+                Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
                     
-                        if (piezaCoronada != nullptr)
-                        {
-                            // TODO: Cambiar este sonido a uno de celebración
-                            ETSIDI::play("musica/Chewbacca.mp3");
-                            casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
-                        }
+                if (piezaCoronada != nullptr)
+                {
+                    // TODO: Cambiar este sonido a uno de celebración
+                    ETSIDI::play("musica/Chewbacca.mp3");
+                    casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
+                }
 
                 movimientoActivado = false;
                 seleccionActiva = false;
