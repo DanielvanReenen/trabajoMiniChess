@@ -9,4 +9,7 @@ C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.
 C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(607,57): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
 C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(607,49): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
 C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(607,33): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(620,57): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(620,49): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(620,33): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   Proyecto_MiniChess.vcxproj -> C:\Users\Guillermo\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

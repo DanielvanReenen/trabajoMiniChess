@@ -611,6 +611,18 @@ void Tablero::DibujarPasosPermitidos() {
             glPopMatrix();
 
         }
+         else if (casillas[casilla.fila][casilla.columna]->getColor() != piezaSeleccionada->getColor()) {
+
+            glColor4f(1.0, 1.0, 0.0, 0.5); // color amarillo semitransparente
+
+            //  coordenadas reales
+            glPushMatrix();
+            glTranslatef(-sel_x + 0.125, -sel_y + 0.12, 0.1); //  centro del círculo
+            GLUquadric* qobj = gluNewQuadric();
+            gluDisk(qobj, 0, 0.05, 20, 1); //disco con radio y 10 subdivisiones
+            gluDeleteQuadric(qobj);
+            glPopMatrix();
+        }
     }
 
     // Restaurar el estado anterior de OpenGL
