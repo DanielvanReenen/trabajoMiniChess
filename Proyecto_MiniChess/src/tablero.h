@@ -33,6 +33,7 @@ private:
     bool seleccionActiva = false;
     bool movimientoActivado = false;
     bool comer = false;
+    unsigned char letracoronacioncambiopieza;
    
 
     const int ColorBlancas = 0;
@@ -71,4 +72,7 @@ public:
     bool estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas);
     bool estaEnJaqueMate(bool turnoBlancas);
     void DibujarPasosPermitidos();
+    unsigned char getCambioPieza();                                    //esto
+    bool coronacion = false;
+    void setCambioPieza(unsigned char letracambiopieza);        //esto
 };

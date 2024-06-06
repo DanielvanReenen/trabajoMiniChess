@@ -29,7 +29,7 @@ void Menu::inicializa() {
 void Menu::tecla(unsigned char key) {
     switch (estado) {
     case INICIO:
-       
+
         if (key == 's' || key == 'S') {
             ETSIDI::stopMusica();
             exit(0);
@@ -51,6 +51,9 @@ void Menu::tecla(unsigned char key) {
         if (key == 's' || key == 'S') {
             exit(0);
         }
+        if (tablero.coronacion) {                              //esto
+            estado = CAMBIOPIEZA;
+        }
         break;
     case WINBLANCAS:
         if (key == 'c' || key == 'C') estado = INICIO;
@@ -68,13 +71,37 @@ void Menu::tecla(unsigned char key) {
             tablero.CasillasaCoordenadas();
             tablero.inicializaTablero();
             ETSIDI::stopMusica();
-          //  ETSIDI::playMusica("musica/fondo.mp3");
+            //  ETSIDI::playMusica("musica/fondo.mp3");
             estado = JUEGO;
         }
         break;
+         
+    case CAMBIOPIEZA:                                                //esto
+        
+        if (key == 't' || key == 'T') {
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+        if (key == 'r' || key ==  'R') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+        if (key == 'c' || key == 'C') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+        if (key == 'a' || key == 'A') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+       
     }
-
 }
+
 
 void Menu::dibuja() {
     switch (estado) {

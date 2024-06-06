@@ -1,5 +1,6 @@
 #include "tablero.h"
 #include "freeglut.h"
+#include <conio.h>
 #include "ETSIDI.h"
 #include <stdlib.h>
 
@@ -297,15 +298,16 @@ void Tablero::Selector(int x, int y) {
                 }
 
                 
-            
-                Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
-                if (piezaCoronada != nullptr)
-                {
-                    // TODO: Cambiar este sonido a uno de celebración
-                    ETSIDI::play("musica/Chewbacca.mp3");
-                    casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
-                }
-
+                
+                    Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
+                    
+                        if (piezaCoronada != nullptr)
+                        {
+                            // TODO: Cambiar este sonido a uno de celebración
+                            ETSIDI::play("musica/Chewbacca.mp3");
+                            casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
+                        }
+                    
 
                 movimientoActivado = false;
                 seleccionActiva = false;
@@ -344,7 +346,7 @@ Casilla Tablero::encontrarRey(bool turnoBlancas) {
             Pieza* pieza = casillas[fila][columna];
             if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey)
             {
-                return Casilla{ columna, fila };
+                return Casilla{ columna, fila }; 
             }
         }
     }
@@ -405,6 +407,13 @@ Pieza* Tablero::HayCoronacion(Casilla casillaDestino, Pieza* tipoPieza)
     return piezaDeseada;
 }
 
+unsigned char Tablero::getCambioPieza() {                                          //esto
+    return letracoronacioncambiopieza;
+}
+void Tablero::setCambioPieza(unsigned char letracambiopieza) {                                          //esto
+    letracoronacioncambiopieza = letracambiopieza;
+}
+
 Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas)
 {
     //El color de pieza tiene que ser el mismo que del turno
@@ -412,48 +421,100 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     char piezaDeseada = 'z';
     Pieza* nuevaPieza = nullptr;
     int colorPieza = blancas ? 0 : 1;
+    unsigned char letra_antes = letracoronacioncambiopieza;
+    //coronacion = true;
 
-    do {
+    std::cout << "Escoge Pieza para la Coronacion: ( T : Torre , C : Caballo , A: Alfil, R : Reina)" << std::endl;
+
+    bool quit = false;
+    bool mensajeImpreso = false;
+    while (!quit) {
+        if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+            quit = true;
+            continue;
+        }
+
+        bool teclaAceptablePresionada = false;
+        for (int key = 0; key < 256; key++) {
+            if (GetAsyncKeyState(key) & 0x8000) {
+                char ascii = MapVirtualKey(key, MAPVK_VK_TO_CHAR);
+                if (ascii == 't' || ascii == 'c' || ascii == 'a' || ascii == 'r' ||
+                    ascii == 'T' || ascii == 'C' || ascii == 'A' || ascii == 'R') {
+                    // Tecla aceptable, salir del bucle
+                    quit = true;
+                    piezaDeseada = ascii; // Actualizar la pieza deseada
+                    teclaAceptablePresionada = true;
+                }
+                else {
+                    // Tecla no aceptable
+                    teclaAceptablePresionada = false;
+                }
+            }
+        }
+
+        if (!teclaAceptablePresionada && !mensajeImpreso) {
+            // Imprimir mensaje si la tecla no es aceptable
+            std::cout << "El tipo de pieza seleccionada no está disponible." << std::endl;
+            mensajeImpreso = true;
+        }
+    }
+  
+
+
+    /*
+    if (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r' && piezaDeseada != 'T' && piezaDeseada != 'C' && piezaDeseada != 'A' && piezaDeseada != 'R')
+    {
         std::cout << "Escoge a que tipo de pieza quieres convertirla ( T : Torre , C : Caballo , A: Alfil, R : Reina)" << endl;
-        std::cin >> piezaDeseada;
+        while (piezaDeseada == letra_antes) {
+            
+
+
+        }
 
         if (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r' && piezaDeseada != 'T' && piezaDeseada != 'C' && piezaDeseada != 'A' && piezaDeseada != 'R')
         {
             std::cout << "El tipo de pieza seleccionada no está disponible." << endl;
+            piezaDeseada = letra_antes;
         }
-    } while (piezaDeseada != 't' && piezaDeseada != 'c' && piezaDeseada != 'a' && piezaDeseada != 'r' &&  piezaDeseada != 'T' && piezaDeseada != 'C' && piezaDeseada != 'A' && piezaDeseada != 'R');
 
+        
 
+    }
+    */
     switch (piezaDeseada) {
     case 't':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-
         break;
+
     case 'T':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-
         break;
+
     case 'c':
         nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-
         break;
+
     case 'C':
         nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-
         break;
+
     case 'a':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
+
     case 'A':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
+
     case 'r':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
+
     case 'R':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
     }
+    coronacion = false;
     return nuevaPieza;
 }
 
