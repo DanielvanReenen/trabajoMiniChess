@@ -16,7 +16,6 @@ using namespace std;
 class Tablero {
     friend class Pieza;
     friend class Selector;
-
 private:
     vector<vector<Pieza*>> casillas;
     Coordenada coordenadaSobreTablero[64];
@@ -68,7 +67,6 @@ public:
     Pieza* CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bool blancas);
     int ultimoPeonDobleMovFila;
     int ultimoPeonDobleMovColumna;
-    bool estaEnJaqueDespuesDeMover(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, bool turnoBlancas);
     bool estaEnJaqueMate(bool turnoBlancas);
     void DibujarPasosPermitidos();
 };
