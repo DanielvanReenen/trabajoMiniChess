@@ -239,7 +239,7 @@ void Tablero::Selector(int x, int y) {
                 if (estaEnJaqueMate(!turno1)) {
                     std::cout << "JAQUE MATE DETECTADO." << std::endl;
                 }
-<<<<<<< HEAD
+
                 else {
                     ultimoPeonDobleMovFila= -1;
                     ultimoPeonDobleMovColumna= -1;
@@ -256,9 +256,6 @@ void Tablero::Selector(int x, int y) {
                             ETSIDI::play("musica/Chewbacca.mp3");
                             casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                         }
-                    
-=======
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
 
                 movimientoActivado = false;
                 seleccionActiva = false;
@@ -287,12 +284,12 @@ Casilla Tablero::encontrarRey(bool turnoBlancas) {
             Pieza* pieza = casillas[fila][columna];
             if (pieza != nullptr && pieza->getTipo() == TipoPieza::Rey && pieza->getColor() == colorRey)
             {
-<<<<<<< HEAD
+
                 return Casilla{ columna, fila }; 
-=======
+
                 std::cout << "Se ha encontrado al rey de color " << colorRey << "( " << fila << " " << columna << ")" << std::endl;
                 return Casilla{ columna, fila };
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
+
             }
         }
     }
@@ -366,13 +363,11 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     //GetConsoleWindow();
     char piezaDeseada = 'z';
     Pieza* nuevaPieza = nullptr;
-<<<<<<< HEAD
+
     int colorPieza = blancas ? 0 : 1;
     unsigned char letra_antes = letracoronacioncambiopieza;
     //coronacion = true;
-=======
-    int colorPieza = blancas ? ColorBlancas : ColorNegras;
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
+
 
     std::cout << "Escoge Pieza para la Coronacion: ( T : Torre , C : Caballo , A: Alfil, R : Reina)" << std::endl;
 
@@ -438,47 +433,25 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
     switch (piezaDeseada) {
     case 't':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-<<<<<<< HEAD
-        break;
 
-=======
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
     case 'T':
         nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-        break;
-
     case 'c':
         nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-<<<<<<< HEAD
-        break;
 
-=======
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
     case 'C':
         nuevaPieza = new Caballo(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
-        break;
 
     case 'a':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-<<<<<<< HEAD
-        break;
 
-=======
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
     case 'A':
         nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-        break;
 
     case 'r':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-<<<<<<< HEAD
-        break;
-
-=======
->>>>>>> 6a66cafd578f7a6cc28737ea93a5a2886a71aeb9
     case 'R':
         nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
-        break;
     }
     coronacion = false;
     return nuevaPieza;
