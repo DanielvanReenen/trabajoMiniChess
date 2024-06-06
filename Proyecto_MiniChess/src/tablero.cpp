@@ -207,7 +207,7 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino = piezaOrigen;
                 piezaDestino->setColumna(casDestino.columna);
                 piezaDestino->setFila(casDestino.fila);
-                piezaSeleccionada->seleccionActivada = false;                                      //ESTO
+                piezaOrigen->seleccionActivada = false;                                      //ESTO
 
                 //Realizamos la omprobacion de la captura al paso
                 if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {

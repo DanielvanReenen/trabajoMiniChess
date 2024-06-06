@@ -1,7 +1,7 @@
 #include "peon.h"
 
 Peon::Peon(Coordenada posicion, int color, int fila, int columna, const Tablero& tablero)
-    : Pieza(color, color == 0 ? "imagenes/PeonJedi.png" : "imagenes/PeonSith.png"), tablero(tablero) {
+    : Pieza(color, color == 0 ? "imagenes/PeonJedi.png" :  "imagenes/PeonSith.png"), tablero(tablero) {
     this->posicion = posicion;
     this->fila = fila;
     this->columna = columna;
