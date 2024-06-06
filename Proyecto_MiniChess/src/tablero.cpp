@@ -619,7 +619,7 @@ void Tablero::DibujarPasosPermitidos() {
             glPushMatrix();
             glTranslatef(-sel_x + 0.125, -sel_y + 0.12, 0.1); //  centro del círculo
             GLUquadric* qobj = gluNewQuadric();
-            gluDisk(qobj, 0, 0.05, 20, 1); //disco con radio y 10 subdivisiones
+            gluDisk(qobj, 0, 0.08, 20, 1); //disco con radio y 10 subdivisiones
             gluDeleteQuadric(qobj);
             glPopMatrix();
         }
