@@ -1,9 +1,10 @@
 #include "torre.h"
 
-Torre::Torre(Coordenada pos, int col, int fila_, int columna_) : Pieza(col, col == 0 ? "imagenes/TorreJedi.png" : "imagenes/TorreSith.png") {
-	setPosicion(pos);
-	fila = fila_;
-	columna = columna_;
+Torre::Torre(Coordenada posicion, int color, int fila, int columna, const Tablero& tablero)
+    : Pieza(color, color == 0 ? "imagenes/TorreJedi.png" : "imagenes/TorreSith.png"), tablero(tablero) {
+    this->posicion = posicion;
+    this->fila = fila;
+    this->columna = columna;
 }
 
 void Torre::dibujaPieza() {
@@ -38,11 +39,23 @@ vector<Casilla> Torre::getMovimientosPermitidos(int filaActual, int columnaActua
         int nuevaFila = filaActual + dir[0];
         int nuevaColumna = columnaActual + dir[1];
 
+        // Verificar que la nueva posición está dentro del tablero
         while (nuevaFila >= 0 && nuevaFila < 8 && nuevaColumna >= 0 && nuevaColumna < 8) {
+            // Verificar si hay una pieza en el camino
+            if (tablero.casillaOcupada(nuevaFila, nuevaColumna)) {
+                // Si la casilla está ocupada por una pieza del oponente, se puede mover allí
+                if (tablero.hayPiezaOponente(nuevaFila, nuevaColumna, turnoBlancas)) {
+                    movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
+                }
+                // En cualquier caso, el alfil no puede pasar a través de esta casilla
+                break;
+            }
+            // Si la casilla está vacía, se puede mover allí
             movimientos.push_back(Casilla{ nuevaColumna, nuevaFila });
             nuevaFila += dir[0];
             nuevaColumna += dir[1];
         }
     }
+
     return movimientos;
 }

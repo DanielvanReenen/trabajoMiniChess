@@ -1,11 +1,13 @@
 #pragma once
 #include "pieza.h"
+#include "tablero.h"
 
 class Torre : public Pieza
 {
+private:
+    const Tablero& tablero;
 public:
-    Torre(int col) : Pieza(col, col == 0 ? "imagenes/TorreJedi.png" : "imagenes/TorreSith.png") {}
-    Torre(Coordenada pos, int col, int fila_, int columna_);
+    Torre(Coordenada pos, int col, int fila_, int columna_, const Tablero& tablero);
 
     void dibujaPieza() override;
     TipoPieza getTipo() const override { return TipoPieza::Torre; }

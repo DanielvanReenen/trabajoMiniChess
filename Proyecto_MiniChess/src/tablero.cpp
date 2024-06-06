@@ -110,10 +110,10 @@ void Tablero::inicializaTablero() {
     enum { blanco, negro };
 
     // Torres
-    casillas[0][0] = new Torre(coordenadaSobreTablero[0 * 8 + 0], blanco, 0, 0);
-    casillas[0][7] = new Torre(coordenadaSobreTablero[0 * 8 + 7], blanco, 0, 7);
-    casillas[7][0] = new Torre(coordenadaSobreTablero[7 * 8 + 0], negro, 7, 0);
-    casillas[7][7] = new Torre(coordenadaSobreTablero[7 * 8 + 7], negro, 7, 7);
+    casillas[0][0] = new Torre(coordenadaSobreTablero[0 * 8 + 0], blanco, 0, 0, *this);
+    casillas[0][7] = new Torre(coordenadaSobreTablero[0 * 8 + 7], blanco, 0, 7, *this);
+    casillas[7][0] = new Torre(coordenadaSobreTablero[7 * 8 + 0], negro, 7, 0, *this);
+    casillas[7][7] = new Torre(coordenadaSobreTablero[7 * 8 + 7], negro, 7, 7, *this);
 
     // Caballos
     casillas[0][1] = new Caballo(coordenadaSobreTablero[0 * 8 + 1], blanco, 0, 1);
@@ -122,18 +122,18 @@ void Tablero::inicializaTablero() {
     casillas[7][6] = new Caballo(coordenadaSobreTablero[7 * 8 + 6], negro, 7, 6);
 
     // Alfiles
-    casillas[0][2] = new Alfil(coordenadaSobreTablero[0 * 8 + 2], blanco, 0, 2);
-    casillas[0][5] = new Alfil(coordenadaSobreTablero[0 * 8 + 5], blanco, 0, 5);
-    casillas[7][2] = new Alfil(coordenadaSobreTablero[7 * 8 + 2], negro, 7, 2);
-    casillas[7][5] = new Alfil(coordenadaSobreTablero[7 * 8 + 5], negro, 7, 5);
+    casillas[0][2] = new Alfil(coordenadaSobreTablero[0 * 8 + 2], blanco, 0, 2, *this);
+    casillas[0][5] = new Alfil(coordenadaSobreTablero[0 * 8 + 5], blanco, 0, 5, *this);
+    casillas[7][2] = new Alfil(coordenadaSobreTablero[7 * 8 + 2], negro, 7, 2, *this);
+    casillas[7][5] = new Alfil(coordenadaSobreTablero[7 * 8 + 5], negro, 7, 5, *this);
 
     // Reyes
     casillas[0][3] = new Rey(coordenadaSobreTablero[0 * 8 + 3], blanco, 0, 3);
     casillas[7][3] = new Rey(coordenadaSobreTablero[7 * 8 + 3], negro, 7, 3);
 
     // Reinas
-    casillas[0][4] = new Reina(coordenadaSobreTablero[0 * 8 + 4], blanco, 0, 4);
-    casillas[7][4] = new Reina(coordenadaSobreTablero[7 * 8 + 4], negro, 7, 4);
+    casillas[0][4] = new Reina(coordenadaSobreTablero[0 * 8 + 4], blanco, 0, 4, *this);
+    casillas[7][4] = new Reina(coordenadaSobreTablero[7 * 8 + 4], negro, 7, 4, *this);
 
     // Peones
     for (int i = 0; i < 8; i++) {
@@ -227,7 +227,7 @@ void Tablero::Selector(int x, int y) {
                     }
 
                     if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Torre) {
-                        piezaComida = new Torre(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                        piezaComida = new Torre(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna(), *this);
                     }
 
                     if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Caballo) {
@@ -235,11 +235,12 @@ void Tablero::Selector(int x, int y) {
                     }
 
                     if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Alfil) {
-                        piezaComida = new Alfil(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                        piezaComida = new Alfil(casillas[casDestino.fila][casDestino.columna]->getPosicion(), 
+                            casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna(), *this);
                     }
 
                     if (casillas[casDestino.fila][casDestino.columna]->getTipo() == TipoPieza::Reina) {
-                        piezaComida = new Reina(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna());
+                        piezaComida = new Reina(casillas[casDestino.fila][casDestino.columna]->getPosicion(), casillas[casDestino.fila][casDestino.columna]->getColor(), casillas[casDestino.fila][casDestino.columna]->getFila(), casillas[casDestino.fila][casDestino.columna]->getColumna(), *this);
                     }
                     
                     delete casillas[casDestino.fila][casDestino.columna];
@@ -425,11 +426,11 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
 
     switch (piezaDeseada) {
     case 't':
-        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
 
         break;
     case 'T':
-        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Torre(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
 
         break;
     case 'c':
@@ -441,16 +442,16 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
 
         break;
     case 'a':
-        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
     case 'A':
-        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Alfil(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
     case 'r':
-        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
     case 'R':
-        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna);
+        nuevaPieza = new Reina(piezaActual->getPosicion(), colorPieza, casillaDestino.fila, casillaDestino.columna, *this);
         break;
     }
     return nuevaPieza;
