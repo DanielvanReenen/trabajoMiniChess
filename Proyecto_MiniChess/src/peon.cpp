@@ -14,10 +14,10 @@ void Peon::dibujaPieza() {
         sprite.setCenter(posicion.x, posicion.y);
 
         glPushMatrix();
-        sprite.draw();
         if (seleccionActivada) {
             DibujarSeleccion();
         }
+        sprite.draw();
         glPopMatrix();
     }
 
@@ -25,10 +25,10 @@ void Peon::dibujaPieza() {
         sprite.setCenter(posicion.x, posicion.y);
 
         glPushMatrix();
-        sprite.draw();
         if (seleccionActivada) {
             DibujarSeleccion();
         }
+        sprite.draw();
         glPopMatrix();
     }
 }

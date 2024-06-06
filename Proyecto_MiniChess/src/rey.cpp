@@ -13,6 +13,9 @@ void Rey::dibujaPieza() {
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
+		if (seleccionActivada) {
+			DibujarSeleccion();
+		}
 		sprite.draw();
 		glPopMatrix();
 	}
@@ -21,6 +24,9 @@ void Rey::dibujaPieza() {
 		sprite.setCenter(posicion.x, posicion.y);
 
 		glPushMatrix();
+		if (seleccionActivada) {
+			DibujarSeleccion();
+		}
 		sprite.draw();
 		glPopMatrix();
 	}
