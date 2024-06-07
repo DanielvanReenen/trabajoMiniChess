@@ -677,7 +677,31 @@ void Tablero::realizarMovimientoMaquina() {
                 }
             }
             else if (nivelDificultad == 2) {
-               
+                // Nivel Difícil: Seleccionar el movimiento que capture la pieza más valiosa
+                int mejorValor = -10000;
+                for (const auto& movimiento : movimientosPosibles) {
+                    Pieza* piezaAMover = movimiento.first;
+                    Casilla destino = movimiento.second;
+                    Pieza* piezaEnDestino = casillas[destino.fila][destino.columna];
+
+                    int valorPieza = 0;
+                    if (piezaEnDestino != nullptr) {
+                        // Asignar valores a las piezas (por ejemplo, reina = 9, torre = 5, etc.)
+                        switch (piezaEnDestino->getTipo()) {
+                        case TipoPieza::Reina: valorPieza = 9; break;
+                        case TipoPieza::Torre: valorPieza = 5; break;
+                        case TipoPieza::Alfil: valorPieza = 3; break;
+                        case TipoPieza::Caballo: valorPieza = 3; break;
+                        case TipoPieza::Peon: valorPieza = 1; break;
+                        default: valorPieza = 0; break;
+                        }
+                    }
+
+                    if (valorPieza > mejorValor) {
+                        mejorValor = valorPieza;
+                        movimientoSeleccionado = movimiento;
+                    }
+                }
             }
 
             // Obtener la pieza a mover y la casilla destino

@@ -71,7 +71,7 @@ public:
     void DibujarPasosPermitidos();
     unsigned char getCambioPieza();                                    
     bool coronacion = false;
-    int nivelDificultad = 1;                                                                            //DIFICULTAD
+    int nivelDificultad = 2;                                                                            //DIFICULTAD
     void setCambioPieza(unsigned char letracambiopieza);        
     void moverPieza(const Casilla& origen, const Casilla& destino);
     void realizarMovimientoMaquina();

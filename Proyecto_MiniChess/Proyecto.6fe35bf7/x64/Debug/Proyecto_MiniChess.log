@@ -25,4 +25,4 @@ C:\Users\PC\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(619
 C:\Users\PC\source\repos\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(619,33): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   torre.cpp
   Generando código...
-  Proyecto_MiniChess.vcxproj -> C:\Users\PC\Source\Repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
+  Proyecto_MiniChess.vcxproj -> C:\Users\PC\source\repos\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe
