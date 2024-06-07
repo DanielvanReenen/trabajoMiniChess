@@ -632,7 +632,52 @@ void Tablero::DibujarPasosPermitidos() {
 
 void Tablero::realizarMovimientoMaquina() {
     if (jugador2.EsMaquina() && jugador2.getTurno()) {
-       
+        std::vector<Pieza*> piezasMaquina;
+        std::vector<std::pair<Pieza*, Casilla>> movimientosPosibles;
+
+        // Recopilar todas las piezas de la máquina y sus movimientos permitidos
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 8; columna++) {
+                Pieza* pieza = casillas[fila][columna];
+                if (pieza != nullptr && pieza->getColor() == ColorNegras) {
+                    std::vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, false);
+                    for (const Casilla& movimiento : movimientos) {
+                        movimientosPosibles.push_back(std::make_pair(pieza, movimiento));
+                    }
+                }
+            }
+        }
+
+        // Seleccionar un movimiento aleatorio
+        if (!movimientosPosibles.empty()) {
+            std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
+            auto movimientoSeleccionado = movimientosPosibles.front();
+
+            // Obtener la pieza a mover y la casilla destino
+            Pieza* piezaAMover = movimientoSeleccionado.first;
+            Casilla destino = movimientoSeleccionado.second;
+
+            int filaOrigen = piezaAMover->getFila();
+            int columnaOrigen = piezaAMover->getColumna();
+            int filaDestino = destino.fila;
+            int columnaDestino = destino.columna;
+
+            // Realizar el movimiento
+            casillas[filaOrigen][columnaOrigen] = nullptr;
+            casillas[filaDestino][columnaDestino] = piezaAMover;
+            piezaAMover->setFila(filaDestino);
+            piezaAMover->setColumna(columnaDestino);
+            piezaAMover->setPosicion(coordenadaSobreTablero[filaDestino * 8 + columnaDestino]);
+
+            std::cout << "La máquina ha movido la pieza desde (" << columnaOrigen << ", " << filaOrigen << ") hasta (" << columnaDestino << ", " << filaDestino << ")" << std::endl;
+
+            // Cambiar el turno
+            jugador2.SetTurno(false);
+            jugador1.SetTurno(true);
+        }
+        else {
+            std::cout << "No se puede mover ninguna pieza." << std::endl;
+        }
     }
 
 }
