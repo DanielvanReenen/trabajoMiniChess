@@ -49,7 +49,6 @@ public:
     void inicializaTablero();
     void Selector(int x, int y);
     void ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido);
-    void MovimientoGeneral(bool turnoBlancas, bool& movimientoPermitido);
     void dibujaPieza();
     void aplicarGravedad();
     void SetJugador1(Jugador jugador1);
@@ -60,7 +59,7 @@ public:
     bool hayPiezaOponente(int fila, int columna, bool turnoBlancas) const;
 
     Casilla encontrarRey(bool turnoBlancas);
-    bool estaEnJaque(Casilla posicionRey, bool colorRey);
+    bool estaEnJaque(bool turnoBlancas);
     bool casillaOcupada(int fila, int columna) const;
     bool caminoDespejado(int filaInicial, int columnaInicial, int filaFinal, int columnaFinal);
     string tipoPiezaToString(TipoPieza tipo);
@@ -73,4 +72,5 @@ public:
     unsigned char getCambioPieza();                                    //esto
     bool coronacion = false;
     void setCambioPieza(unsigned char letracambiopieza);        //esto
+    void moverPieza(const Casilla& origen, const Casilla& destino);
 };
