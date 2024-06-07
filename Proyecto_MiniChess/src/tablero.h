@@ -38,8 +38,8 @@ private:
     const int ColorBlancas = 0;
     const int ColorNegras = 1;
 
-    bool jaque = false;
-    bool jaqueMate = false;
+    bool enJaque = false;
+    bool enJaqueMate = false;
 
 public:
     Tablero(const Jugador& j1, const Jugador& j2);

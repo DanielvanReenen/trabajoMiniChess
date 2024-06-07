@@ -46,16 +46,16 @@ bool Tablero::hayPiezaOponente(int fila, int columna, bool turnoBlancas) const {
 void Tablero::aplicarGravedad() {
     for (int i = 0; i < 8; i++) {
         for (int j = 6; j >= 0; j--) {
-            if (casillas[j][i] != nullptr) {
+            if (casillas[i][j] != nullptr) {
                 int nuevaFilaGravitatoria = j;
-                while (nuevaFilaGravitatoria < 7 && casillas[nuevaFilaGravitatoria + 1][i] == nullptr) {
+                while (nuevaFilaGravitatoria < 7 && casillas[i][nuevaFilaGravitatoria + 1] == nullptr) {
                     nuevaFilaGravitatoria++;
                 }
                 if (nuevaFilaGravitatoria != j) {
-                    casillas[nuevaFilaGravitatoria][i] = casillas[j][i];
-                    casillas[j][i] = nullptr;
-                    casillas[nuevaFilaGravitatoria][i]->setFila(nuevaFilaGravitatoria);
-                    casillas[nuevaFilaGravitatoria][i]->setPosicion(coordenadaSobreTablero[nuevaFilaGravitatoria * 8 + i]);
+                    casillas[i][nuevaFilaGravitatoria] = casillas[i][j];
+                    casillas[i][j] = nullptr;
+                    casillas[i][nuevaFilaGravitatoria]->setFila(nuevaFilaGravitatoria);
+                    casillas[i][nuevaFilaGravitatoria]->setPosicion(coordenadaSobreTablero[i * 8 + nuevaFilaGravitatoria]);
                 }
             }
         }
@@ -100,8 +100,8 @@ void Tablero::CasillasaCoordenadas() {
     int k = 0;
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            coordenadaSobreTablero[k].x = 0.93 - 0.23 * j;
-            coordenadaSobreTablero[k].y = -0.675 + 0.23 * i;
+            coordenadaSobreTablero[k].x = 0.93 - 0.23 * i;
+            coordenadaSobreTablero[k].y = -0.675 + 0.23 * j;
             k++;
         }
     }
@@ -154,8 +154,8 @@ void Tablero::Selector(int x, int y) {
         return;
     }
 
-    casSeleccion.columna = (x - 36) / 90;
-    casSeleccion.fila = (y - 36) / 90;
+    casSeleccion.columna = (y - 36) / 90;
+    casSeleccion.fila = (x - 36) / 90;
     piezaSeleccionada = getPieza(casSeleccion.fila, casSeleccion.columna);
     std::cout << "Has pulsado en la casilla: Columna: (" << casSeleccion.columna << "), Fila: (" << casSeleccion.fila << ")" << std::endl;
 
@@ -209,28 +209,18 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino->setFila(casDestino.fila);
                 piezaOrigen->seleccionActivada = false;
 
-                //Realizamos la comprobacion de la captura al paso
-                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {
-                    int direction = (piezaOrigen->getColor() == 0) ? -1 : 1; 
-                    delete casillas[casDestino.fila + direction][casDestino.columna];
-                    casillas[casDestino.fila + direction][casDestino.columna] = nullptr;
-                    std::cout << "Captura al paso en (" << casDestino.columna << ", " << casDestino.fila + direction << ")" << std::endl;
-                }
-
+                
                 // Realizar el movimiento
                 Pieza* piezaTemporal = casillas[casDestino.fila][casDestino.columna];
                 casillas[casDestino.fila][casDestino.columna] = piezaDestino;
                 casillas[casOrigen.fila][casOrigen.columna] = nullptr;
 
-                bool enJaque = false;
-                if (enJaque) {
-                    std::cout << "Movimiento inválido: dejaría al rey en jaque." << std::endl;
-                    // Revertir el movimiento
-                    casillas[casOrigen.fila][casOrigen.columna] = piezaDestino;
-                    casillas[casDestino.fila][casDestino.columna] = piezaTemporal;
-                    return;
+                enJaqueMate = estaEnJaqueMate(turno1);
+                
+                if (enJaqueMate) {
+                    exit(0);
                 }
-
+                
                 // Movimiento válido, eliminar la pieza temporal si es necesario
                 if (piezaTemporal != nullptr && piezaTemporal != piezaDestino) {
                     delete piezaTemporal;
@@ -250,6 +240,14 @@ void Tablero::Selector(int x, int y) {
                     ultimoPeonDobleMovColumna = -1;
 
                 }
+
+                //Realizamos la comprobacion de la captura al paso
+                if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 1 && std::abs(casDestino.columna - casOrigen.columna) == 1 && casillas[casDestino.fila][casDestino.columna] == nullptr) {
+                    int direction = (piezaOrigen->getColor() == 0) ? -1 : 1;
+                    delete casillas[casDestino.fila + direction][casDestino.columna];
+                    casillas[casDestino.fila + direction][casDestino.columna] = nullptr;
+                    std::cout << "Captura al paso en (" << casDestino.columna << ", " << casDestino.fila + direction << ")" << std::endl;
+                }
                 
                 Pieza* piezaCoronada = HayCoronacion(casSeleccion, piezaOrigen);
                 if (piezaCoronada != nullptr)
@@ -259,9 +257,7 @@ void Tablero::Selector(int x, int y) {
                     casillas[piezaDestino->getFila()][piezaDestino->getColumna()] = piezaCoronada;
                 }
 
-                if (estaEnJaqueMate(turno1)) {
-
-                }
+                
 
 
                 movimientoActivado = false;
@@ -408,7 +404,7 @@ Pieza* Tablero::CoronacionDeseada(Pieza* piezaActual, Casilla casillaDestino, bo
 
         if (!teclaAceptablePresionada && !mensajeImpreso) {
             // Imprimir mensaje si la tecla no es aceptable
-            std::cout << "El tipo de pieza seleccionada no está disponible." << std::endl;
+            std::cout << "El tipo de pieza seleccionada no esta disponible." << std::endl;
             mensajeImpreso = true;
         }
     }
@@ -447,6 +443,7 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido) {
         movimientoPermitido = false;
         return;
     }
+
     std::vector<Casilla> movimientosPermitidos = piezaOrigen->getMovimientosPermitidos(casOrigen.fila, casOrigen.columna, turnoBlancas);
     std::cout << "Movimientos permitidos para la pieza en (" << casOrigen.columna << ", " << casOrigen.fila << "): ";
     for (const auto& movimiento : movimientosPermitidos) {
@@ -458,14 +455,15 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido) {
             casillas[casOrigen.fila][casOrigen.columna] = nullptr;
 
             Casilla posicionRey = encontrarRey(turnoBlancas);
-            bool enJaque = false;
+            
+            enJaque = estaEnJaque(!turnoBlancas);
 
             // Revertir el movimiento
             casillas[casOrigen.fila][casOrigen.columna] = piezaOrigen;
             casillas[movimiento.fila][movimiento.columna] = piezaDestinoOriginal;
 
             if (enJaque) {
-                std::cout << "Movimiento inválido: dejaría al rey en jaque." << std::endl;
+                std::cout << "Movimiento invalido: dejaria al rey en jaque." << std::endl;
                 movimientoPermitido = false;
             }
             else {
@@ -477,7 +475,7 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido) {
     }
     std::cout << std::endl;
     movimientoPermitido = false;
-    std::cout << "No se encontró un movimiento permitido." << std::endl;
+    std::cout << "No se encontro un movimiento permitido." << std::endl;
 }
 
 bool Tablero::estaEnJaque(bool turnoBlancas) 
@@ -519,7 +517,7 @@ bool Tablero::estaEnJaque(bool turnoBlancas)
 bool Tablero::estaEnJaqueMate(bool turnoBlancas) 
 {
     // Solo si está en jaque miramos el jaque mate
-    if (estaEnJaque(turnoBlancas)) {
+    if (enJaque) {
         int miColor = turnoBlancas ? ColorBlancas : ColorNegras;
 
         Casilla reyOponente = encontrarRey(turnoBlancas);
@@ -530,7 +528,6 @@ bool Tablero::estaEnJaqueMate(bool turnoBlancas)
         for (const Casilla& movimiento : movimientosDelReyEnemigo) {
             Pieza* piezaDestinoOriginal = casillas[movimiento.fila][movimiento.columna];
             moverPieza(reyOponente, movimiento);
-            bool enJaque = estaEnJaque(turnoBlancas);
             moverPieza(movimiento, reyOponente);  // Deshacer movimiento
             casillas[movimiento.fila][movimiento.columna] = piezaDestinoOriginal;  // Restaurar pieza capturada
 
@@ -605,12 +602,15 @@ void Tablero::DibujarPasosPermitidos() {
             gluDeleteQuadric(qobj);
             glPopMatrix();
 
+
         }
-        else if (casillas[casilla.fila][casilla.columna]->getColor() != piezaSeleccionada->getColor()) {
+
+
+        else if (casillas[casilla.fila][casilla.columna]->getColor() != piezaOrigen->getColor()) {
 
             glColor4f(1.0, 1.0, 0.0, 0.5); // color amarillo semitransparente
 
-            //  coordenadas reales
+            //coordenadas reales
             glPushMatrix();
             glTranslatef(-sel_x + 0.125, -sel_y + 0.12, 0.1); //  centro del círculo
             GLUquadric* qobj = gluNewQuadric();

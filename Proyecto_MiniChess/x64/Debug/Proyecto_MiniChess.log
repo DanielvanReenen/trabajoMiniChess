@@ -1,4 +1,28 @@
-﻿  tablero.cpp
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(99,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(100,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  MiniChess.cpp
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(29,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(85,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\MiniChess.cpp(85,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  alfil.cpp
+  menu.cpp
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\menu.cpp(9,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  peon.cpp
+  reina.cpp
+  rey.cpp
+  tablero.cpp
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(103,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(104,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(578,59): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(578,51): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(578,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(595,33): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(595,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(599,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(599,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(599,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(615,57): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(615,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\src\tablero.cpp(615,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  torre.cpp
+  Generating Code...
   Proyecto_MiniChess.vcxproj -> C:\Users\danie\Desktop\DanielvanReenen\trabajoMiniChess\Proyecto_MiniChess\x64\Debug\Proyecto_MiniChess.exe

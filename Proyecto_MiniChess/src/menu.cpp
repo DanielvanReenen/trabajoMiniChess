@@ -179,7 +179,7 @@ void Menu::dibuja() {
 }
 
 void Menu::aplicarGravedad() {
-    //tablero.aplicarGravedad();
+    tablero.aplicarGravedad();
 }
 
 void Menu::Selector(int x, int y) {
