@@ -92,4 +92,5 @@ void OnTimer(int value) {
     // No borrar estas lineas
     glutTimerFunc(1000, OnTimer, 0);
     glutPostRedisplay();
+    menu.ComprobarMaquina();
 }

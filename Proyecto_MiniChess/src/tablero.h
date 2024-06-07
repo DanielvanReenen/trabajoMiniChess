@@ -73,4 +73,5 @@ public:
     bool coronacion = false;
     void setCambioPieza(unsigned char letracambiopieza);        //esto
     void moverPieza(const Casilla& origen, const Casilla& destino);
+    void realizarMovimientoMaquina();
 };

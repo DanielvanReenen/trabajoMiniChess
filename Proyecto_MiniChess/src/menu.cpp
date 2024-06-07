@@ -35,11 +35,14 @@ void Menu::tecla(unsigned char key) {
             exit(0);
         }
         if (key == 'e' || key == 'E') {
-            ETSIDI::stopMusica();
+
+            /* ETSIDI::stopMusica();
             tablero.CasillasaCoordenadas();
-            tablero.inicializaTablero();
-            ETSIDI::play("musica/fondo.mp3");
-            estado = JUEGO;
+            ETSIDI::stopMusica();
+            tablero.inicializaTablero();*/
+
+            
+            estado = MODOJUEGO;
         }
         else if (key == 'c' || key == 'C') {
             estado = CREDITOS;
@@ -67,39 +70,42 @@ void Menu::tecla(unsigned char key) {
     case CREDITOS:
         if (key == 's' || key == 'S') exit(0);
         if (key == 'e' || key == 'E') {
-
+            /*
             tablero.CasillasaCoordenadas();
             tablero.inicializaTablero();
             ETSIDI::stopMusica();
-            //  ETSIDI::playMusica("musica/fondo.mp3");
-            estado = JUEGO;
+            ETSIDI::stopMusica();
+            */
+            
+            estado = MODOJUEGO;
         }
         break;
-         
-    case CAMBIOPIEZA:                                                //esto
-        
-        if (key == 't' || key == 'T') {
-            tablero.setCambioPieza(key); 
+
+    case MODOJUEGO:
+        if (key == 's' || key == 'S') exit(0);
+        if (key == '1') {
+            bool modoJuegoContraMaquina = true;
+            Jugador jugador2 = tablero.GetJugador2();
+            jugador2.SetEsMaquina(true); // El jugador 2 es la máquina
+            tablero.SetJugador2(jugador2);
+            tablero.CasillasaCoordenadas();
+            tablero.inicializaTablero();
+            ETSIDI::stopMusica();
             estado = JUEGO;
-            break;
+            //  ETSIDI::playMusica("musica/fondo.mp3");
         }
-        if (key == 'r' || key ==  'R') { 
-            tablero.setCambioPieza(key); 
+        if (key == '2') {
+            tablero.CasillasaCoordenadas();
+            tablero.inicializaTablero();
+            ETSIDI::stopMusica();
             estado = JUEGO;
-            break;
+            //  ETSIDI::playMusica("musica/fondo.mp3");
+
         }
-        if (key == 'c' || key == 'C') { 
-            tablero.setCambioPieza(key); 
-            estado = JUEGO;
-            break;
-        }
-        if (key == 'a' || key == 'A') { 
-            tablero.setCambioPieza(key); 
-            estado = JUEGO;
-            break;
-        }
-       
+        break;
+
     }
+    
 }
 
 
@@ -155,7 +161,7 @@ void Menu::dibuja() {
         glDisable(GL_TEXTURE_2D);
         break;
 
-        case PAUSA:
+    case PAUSA:
         std::cout << "Dibujando la pantalla de pausa" << std::endl;
         tablero.dibuja();
         tablero.dibujaPieza();
@@ -175,7 +181,23 @@ void Menu::dibuja() {
         glEnable(GL_LIGHTING);
         glDisable(GL_TEXTURE_2D);
         break;
-    }
+
+    case MODOJUEGO:
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/MODOJUEGO.png").id);
+        glDisable(GL_LIGHTING);
+        glBegin(GL_POLYGON);
+        glColor3f(1, 1, 1);
+        glTexCoord2d(0, 1); glVertex2f(-1, -1);
+        glTexCoord2d(1, 1); glVertex2f(1, -1);
+        glTexCoord2d(1, 0); glVertex2f(1, 1);
+        glTexCoord2d(0, 0); glVertex2f(-1, 1);
+        glEnd();
+        glEnable(GL_LIGHTING);
+        glDisable(GL_TEXTURE_2D);
+        break;
+    
+}
 }
 
 void Menu::aplicarGravedad() {
@@ -188,4 +210,8 @@ void Menu::Selector(int x, int y) {
 
 Menu::Estado Menu::getEstado() const {
     return estado;
+}
+
+void Menu::ComprobarMaquina() {
+    tablero.realizarMovimientoMaquina();
 }

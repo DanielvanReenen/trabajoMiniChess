@@ -1,8 +1,8 @@
 #include "tablero.h"
 #include "freeglut.h"
-#include <conio.h>
 #include "ETSIDI.h"
 #include <stdlib.h>
+#include <algorithm> 
 
 Tablero::Tablero(const Jugador& j1, const Jugador& j2)
     : jugador1(j1), jugador2(j2), casillas(8, vector<Pieza*>(8, nullptr)) {
@@ -144,6 +144,10 @@ void Tablero::inicializaTablero() {
 }
 
 void Tablero::Selector(int x, int y) {
+    if (jugador2.EsMaquina() && jugador2.getTurno()) {
+        return; // Salir inmediatamente para bloquear la interacción
+    }
+
     system("cls");
     bool turno1 = jugador1.getTurno();
     bool turno2 = jugador2.getTurno();
@@ -624,4 +628,11 @@ void Tablero::DibujarPasosPermitidos() {
     glDisable(GL_BLEND);
     glEnable(GL_LIGHTING);
     glEnable(GL_TEXTURE_2D);
+}
+
+void Tablero::realizarMovimientoMaquina() {
+    if (jugador2.EsMaquina() && jugador2.getTurno()) {
+       
+    }
+
 }

@@ -5,7 +5,7 @@
 
 class Menu {
 public:
-    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA };
+    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA, MODOJUEGO};
 
 private:
     Estado estado;
@@ -19,6 +19,7 @@ public:
     void aplicarGravedad();
     void Selector(int x, int y);
     Estado getEstado() const;  // Declaración de la función getEstado
+    void ComprobarMaquina();
 };
 
 
