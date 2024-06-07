@@ -86,9 +86,10 @@ void resize(int width, int height) {
 }
 
 void OnTimer(int value) {
-    //tablero.aplicarGravedad();
-    //menu.tablero.aplicarGravedad();
-    menu.aplicarGravedad();
+    if (menu.getGravedad() == true) {
+        menu.aplicarGravedad();
+    }
+
     // No borrar estas lineas
     glutTimerFunc(1000, OnTimer, 0);
     glutPostRedisplay();
