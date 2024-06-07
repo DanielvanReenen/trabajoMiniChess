@@ -5,11 +5,12 @@
 
 class Menu {
 public:
-    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA, MODOJUEGO};
+    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA, MODOJUEGO, MENU_GRAVEDAD};
 
 private:
     Estado estado;
     Tablero tablero;
+    bool gravedadON;
 
 public:
     Menu();

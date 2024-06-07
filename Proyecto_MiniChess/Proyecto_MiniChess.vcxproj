@@ -23,7 +23,6 @@
     <ClInclude Include="src\caballo.h" />
     <ClInclude Include="src\casilla.h" />
     <ClInclude Include="src\Coordenada.h" />
-    <ClInclude Include="src\interaccion.h" />
     <ClInclude Include="src\jugador.h" />
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\peon.h" />
