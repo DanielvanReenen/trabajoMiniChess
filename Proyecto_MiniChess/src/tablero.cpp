@@ -631,6 +631,7 @@ void Tablero::DibujarPasosPermitidos() {
 }
 
 void Tablero::realizarMovimientoMaquina() {
+    
     if (jugador2.EsMaquina() && jugador2.getTurno()) {
         std::vector<Pieza*> piezasMaquina;
         std::vector<std::pair<Pieza*, Casilla>> movimientosPosibles;
@@ -648,10 +649,36 @@ void Tablero::realizarMovimientoMaquina() {
             }
         }
 
-        // Seleccionar un movimiento aleatorio
+        // Seleccionar un movimiento basado en el nivel de dificultad
         if (!movimientosPosibles.empty()) {
-            std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
-            auto movimientoSeleccionado = movimientosPosibles.front();
+            std::pair<Pieza*, Casilla> movimientoSeleccionado;
+
+            if (nivelDificultad == 0) {
+                // Nivel Fácil: Movimiento aleatorio
+                std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
+                movimientoSeleccionado = movimientosPosibles.front();
+            }
+            else if (nivelDificultad == 1) {
+                // Nivel Intermedio: Movimiento aleatorio que prioriza capturas
+                std::vector<std::pair<Pieza*, Casilla>> movimientosDeCaptura;
+                for (const auto& movimiento : movimientosPosibles) {
+                    if (casillas[movimiento.second.fila][movimiento.second.columna] != nullptr) {
+                        movimientosDeCaptura.push_back(movimiento);
+                    }
+                }
+
+                if (!movimientosDeCaptura.empty()) {
+                    std::random_shuffle(movimientosDeCaptura.begin(), movimientosDeCaptura.end());
+                    movimientoSeleccionado = movimientosDeCaptura.front();
+                }
+                else {
+                    std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
+                    movimientoSeleccionado = movimientosPosibles.front();
+                }
+            }
+            else if (nivelDificultad == 2) {
+               
+            }
 
             // Obtener la pieza a mover y la casilla destino
             Pieza* piezaAMover = movimientoSeleccionado.first;
@@ -679,5 +706,6 @@ void Tablero::realizarMovimientoMaquina() {
             std::cout << "No se puede mover ninguna pieza." << std::endl;
         }
     }
+    
 
 }

@@ -69,9 +69,10 @@ public:
     int ultimoPeonDobleMovColumna;
     bool estaEnJaqueMate(bool turnoBlancas);
     void DibujarPasosPermitidos();
-    unsigned char getCambioPieza();                                    //esto
+    unsigned char getCambioPieza();                                    
     bool coronacion = false;
-    void setCambioPieza(unsigned char letracambiopieza);        //esto
+    int nivelDificultad = 1;                                                                            //DIFICULTAD
+    void setCambioPieza(unsigned char letracambiopieza);        
     void moverPieza(const Casilla& origen, const Casilla& destino);
     void realizarMovimientoMaquina();
 };
