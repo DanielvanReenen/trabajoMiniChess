@@ -35,8 +35,11 @@ void Menu::tecla(unsigned char key) {
             exit(0);
         }
         if (key == 'e' || key == 'E') {
-
-            estado = MENU_GRAVEDAD;
+            ETSIDI::stopMusica();
+            tablero.CasillasaCoordenadas();
+            tablero.inicializaTablero();
+            ETSIDI::play("musica/fondo.mp3");
+            estado = JUEGO;
         }
         else if (key == 'c' || key == 'C') {
             estado = CREDITOS;
@@ -47,6 +50,9 @@ void Menu::tecla(unsigned char key) {
         if (key == 'p' || key == 'P') estado = PAUSA;
         if (key == 's' || key == 'S') {
             exit(0);
+        }
+        if (tablero.coronacion) {                              //esto
+            estado = CAMBIOPIEZA;
         }
         break;
     case WINBLANCAS:
@@ -62,55 +68,38 @@ void Menu::tecla(unsigned char key) {
         if (key == 's' || key == 'S') exit(0);
         if (key == 'e' || key == 'E') {
 
-            estado = MENU_GRAVEDAD;
-        }
-        break;
-
-    case MODOJUEGO:
-        if (key == 's' || key == 'S') exit(0);
-
-        if (key == '3') {                                                                       //DIFICULTAD MEDIA
-            tablero.nivelDificultad = 1;
-            bool modoJuegoContraMaquina = true;
-            Jugador jugador2 = tablero.GetJugador2();
-            jugador2.SetEsMaquina(true); 
-            tablero.SetJugador2(jugador2);
             tablero.CasillasaCoordenadas();
             tablero.inicializaTablero();
             ETSIDI::stopMusica();
-            estado = JUEGO;    
-        }
-        if (key == '2') {                                                                       //DIFICULTAD FACIL
-            tablero.nivelDificultad = 0;
-            bool modoJuegoContraMaquina = true;
-            Jugador jugador2 = tablero.GetJugador2();
-            jugador2.SetEsMaquina(true); 
-            tablero.SetJugador2(jugador2);
-            tablero.CasillasaCoordenadas();
-            tablero.inicializaTablero();
-            ETSIDI::stopMusica();
-            estado = JUEGO;
-        }
-        if (key == '1') {                                                                       //MODO DOS JUGADORES
-            tablero.CasillasaCoordenadas();
-            tablero.inicializaTablero();
-            ETSIDI::stopMusica();
+            //  ETSIDI::playMusica("musica/fondo.mp3");
             estado = JUEGO;
         }
         break;
-
-    case MENU_GRAVEDAD:
-        if (key == 's' || key == 'S') exit(0);       
-        if (key == 'N' || key == 'n') {                                                                   //SIN GRAVEDAD
-            gravedadON = false;       
-            estado = MODOJUEGO;
+         
+    case CAMBIOPIEZA:                                                //esto
+        
+        if (key == 't' || key == 'T') {
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
         }
-        if (key == 'G' || key == 'g') {                                                                   //SIN GRAVEDAD
-            gravedadON = true; 
-            estado = MODOJUEGO;
+        if (key == 'r' || key ==  'R') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
         }
-        break;
-    }  
+        if (key == 'c' || key == 'C') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+        if (key == 'a' || key == 'A') { 
+            tablero.setCambioPieza(key); 
+            estado = JUEGO;
+            break;
+        }
+       
+    }
 }
 
 
@@ -166,23 +155,10 @@ void Menu::dibuja() {
         glDisable(GL_TEXTURE_2D);
         break;
 
-    case PAUSA:
+        case PAUSA:
+        std::cout << "Dibujando la pantalla de pausa" << std::endl;
         tablero.dibuja();
         tablero.dibujaPieza();
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/PAUSA.png").id);
-        glDisable(GL_LIGHTING);
-        glBegin(GL_POLYGON);
-        glColor3f(1, 1, 1);
-        glTexCoord2d(0, 1); glVertex2f(-0.4, -0.4);
-        glTexCoord2d(1, 1); glVertex2f(0.4, -0.4);
-        glTexCoord2d(1, 0); glVertex2f(0.4, 0.4);
-        glTexCoord2d(0, 0); glVertex2f(-0.4, 0.4);
-        glEnd();
-        glEnable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
-        
-
         break;
 
     case CREDITOS:
@@ -199,43 +175,11 @@ void Menu::dibuja() {
         glEnable(GL_LIGHTING);
         glDisable(GL_TEXTURE_2D);
         break;
-
-    case MODOJUEGO:
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/MODOJUEGO.png").id);
-        glDisable(GL_LIGHTING);
-        glBegin(GL_POLYGON);
-        glColor3f(1, 1, 1);
-        glTexCoord2d(0, 1); glVertex2f(-1, -1);
-        glTexCoord2d(1, 1); glVertex2f(1, -1);
-        glTexCoord2d(1, 0); glVertex2f(1, 1);
-        glTexCoord2d(0, 0); glVertex2f(-1, 1);
-        glEnd();
-        glEnable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
-        break;
-    case MENU_GRAVEDAD:
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/GRAVEDAD.png").id);
-        glDisable(GL_LIGHTING);
-        glBegin(GL_POLYGON);
-        glColor3f(1, 1, 1);
-        glTexCoord2d(0, 1); glVertex2f(-1, -1);
-        glTexCoord2d(1, 1); glVertex2f(1, -1);
-        glTexCoord2d(1, 0); glVertex2f(1, 1);
-        glTexCoord2d(0, 0); glVertex2f(-1, 1);
-        glEnd();
-        glEnable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
-        break;
-    
-}
+    }
 }
 
 void Menu::aplicarGravedad() {
-    if (gravedadON = true) {
-        tablero.aplicarGravedad();
-    }
+    tablero.aplicarGravedad();
 }
 
 void Menu::Selector(int x, int y) {
@@ -244,8 +188,4 @@ void Menu::Selector(int x, int y) {
 
 Menu::Estado Menu::getEstado() const {
     return estado;
-}
-
-void Menu::ComprobarMaquina() {
-    tablero.realizarMovimientoMaquina();
 }

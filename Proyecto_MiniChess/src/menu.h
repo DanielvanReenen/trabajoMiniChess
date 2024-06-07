@@ -5,12 +5,11 @@
 
 class Menu {
 public:
-    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA, MODOJUEGO, MENU_GRAVEDAD};
+    enum Estado { INICIO, JUEGO, WINNEGRAS, WINBLANCAS, PAUSA, CREDITOS, CAMBIOPIEZA };
 
 private:
     Estado estado;
     Tablero tablero;
-    bool gravedadON;
 
 public:
     Menu();
@@ -20,7 +19,6 @@ public:
     void aplicarGravedad();
     void Selector(int x, int y);
     Estado getEstado() const;  // Declaración de la función getEstado
-    void ComprobarMaquina();
 };
 
 

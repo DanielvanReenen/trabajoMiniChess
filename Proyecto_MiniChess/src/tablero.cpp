@@ -1,8 +1,8 @@
 #include "tablero.h"
 #include "freeglut.h"
+#include <conio.h>
 #include "ETSIDI.h"
 #include <stdlib.h>
-#include <algorithm> 
 
 Tablero::Tablero(const Jugador& j1, const Jugador& j2)
     : jugador1(j1), jugador2(j2), casillas(8, vector<Pieza*>(8, nullptr)) {
@@ -144,10 +144,6 @@ void Tablero::inicializaTablero() {
 }
 
 void Tablero::Selector(int x, int y) {
-    if (jugador2.EsMaquina() && jugador2.getTurno()) {
-        return; // Salir inmediatamente para bloquear la interacción
-    }
-
     system("cls");
     bool turno1 = jugador1.getTurno();
     bool turno2 = jugador2.getTurno();
@@ -203,7 +199,9 @@ void Tablero::Selector(int x, int y) {
         }
         else {
             bool movimientoPermitido = false;
+            aplicarGravedad();
             ValidarMovimiento(turno1, movimientoPermitido);
+           
 
             if (movimientoPermitido) {
                 casDestino = casSeleccion;
@@ -233,6 +231,7 @@ void Tablero::Selector(int x, int y) {
                 piezaDestino->setPosicion(coordenadaSobreTablero[casDestino.fila * 8 + casDestino.columna]);
                 ETSIDI::play("musica/sonido-mover.mp3");
                 std::cout << "Has seleccionado un movimiento desde (" << casOrigen.columna << ", " << casOrigen.fila << ") hasta (" << casDestino.columna << ", " << casDestino.fila << ")" << std::endl;
+                
 
                 // Guardamos el valor del ultimo movimiento doble realizado por un peon
                 if (piezaOrigen->getTipo() == TipoPieza::Peon && std::abs(casDestino.fila - casOrigen.fila) == 2) {
@@ -461,7 +460,7 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido) {
             Casilla posicionRey = encontrarRey(turnoBlancas);
             
             enJaque = estaEnJaque(!turnoBlancas);
-
+            
             // Revertir el movimiento
             casillas[casOrigen.fila][casOrigen.columna] = piezaOrigen;
             casillas[movimiento.fila][movimiento.columna] = piezaDestinoOriginal;
@@ -472,6 +471,7 @@ void Tablero::ValidarMovimiento(bool turnoBlancas, bool& movimientoPermitido) {
             }
             else {
                 movimientoPermitido = true;
+               
                 std::cout << "Movimiento permitido encontrado." << std::endl;
                 return;
             }
@@ -628,82 +628,4 @@ void Tablero::DibujarPasosPermitidos() {
     glDisable(GL_BLEND);
     glEnable(GL_LIGHTING);
     glEnable(GL_TEXTURE_2D);
-}
-
-void Tablero::realizarMovimientoMaquina() {
-    
-    if (jugador2.EsMaquina() && jugador2.getTurno()) {
-        std::vector<Pieza*> piezasMaquina;
-        std::vector<std::pair<Pieza*, Casilla>> movimientosPosibles;
-
-        // Recopilar todas las piezas de la máquina y sus movimientos permitidos
-        for (int fila = 0; fila < 8; fila++) {
-            for (int columna = 0; columna < 8; columna++) {
-                Pieza* pieza = casillas[fila][columna];
-                if (pieza != nullptr && pieza->getColor() == ColorNegras) {
-                    std::vector<Casilla> movimientos = pieza->getMovimientosPermitidos(fila, columna, false);
-                    for (const Casilla& movimiento : movimientos) {
-                        movimientosPosibles.push_back(std::make_pair(pieza, movimiento));
-                    }
-                }
-            }
-        }
-
-        // Seleccionar un movimiento basado en el nivel de dificultad
-        if (!movimientosPosibles.empty()) {
-            std::pair<Pieza*, Casilla> movimientoSeleccionado;
-
-            if (nivelDificultad == 0) {
-                // Nivel Fácil: Movimiento aleatorio
-                std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
-                movimientoSeleccionado = movimientosPosibles.front();
-            }
-            else if (nivelDificultad == 1) {
-                // Nivel Intermedio: Movimiento aleatorio que prioriza capturas
-                std::vector<std::pair<Pieza*, Casilla>> movimientosDeCaptura;
-                for (const auto& movimiento : movimientosPosibles) {
-                    if (casillas[movimiento.second.fila][movimiento.second.columna] != nullptr) {
-                        movimientosDeCaptura.push_back(movimiento);
-                    }
-                }
-
-                if (!movimientosDeCaptura.empty()) {
-                    std::random_shuffle(movimientosDeCaptura.begin(), movimientosDeCaptura.end());
-                    movimientoSeleccionado = movimientosDeCaptura.front();
-                }
-                else {
-                    std::random_shuffle(movimientosPosibles.begin(), movimientosPosibles.end());
-                    movimientoSeleccionado = movimientosPosibles.front();
-                }
-            }
-            
-
-            // Obtener la pieza a mover y la casilla destino
-            Pieza* piezaAMover = movimientoSeleccionado.first;
-            Casilla destino = movimientoSeleccionado.second;
-
-            int filaOrigen = piezaAMover->getFila();
-            int columnaOrigen = piezaAMover->getColumna();
-            int filaDestino = destino.fila;
-            int columnaDestino = destino.columna;
-
-            // Realizar el movimiento
-            casillas[filaOrigen][columnaOrigen] = nullptr;
-            casillas[filaDestino][columnaDestino] = piezaAMover;
-            piezaAMover->setFila(filaDestino);
-            piezaAMover->setColumna(columnaDestino);
-            piezaAMover->setPosicion(coordenadaSobreTablero[filaDestino * 8 + columnaDestino]);
-
-            std::cout << "La máquina ha movido la pieza desde (" << columnaOrigen << ", " << filaOrigen << ") hasta (" << columnaDestino << ", " << filaDestino << ")" << std::endl;
-
-            // Cambiar el turno
-            jugador2.SetTurno(false);
-            jugador1.SetTurno(true);
-        }
-        else {
-            std::cout << "No se puede mover ninguna pieza." << std::endl;
-        }
-    }
-    
-
 }
